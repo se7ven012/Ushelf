@@ -1,0 +1,10 @@
+{{extend './_layouts/home.html'}}
+
+<!--普通用户设置界面-->>
+{{block 'body'}}
+<form action="/users/search" method="post">
+    账号：<input type="text" name="account" value="{{u_account}}"><br>
+    密码：<input type="text" name="password" value="{{u_password}}"><br>
+    <input type="submit" value="查询">
+</form>
+{{/block}}

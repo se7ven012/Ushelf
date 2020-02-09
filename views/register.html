@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<head>
+   <meta charset="UTF-8">
+   <title>Hello world</title>
+   <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+   <link rel="stylesheet" href="public/css/login.css">
+</head>
+
+
+<body>
+   <!-- signup -->
+   <div class="sidenav">
+      <div class="login-main-text">
+         <h2>Ushelf<br> Login Page</h2>
+         <p>Your next door storage.</p>
+      </div>
+   </div>
+   <div class="main">
+      <div class="col-md-6 col-sm-12">
+         <div class="login-form">
+            <form id="register_form">
+               <div class="form-group">
+                  <label>User Name</label>
+                  <!--注意input里的name是一定要写的，否则后端取不到值，不知道指的是什么-->
+                  <input type="text" class="form-control" id="account" name="account" placeholder="User Name" required>
+               </div>
+               <div class="form-group">
+                  <label>Password</label>
+                  <input type="password" class="form-control" id="password" name="password" placeholder="Password"required>
+               </div>
+               <button type="submit" class="btn btn-black">Register</button>
+            
+            </form>
+         </div>
+      </div>
+   </div>
+   <!-- signup -->
+   <script src="/node_modules/jquery/dist/jquery.js"></script>
+   <script>
+      $('#register_form').on('submit', function (e) {
+         e.preventDefault()
+         var formData = $(this).serialize()
+         $.ajax({
+            url: '/signup',
+            type: 'post',
+            data: formData,
+            dataType: 'json',
+            success: function (data) {
+               //console.log(data)
+               if (data.result.code==200){
+                  alert("注册成功,2秒后跳转到首页");
+                  setTimeout(function() {
+                     location.href='http://'+window.location.host;
+                    },2000)
+               }else{
+                  alert("登录名已经有人用")
+               }
+            }
+         })
+      })
+   </script>
+</body>
+
+</html>

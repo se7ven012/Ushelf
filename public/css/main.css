@@ -1,0 +1,23 @@
+body{
+    background-color: wheat;
+    font-family: "Lato", sans-serif;
+}
+
+h1{
+    text-align: center;
+    margin-top: 55px;
+    margin-bottom: 55px;
+}
+
+.card-body{
+    background-color: aqua;
+}
+
+#main-content{
+    text-align: center;
+    margin-top: 25px;
+}
+
+#name{
+    margin: 0 auto;
+}
