@@ -23,7 +23,7 @@ var responseJSON = function (res, ret) {
 
 router.get('/', function (req, res) {
     //console.log(req.session.user)
-    res.render('index.html',{
+    res.render('index.html', {
         user: req.session.user
     })
 })
@@ -62,7 +62,7 @@ router.post('/signin', function (req, res) {
                         req.session.user = data.userInfo;
                     }
                 }
-                if (found == false){
+                if (found == false) {
                     result = {
                         code: -1,
                         msg: 'Wrong password!'
@@ -112,14 +112,12 @@ router.post('/signup', function (req, res) {
                 }; //登录成功返回用户信息
                 console.log('用户已存在');
             } else {
-                connection.query(userSQL.insert, [account, password], function (err, result) {
+                connection.query(userSQL.insertUser, [account, password], function (err, result) {
                     if (result) {
                         data.result = {
                             code: 200,
                             msg: '注册成功'
                         };
-                        //用session记录用户的登陆状态
-                        req.session.user = result
                         //console.log('注册成功');
                     } else {
                         data.result = {
@@ -147,6 +145,45 @@ router.get('/logout', function (req, res) {
     // 2.重新定向到主页
     req.session.user = null
     res.redirect('/')
+})
+
+router.get('/detail', function (req, res) {
+    res.render('settings/profile.html', {
+        user: req.session.user
+    })
+})
+
+router.post('/detail', function (req, res) {
+    pool.getConnection(function (err, connection) {
+        var param = JSON.parse(JSON.stringify(req.body));
+        var _res = res;
+        console.log(param.EndDate)
+        connection.query(userSQL.updateDateforOrder, [param.StartDate, param.EndDate, req.session.user.account], function (err, result) {
+            var data = {};
+            if (result) {
+                data.result = {
+                    code: 200,
+                    msg: '日期设置成功'
+                };
+            } else {
+                data.result = {
+                    code: -1,
+                    msg: '日期设置失败'
+                };
+            }
+            if (err) data.err = err;
+            setTimeout(function () {
+                responseJSON(_res, data)
+            }, 300);
+        });
+        connection.release();
+    });
+})
+
+router.get('/setting', function (req, res) {
+    res.render('settings/setting.html', {
+        user: req.session.user
+    })
 })
 
 module.exports = router

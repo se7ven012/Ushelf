@@ -1,8 +1,8 @@
-function loadComments() {
-    var xhttp = new XMLHttpRequest();
+function loadComments(){
+    var xhttp=new XMLHttpRequest();
 
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
+    xhttp.onreadystatechange=function(){
+        if(this.readyState == 4 && this.status == 200){
             //这行代码用来刷新comments tag(把新的数据加载老数据后面，不用全部刷新)
             document.getElementById('comments').innerHTML = '';
 
@@ -10,7 +10,7 @@ function loadComments() {
             var results = JSON.parse(result);
 
             results.forEach((comment) => {
-
+                
                 //？？？？定义格式？
                 var node = document.createElement("div");
                 var name = document.createElement("H5");
@@ -31,12 +31,12 @@ function loadComments() {
                 name.appendChild(textName);
                 date.appendChild(textDate);
                 message.appendChild(textMessage);
-
+                
                 //数据要加进body才行
                 node.appendChild(name);
                 node.appendChild(date);
                 node.appendChild(message);
-
+                
                 //append all to the <div> tag
                 document.getElementById('comments').appendChild(node);
             });
@@ -48,11 +48,11 @@ function loadComments() {
 }
 
 //这里的逻辑是先从bootstrap把框框里的字符取出来发给node处理
-function insertComment() {
+function insertComment(){
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
+    xhttp.onreadystatechange = function(){
         //TODO: code response display the new comment into the comment section
-        if (this.readyState == 4 && this.status == 200) {
+        if(this.readyState == 4 && this.status == 200){
             var result = this.responseText;
             //这里的console是在前端显示的, result从后端来
             console.log(result);
@@ -60,56 +60,54 @@ function insertComment() {
             loadComments();
         }
     }
-    var name = document.getElementById('name').value; //'name is from html(input id="name")'
+    var name = document.getElementById('name').value;//'name is from html(input id="name")'
     var message = document.getElementById('message').value;
 
     xhttp.open("POST", "/insert", true);
-    xhttp.setRequestHeader("Content-Type", "application/json");
-    xhttp.send('{"name":"' + name + '", "message":"' + message + '"}');
-}
+    xhttp.setRequestHeader("Content-Type","application/json");
+    xhttp.send('{"name":"'+name+'", "message":"'+message+'"}');
+} 
 
 //注册 **在这里写字符限制，不能出现空字符，要邮箱格式
-function SignUpAccount() {
+function SignUpAccount(){
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
+    xhttp.onreadystatechange = function(){
         //TODO: code response display the new comment into the comment section
-        if (this.readyState == 4 && this.status == 200) {
+        if(this.readyState == 4 && this.status == 200){
             var result = this.responseText;
-            console.log(result); //控制台看命令状态
+            console.log(result);//控制台看命令状态
         }
     }
     //获取相应框框内的值
     var account = document.getElementById('account').value;
     var password = document.getElementById('password').value;
 
-    if (account != "" || password != "") {
-        //发送一个状态个server.js判断
-        xhttp.open("POST", "/signup", true);
-        xhttp.setRequestHeader("Content-Type", "application/json");
-        //发送取得的值给server.js
-        xhttp.send('{"account":"' + account + '", "password":"' + password + '"}');
-    }
+    if ( account != "" || password != ""){
+    //发送一个状态个server.js判断
+    xhttp.open("POST", "/signup", true);
+    xhttp.setRequestHeader("Content-Type","application/json");
+    //发送取得的值给server.js
+    xhttp.send('{"account":"'+account+'", "password":"'+password+'"}');}
 }
 
 //登录
-function SignInAccount() {
+function SignInAccount(){
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
+    xhttp.onreadystatechange = function(){
         //TODO: code response display the new comment into the comment section
-        if (this.readyState == 4 && this.status == 200) {
+        if(this.readyState == 4 && this.status == 200){
             var result = this.responseText;
-            console.log(result); //控制台看命令状态
+            console.log(result);//控制台看命令状态
         }
     }
     //获取相应框框内的值
     var account = document.getElementById('account').value;
     var password = document.getElementById('password').value;
 
-    if (account != "" || password != "") {
-        //发送一个状态个server.js判断
-        xhttp.open("POST", "/signin", true);
-        xhttp.setRequestHeader("Content-Type", "application/json");
-        //发送取得的值给server.js
-        xhttp.send('{"account":"' + account + '", "password":"' + password + '"}');
-    }
+    if ( account != "" || password != ""){
+    //发送一个状态个server.js判断
+    xhttp.open("POST", "/signin", true);
+    xhttp.setRequestHeader("Content-Type","application/json");
+    //发送取得的值给server.js
+    xhttp.send('{"account":"'+account+'", "password":"'+password+'"}');}
 }
