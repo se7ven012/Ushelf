@@ -49,12 +49,12 @@
             success: function (data) {
                //console.log(data)
                if (data.result.code==200){
-                  alert("注册成功,2秒后跳转到首页");
+                  alert("注册成功,点击跳转登录");
                   setTimeout(function() {
-                     location.href='http://'+window.location.host;
-                    },2000)
+                     location.href='http://'+window.location.host+'/signin';
+                    }, 10)
                }else{
-                  alert("登录名已经有人用")
+                  alert("用户名已被占用")
                }
             }
          })
