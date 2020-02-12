@@ -8,7 +8,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
 
             {{if user}}
@@ -20,8 +20,8 @@
                         当前登录用户： {{user.account}}
                     </li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="#">个人主页</a></li>
-                    <li><a href="/settings/profile">设置</a></li>
+                    <li><a href="detail">个人主页</a></li>
+                    <li><a href="setting">设置</a></li>
                     <li><a href="logout">退出</a></li>
                 </ul>
             </li>
