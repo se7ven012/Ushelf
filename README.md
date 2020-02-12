@@ -5,7 +5,7 @@
 - Database：MySQL
 
 ## Directory structure
-'''
+```
 |-- WEB
     |-- app.js
     |-- ERD.vsdx
@@ -54,7 +54,7 @@
             |-- footer.html
             |-- header.html
             |-- settings-nav.html
-'''
+```
 
 ## Router
 |PATH|GET/POST|GET ATTRIBUTES|POST ATTRIBUTES|REQUIRED LOGIN|备注|
