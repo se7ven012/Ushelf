@@ -1,0 +1,66 @@
+{{extend '../_layouts/home.html'}}
+
+<!--设置可订日测试-->>
+{{ block 'head'}}
+<link rel="stylesheet" href="/node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" type="text/css"/>
+{{/block}}
+
+{{block 'body'}}
+<form id="date_form">
+    <div class="container mt-5 mb-5" style="width: 400px">
+        <h3>设置可订日测试</h3>
+        <input data-date-format="dd/mm/yyyy" id="datepicker" name="picker">
+        <button type="submit" class="btn btn-dark">Book</button>
+        <p><br /></p>
+        <p>Date: <b id="dates"></b></p>
+    </div>
+</form>
+
+
+<script type="text/javascript" src="/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+
+<!-- 日历显示 -->
+<script type="text/javascript">
+    $('#datepicker').datepicker({
+        autoclose: false,
+        format:'yyyy-mm-dd',
+        multidate: true,
+        opens: 'left',
+        todayHightlight: true,
+        startDate: new Date(),
+        endDate: new Date(new Date().setDate(new Date().getDate() + 366)),
+        minDate: new Date(),
+        maxDate: new Date(new Date().setDate(new Date().getDate() + 366)),
+    });
+    $('#datepicker').on('change',function(){
+        $('#dates').text($('#datepicker').val())
+    });
+</script> 
+
+<!-- 向后端发送数据 -->
+<script>
+    $('#date_form').on('submit', function (e) {
+        e.preventDefault()
+        var datelist = $('#dates').text()
+        $.ajax({
+            url: '/setting',
+            type: 'post',
+            data: {
+                "dates": datelist
+            },
+            dataType: 'json',
+            success: function (data) {
+                console.log(data)
+                if (data.result.code == 200) {
+                    alert('接待时间设置成功');
+                    setTimeout(function () {
+                        location.href = 'http://' + window.location.host + '/setting';
+                    }, 10)
+                } else {
+                    alert('服务器忙，请稍后再试')
+                }
+            }
+        })
+    })
+</script>
+{{/block}}
