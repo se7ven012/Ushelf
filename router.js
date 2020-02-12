@@ -151,6 +151,32 @@ router.get('/detail', function (req, res) {
     res.render('settings/profile.html', {
         user: req.session.user
     })
+    pool.getConnection(function (err, connection) {
+        var _res = res;
+        connection.query(userSQL.getUnavailableDates, [req.session.user.account], function (err, res, result) {
+            if(res){
+                var data = {};
+                data.unavailable = res.unavailabledates;
+            if (result) {
+                data.result = {
+                    code: 200,
+                    msg: '读取日期成功'
+                };
+                console.log(data.unavailable)
+            }
+            } else {
+                data.result = {
+                    code: -1,
+                    msg: '读取日期失败'
+                };
+            }
+            if (err) data.err = err;
+            setTimeout(function () {
+                responseJSON(_res, data)
+            }, 300);
+        });
+        connection.release();
+    });
 })
 
 router.post('/detail', function (req, res) {
@@ -184,6 +210,34 @@ router.get('/setting', function (req, res) {
     res.render('settings/setting.html', {
         user: req.session.user
     })
+})
+
+router.post('/setting', function (req, res) {
+    pool.getConnection(function (err, connection) {
+        var param = JSON.parse(JSON.stringify(req.body));
+        var _res = res;
+        var dates = param.dates
+        //console.log(dates)
+        connection.query(userSQL.updateUnavailableDates, [dates, req.session.user.account], function (err, result) {
+            var data = {};
+            if (result) {
+                data.result = {
+                    code: 200,
+                    msg: '日期设置成功'
+                };
+            } else {
+                data.result = {
+                    code: -1,
+                    msg: '日期设置失败'
+                };
+            }
+            if (err) data.err = err;
+            setTimeout(function () {
+                responseJSON(_res, data)
+            }, 300);
+        });
+        connection.release();
+    });
 })
 
 module.exports = router
