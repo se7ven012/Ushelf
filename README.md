@@ -60,7 +60,7 @@
 |PATH|GET/POST|GET ATTRIBUTES|POST ATTRIBUTES|REQUIRED LOGIN|备注|
 | :----: | :----: | :----: | :----: | :----: | :---- |
 |/|GET| |  |NO|渲染首页| 			 	
-|/signup|GET|  |NO|渲染注册页|
+|/signup|GET| | |NO|渲染注册页|
 |/signup|POST| |email, password|NO|处理注册请求|
 |/signin|GET||  |NO|渲染登录页|
 |/signin|POST|| email, password|NO|处理登录请求|
