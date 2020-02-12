@@ -151,19 +151,21 @@ router.get('/detail', function (req, res) {
     res.render('settings/profile.html', {
         user: req.session.user
     })
+})
+
+router.get('/detail.json', function (req, res) {
     pool.getConnection(function (err, connection) {
         var _res = res;
-        connection.query(userSQL.getUnavailableDates, [req.session.user.account], function (err, res, result) {
-            if(res){
+        connection.query(userSQL.getUnavailableDates, [req.session.user.account], function (err, response, result) {
+            if (response) {
                 var data = {};
-                data.unavailable = res.unavailabledates;
-            if (result) {
-                data.result = {
-                    code: 200,
-                    msg: '读取日期成功'
-                };
-                console.log(data.unavailable)
-            }
+                data.unavailable = response[0].unavailabledates;
+                if (result) {
+                    data.result = {
+                        code: 200,
+                        msg: '读取日期成功'
+                    };
+                }
             } else {
                 data.result = {
                     code: -1,
@@ -171,11 +173,9 @@ router.get('/detail', function (req, res) {
                 };
             }
             if (err) data.err = err;
-            setTimeout(function () {
-                responseJSON(_res, data)
-            }, 300);
+            res.json(data)
+            connection.release();
         });
-        connection.release();
     });
 })
 
