@@ -1,6 +1,5 @@
 # Ushelf
-- Front End：HTML + Bootstrap
-- Back End：NodeJS + Express + MySQL
+NodeJS + Express + MySQL + Bootstrap
 
 ## Directory structure
 ```
