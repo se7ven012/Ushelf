@@ -68,7 +68,7 @@ NodeJS + Express + MySQL + Bootstrap
 |/setting|GET| | |YES|渲染用户设定日期界面|
 |/setting|POST| | |YES|处理设定日期请求|
 
-## TODO:
+## Ubuntu TODO:
 - sudo apt-get install nodejs npm git mysql-server wget
 - sudo wget https://sourceforge.net/projects/xampp/files/XAMPP%20Linux/7.4.1/xampp-linux-x64-7.4.1-0-installer.run
 - sudo chmod 755 xampp-linux-x64-7.4.1-0-installer.run
@@ -82,3 +82,13 @@ NodeJS + Express + MySQL + Bootstrap
 - cd Ushelf
 - npm install node express mysql bootstrap jquery art-template express-art-template --save body-parser express-session blueimp-md5 moment daterangepicker bootstrap-datepicker
 - node app.js
+
+## Windows TODO:
+- 安装 nodejs git mysql
+- 下载 xampp
+- 关掉 mysql后台服务
+- 启动 xampp （勾选mysql和apache选项）
+- 用git clone把这个项目复制到本地
+- 用vscode打开项目文件夹
+- 在vscode的console里执行： npm install node express mysql bootstrap jquery art-template express-art-template --save body-parser express-session blueimp-md5 moment daterangepicker bootstrap-datepicker
+- 在vscode的console里执行： node app.js
