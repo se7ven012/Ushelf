@@ -62,10 +62,10 @@ NodeJS + Express + MySQL + Bootstrap
 |/signin|GET| | |NO|渲染登录页|
 |/signin|POST| |email, password|NO|处理登录请求|
 |/logout|GET| | |YES|处理退出请求|
-|/detail|GET| | |YES|渲染用户预定日期界面|
+|/detail|GET| | |YES|渲染租客预定日期界面|
 |/detail.json|GET|unavailabledates| |YES|查询发送不可访问日期|
 |/detail|POST| |startdate,enddate|YES|处理预定日期请求|
-|/setting|GET| | |YES|渲染用户设定日期界面|
+|/setting|GET| | |YES|渲染屋主设定日期界面|
 |/setting|POST| |unavailabledates|YES|处理设定日期请求|
 
 ## Ubuntu TODO:
