@@ -5,7 +5,6 @@ NodeJS + Express + MySQL + Bootstrap
 ```
 |-- WEB
     |-- app.js
-    |-- ERD.vsdx
     |-- function.js
     |-- package-lock.json
     |-- README.md
