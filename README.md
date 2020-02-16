@@ -54,19 +54,19 @@ NodeJS + Express + MySQL + Bootstrap
 
 ## Router
 注意这是测试版本
-|PATH|GET/POST|GET ATTRIBUTES|POST ATTRIBUTES|REQUIRED LOGIN|备注|
+|PATH|GET/POST|GET ATTRIBUTES|POST ATTRIBUTES|REQUIRED LOGIN|REQUIRED HOST|备注|
 | :----: | :----: | :----: | :----: | :----: | :---- |
-|/|GET| | |NO|渲染首页| 			 	
-|/signup|GET| | |NO|渲染注册页|
-|/signup|POST| |email, password|NO|处理注册请求|
-|/signin|GET| | |NO|渲染登录页|
-|/signin|POST| |email, password|NO|处理登录请求|
-|/logout|GET| | |YES|处理退出请求|
-|/detail|GET| | |YES|渲染租客预定日期界面|
-|/detail.json|GET|unavailabledates| |YES|查询发送不可访问日期|
-|/detail|POST| |startdate, enddate|YES|处理预定日期请求|
-|/setting|GET| | |YES|渲染屋主设定日期界面|
-|/setting|POST| |unavailabledates|YES|处理设定日期请求|
+|/|GET| | |NO|NO|渲染首页| 			 	
+|/signup|GET| | |NO|NO|渲染注册页|
+|/signup|POST| |email, password|NO|NO|处理注册请求|
+|/signin|GET| | |NO|NO|渲染登录页|
+|/signin|POST| |email, password|NO|NO|处理登录请求|
+|/logout|GET| | |YES|NO|处理退出请求|
+|/detail|GET| | |YES|NO|渲染租客预定日期界面|
+|/detail.json|GET|unavailabledates| |YES|NO|查询发送不可访问日期|
+|/detail|POST| |startdate, enddate|YES|NO|处理预定日期请求|
+|/setting|GET| | |YES|YES|渲染屋主设定日期界面|
+|/setting|POST| |unavailabledates|YES|YES|处理设定日期请求|
 
 ## Ubuntu TODO:
 - sudo apt-get install nodejs npm git mysql-server wget
