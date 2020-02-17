@@ -67,7 +67,7 @@ NodeJS + Express + MySQL + Bootstrap
 |/detail|POST| |startdate, enddate|YES|NO|处理预定日期请求|
 |/setting|GET| | |YES|YES|渲染屋主设定日期界面|
 |/setting|POST| |unavailabledates|YES|YES|处理设定日期请求|
-|/postmsg|GET|fromsb, saytosb, publishedTime, content||YES|NO|渲染聊天界面|
+|/getmsg|GET|fromsb, saytosb, publishedTime, content||YES|NO|渲染聊天界面|
 |/postmsg|POST| |fromsb, saytosb, publishedTime, content|YES|NO|处理聊天请求|
 
 
