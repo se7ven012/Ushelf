@@ -55,7 +55,7 @@ NodeJS + Express + MySQL + Bootstrap
 ## Router
 注意这是测试版本
 |PATH|GET/POST|GET ATTRIBUTES|POST ATTRIBUTES|REQUIRED LOGIN|REQUIRED HOST|备注|
-| :----: | :----: | :----: | :----: | :----: | :----: | :---- |
+| :----: | :----: | :----: | :----: | :----: | :----: | :----: |
 |/|GET| | |NO|NO|渲染首页| 			 	
 |/signup|GET| | |NO|NO|渲染注册页|
 |/signup|POST| |email, password|NO|NO|处理注册请求|
