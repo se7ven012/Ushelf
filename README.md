@@ -68,7 +68,7 @@ NodeJS + Express + MySQL + Bootstrap
 |/setting|GET| | |YES|YES|渲染屋主设定日期界面|
 |/setting|POST| |unavailabledates|YES|YES|处理设定日期请求|
 |/getchatmsg|GET|fromsb, saytosb, publishedTime, content||YES|NO|渲染聊天界面|
-|/postmsg|POST| |fromsb, saytosb, publishedTime, content|YES|NO|处理聊天请求|
+|/postmsg|POST| |fromsb, saytosb, publishedTime, content|YES|NO|处理发送聊天请求|
 
 
 ## Ubuntu TODO:
