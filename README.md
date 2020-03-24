@@ -93,5 +93,5 @@ NodeJS + Express + MySQL + Bootstrap
 - 启动 xampp （勾选mysql和apache选项）
 - 用git clone把这个项目复制到本地
 - 用vscode打开项目文件夹
-- 在vscode的console里执行： npm install node express mysql bootstrap jquery art-template express-art-template --save body-parser express-session blueimp-md5 moment daterangepicker bootstrap-datepicker moment
+- 在vscode的console里执行： npm install node express mysql bootstrap jquery art-template express-art-template --save body-parser express-session blueimp-md5 moment daterangepicker bootstrap-datepicker moment express-mailer
 - 在vscode的console里执行： node app.js
