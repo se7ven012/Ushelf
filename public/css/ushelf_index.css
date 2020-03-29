@@ -1,0 +1,108 @@
+.banner {
+    position: static;
+    width: 100%;
+    height: 100vh;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-color: black;
+    object-fit: cover;
+}
+
+@media (max-width: 767px) {
+    .banner {
+        height: 100vh;
+    }
+}
+
+.searchForm {
+    position: absolute;
+    height: auto;
+    background-color: white;
+    border-radius: 4px;
+    text-align: center;
+    padding: 20px 10px;
+}
+
+@media (min-width: 0px) and (max-width: 991px) {
+    .searchForm {
+        top: 50%;
+        left: 50%;
+        width: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+    .searchForm {
+        top: 40vh;
+        right: 100px;
+        width: 30%;
+    }
+}
+
+@media (min-width: 1201px) {
+    .searchForm {
+        top: 50%;
+        left: 80%;
+        width: 30%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.searchForm-title {
+    font-size: 30px;
+    font-family: 'Lustria', serif;
+}
+
+@media (min-width: 0px) and (max-width: 767px) {
+    .searchForm-title {
+        font-size: 25px;
+    }
+}
+
+.searchForm-input {
+    height: 40px;
+    width: 80%;
+    border: 1px solid #F0F0F0;
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 16px;
+    color: #000;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.searchForm-search {
+    height: 40px;
+    width: 80%;
+    margin: auto;
+    margin-top: 35px;
+    background-color: lightslategrey;
+    border-color: transparent;
+}
+
+.searchForm-searchbtn {
+    height: 40px;
+    width: 100%;
+    border-color: transparent;
+}
+
+@media (min-width: 0px) and (max-width: 991px) {
+    .news {
+        height: 400px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+    .news {
+        height: 200px;
+    }
+}
+
+@media (min-width: 1201px) {
+    .news {
+        height: 200px;
+    }
+}

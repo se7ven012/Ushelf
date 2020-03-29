@@ -1,0 +1,230 @@
+.storage-filter {
+    height: 40px;
+    width: 200px;
+    border: 1px solid #F0F0F0;
+    border-radius: 4px;
+    padding: 3px;
+    font-size: 16px;
+    color: #000;
+}
+
+.storage-filter:hover {
+    background-color: rgb(224, 224, 224);
+}
+
+.btnRules {
+    transition-duration: 0.4s;
+}
+
+.btnRules-active {
+    background-color: darkgrey;
+    color: white;
+}
+
+.btnRules:hover {
+    background-color: darkgrey;
+    color: white;
+}
+
+.searchWidgets {
+    border-color: darkgrey;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.searchWidgets-hr {
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+}
+
+@media (min-width: 0px) and (max-width: 991px) {
+    .storagePic {
+        height: 400px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+    .storagePic {
+        height: 200px;
+    }
+}
+
+@media (min-width: 1201px) {
+    .storagePic {
+        height: 200px;
+    }
+}
+
+.newsPic {
+    width: 100%;
+}
+
+@media (min-width: 0px) and (max-width: 991px) {
+    .newsPic {
+        height: 350px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+    .newsPic {
+        height: 250px;
+    }
+}
+
+@media (min-width: 1201px) {
+    .newsPic {
+        height: 250px;
+    }
+}
+
+.ushelfBtn {
+    border-color: transparent;
+    background-color: #d9d9d9;
+}
+
+.ushelfBtn:hover {
+    background-color: #8c8c8c;
+}
+
+
+/*========== Modal ==========================================================================================*/
+
+
+/* The Modal (background) */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+
+/* Modal Content */
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+}
+
+
+/* The Close Button */
+
+.close {
+    color: #aaaaaa;
+    margin-right: 3px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/*========== End of Modal ==========================================================================================*/
+
+.alertNotice {
+    color: red;
+    display: none;
+}
+
+.storage-search {
+    height: 40px;
+    width: 150px;
+    background-color: rgb(212, 249, 252);
+    border-color: transparent;
+    border-radius: 4px;
+    padding: 3px;
+    font-size: 16px;
+    color: #000;
+}
+
+.storage-search:hover {
+    background-color: rgb(136, 245, 255);
+}
+
+.dropdown-msgIcon {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-msg {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    width: 200px;
+    box-shadow: 5px 8px 16px 5px rgba(0, 0, 0, 0.2);
+    padding: 12px 16px;
+    z-index: 1;
+    font-size: 14px;
+}
+
+.dropdown-msgIcon:hover .dropdown-msg {
+    display: block;
+}
+
+.ushelfBtn-contact {
+    border-color: transparent;
+    background-color: #fde8a3;
+}
+
+.ushelfBtn-contact:hover {
+    background-color: #ffc402;
+}
+
+.ushelfBtn-green {
+    border-color: transparent;
+    background-color: #75ff75;
+}
+
+.ushelfBtn-green:hover {
+    background-color: #09c909;
+}
+
+.ushelfBtn-red {
+    border-color: transparent;
+    background-color: #fd5353;
+}
+
+.ushelfBtn-red:hover {
+    background-color: #f80404;
+}
+
+.ushelfBtn-yellow {
+    border-color: transparent;
+    background-color: #fde8a3;
+}
+
+.ushelfBtn-yellow:hover {
+    background-color: #ffc402;
+}
+
+.ushelfBtn-blue {
+    border-color: transparent;
+    background-color: #7ad9ff;
+}
+
+.ushelfBtn-blue:hover {
+    background-color: #0a93c9;
+}
