@@ -87,7 +87,7 @@ tags: []
 - sudo nano httpd-xampp.conf
 - replace "Require local" with "Require all granted"
 - sudo service mysql stop
-- sudo /opt/lampp/lampp start
+- sudo /opt/lampp/xampp start
 - git clone https://github.com/se7ven012/Ushelf.git
 - cd Ushelf
 - npm install node popper express jquery mysql bootstrap art-template express-art-template body-parser express-session blueimp-md5 moment daterangepicker bootstrap-datepicker nodemailer --save
