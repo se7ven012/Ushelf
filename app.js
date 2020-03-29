@@ -3,7 +3,6 @@ var path = require('path')
 var bodyParser = require('body-parser')
 var router = require('./router')
 var session = require('express-session')
-
 var app = express()
 
 app.use('/public/', express.static(path.join(__dirname, './public/')))
@@ -27,7 +26,8 @@ app.use(session({
     saveUninitialized: true // 无论是否使用session，都会分配一个密匙
 }))//Session在生产环境中会永久化储存，服务器关了都不会丢
 
-// 挂在路由到app中
+// -------------------------------------------
+// 挂载路由到app中
 app.use(router)
 
 app.listen(5000,function(){
