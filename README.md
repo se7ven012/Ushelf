@@ -87,6 +87,7 @@ tags: []
 - replace "Require local" with "Require all granted"
 - service mysql stop
 - sudo /opt/lampp/lampp start
+- 访问数据库操作界面 http://YOUR IP/phpmyadmin/
 - git clone https://github.com/se7ven012/Ushelf.git
 - cd Ushelf
 - npm install node express mysql bootstrap jquery art-template express-art-template body-parser express-session blueimp-md5 moment daterangepicker bootstrap-datepicker moment nodemailer --save
