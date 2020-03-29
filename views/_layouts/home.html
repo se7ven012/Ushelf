@@ -4,20 +4,23 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+
+    <script src="../public/js/loadNavbar.js"></script>
+    <script src="../public/js/loadFooter.js"></script>
+
     {{ block 'head'}}{{/block}}
+    <title>Ushelf</title>
 </head>
 
 
 <body>
     {{ include '../_partials/header.html'}}
-    <script src="/node_modules/jquery/dist/jquery.js"></script>
-    {{block 'body'}}{{/block}}
+    {{ block 'body'}}{{/block}}
     {{ include '../_partials/footer.html'}}
+    <script src="/node_modules/jquery/dist/jquery.js"></script>
     <script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
     {{ block 'script'}}{{/block}}
 </body>
-
 
 </html>
