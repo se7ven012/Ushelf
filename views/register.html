@@ -1,65 +1,136 @@
 <!DOCTYPE html>
 
 <head>
-   <meta charset="UTF-8">
-   <title>Hello world</title>
-   <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
-   <link rel="stylesheet" href="public/css/login.css">
+    <meta charset="UTF-8">
+    <title>Hello world</title>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="public/css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-
 <body>
-   <!-- signup -->
-   <div class="sidenav">
-      <div class="login-main-text">
-         <h2>Ushelf<br> Login Page</h2>
-         <p>Your next door storage.</p>
-      </div>
-   </div>
-   <div class="main">
-      <div class="col-md-6 col-sm-12">
-         <div class="login-form">
-            <form id="register_form">
-               <div class="form-group">
-                  <label>User Name</label>
-                  <!--注意input里的name是一定要写的，否则后端取不到值，不知道指的是什么-->
-                  <input type="text" class="form-control" id="account" name="account" placeholder="User Name" required>
-               </div>
-               <div class="form-group">
-                  <label>Password</label>
-                  <input type="password" class="form-control" id="password" name="password" placeholder="Password"required>
-               </div>
-               <button type="submit" class="btn btn-black">Register</button>
-            
-            </form>
-         </div>
-      </div>
-   </div>
-   <!-- signup -->
-   <script src="/node_modules/jquery/dist/jquery.js"></script>
-   <script>
-      $('#register_form').on('submit', function (e) {
-         e.preventDefault()
-         var formData = $(this).serialize()
-         $.ajax({
-            url: '/signup',
-            type: 'post',
-            data: formData,
-            dataType: 'json',
-            success: function (data) {
-               //console.log(data)
-               if (data.result.code==200){
-                  alert("注册成功,点击跳转登录");
-                  setTimeout(function() {
-                     location.href='http://'+window.location.host+'/signin';
-                    }, 10)
-               }else{
-                  alert("用户名已被占用")
-               }
+    <button class="btn-back fixed-top" style="background-color: white; font-size: 20px;" onclick="location.replace(document.referrer)"><i class="fa fa-chevron-left mr-2"></i>Back</button>
+
+    <!-- signup -->
+    <div class="sidenav">
+        <div class="login-main-text">
+            <h2>Sign up</h2>
+            <p>Become a part of Ushelf today!</p>
+        </div>
+    </div>
+    <div class="main">
+        <div class="col-md-6 col-sm-12">
+            <div class="login-form">
+                <form id="register_form">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <!--注意input里的name是一定要写的，否则后端取不到值，不知道指的是什么-->
+                        <input type="text" class="form-control" id="account" name="account" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>User Name</label>
+                        <!--注意input里的name是一定要写的，否则后端取不到值，不知道指的是什么-->
+                        <input type="text" class="form-control" id="username" name="username" placeholder="User Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm password</label>
+                        <input type="password" class="form-control" id="password2" name="password" placeholder="Password" required>
+                    </div>
+                    <p id="note"></p>
+                    <button id="btnRegister" type="submit" class="btn btn-black">Register</button>
+                </form>
+                <form id="vcodeForm" style="display: none;">
+                    <div class="form-group">
+                        <label>Verification Code</label>
+                        <input type="text" class="form-control" id="vcode" name="password" placeholder="Password" required>
+                    </div>
+                    <button id="btnActivate" type="submit" class="btn btn-black">Activate</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- signup -->
+    <script src="/node_modules/jquery/dist/jquery.js"></script>
+
+    <script>
+        $('#register_form').on('submit', function(e) {
+            e.preventDefault();
+            var formData = $(this).serialize();
+            var x = document.getElementById("btnRegister");
+            var y = document.getElementById("note");
+            var register_form = document.getElementById("register_form");
+            var vcodeForm = document.getElementById("vcodeForm");
+            var account = document.getElementById("account"); // Email
+            var username = document.getElementById("username"); // Account
+            var password = document.getElementById("password"); // Password1
+            var password2 = document.getElementById("password2"); // Password2 (confirm password)
+            var emailFormat =
+                /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (account.value.match(emailFormat)) { // Check email format
+                if (password.value == password2.value) {
+                    $.ajax({
+                        url: '/signup.check',
+                        type: 'post',
+                        data: formData,
+                        dataType: 'json',
+                        success: function(data) {
+                            if (data.result.code == 200) {
+                                // 如果后端返回成功，显示验证码界面
+                                y.textContent =
+                                    "The verification code had sent to your email. Please use it to activate your account."
+                                y.style.color = "#00cccc";
+                                x.style.display = "none";
+                                vcodeForm.style.display = "block";
+                                var vcode = data.result.validationcode;
+                                $('#vcodeForm').on('submit', function(e) {
+                                    e.preventDefault();
+                                    if (vcode == document.getElementById("vcode").value) {
+                                        $.ajax({
+                                            url: '/signup.verify',
+                                            type: 'post',
+                                            data: formData,
+                                            dataType: 'json',
+                                            success: function(data) {
+                                                //console.log(data)
+                                                if (data.result.code == 200) {
+                                                    alert("注册成功，点击跳转登录")
+                                                    setTimeout(function() {
+                                                        location.href = 'http://' + window
+                                                            .location.host + '/signin';
+                                                    }, 10)
+                                                } else {
+                                                    alert("服务器忙请稍后再试")
+                                                }
+                                            }
+                                        })
+                                    } else {
+                                        alert("vcode错了")
+                                    }
+                                })
+                            } else if (data.result.code == 1) {
+                                alert("账号已存在")
+                            } else if (data.result.code == 2) { // 邮件发送失败
+                                alert("服务器忙请稍后再试")
+                            } else {
+                                alert("服务器忙请稍后再试")
+                            }
+                        }
+                    })
+                } else {
+                    y.textContent = "The password doesn't match";
+                    y.style.color = "red";
+                }
+            } else {
+                y.textContent = "Please enter a valid email";
+                y.style.color = "red";
             }
-         })
-      })
-   </script>
+        })
+    </script>
 </body>
 
 </html>

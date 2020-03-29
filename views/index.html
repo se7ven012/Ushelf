@@ -1,8 +1,98 @@
-{{extend './_layouts/home.html'}}
+<!DOCTYPE html>
+<html lang="en">
 
-<!--普通用户首页界面-->>
-{{block 'content'}}
-<div>
-    <h1>首页</h1>
-</div>
-{{/block}}
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.css"> {{ block 'head'}}{{/block}}
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cantora+One&display=swap">
+    <link rel="stylesheet" href="../public/css/ushelf.css">
+    <link rel="stylesheet" href="../public/css/ushelf_aboutHost.css">
+    <link rel="stylesheet" href="../public/css/ushelf_index.css">
+
+    <!-- Script -->
+    <script src="../../public/js/jquery-3.4.1.min.js"></script>
+    <title>Ushelf</title>
+</head>
+
+<body>
+    {{ include '../views/_partials/clientheader.html'}}
+
+    <!-- Banner -->
+    <img src="../public/img/banner.jpg " class="banner">
+
+    <!-- Search Form -->
+    <div class="searchForm ">
+        <div class="searchForm-title ">Rent your storage today</div>
+        <p>Find your storage now!</p>
+        <button id="button-search" type="submit" class="ushelfBtn" style="width: 80%; height: 40px; margin-top: 20px;" onclick="window.location.href='searchStorage.search'">Search Now
+    </button>
+    </div>
+
+    <!-- News & Promotion -->
+    <div class="container mt-4">
+        <h2>News & Promotions</h2>
+        <div class="row">
+            <div class="col-lg-4 portfolio-item my-2">
+                <div class="card h-100">
+                    <img class="card-img-top news" src="../public/img/news_openning.jpg" alt="">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <span style="color: black;">Opening Sale</span>
+                        </h4>
+                        <p>To celebrate the opening of Ushelf, the service charges of each booking is only 5%, place your booking today!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 portfolio-item my-2">
+                <div class="card h-100">
+                    <img class="card-img-top news" src="../public/img/news_referral reward.jpg" alt="">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <span style="color: black;">Referral Reward</span>
+                        </h4>
+                        <p>Share Ushelf with your friends</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 portfolio-item my-2">
+                <div class="card h-100">
+                    <img class="card-img-top news" src="../public/img/news_rule.jpg" alt="">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <span style="color: black;">Storage Rule</span>
+                        </h4>
+                        <p>Do you know what you can store and what cannot store? Take a look now!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Short Introduction -->
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-lg-6">
+                <h2>What is Ushelf?</h2>
+                <p>Ushelf is a consumer to consumer (C2C) and business to consumer (B2C) platform for storage renting. We aim to provide a platform that you can find the perfect storage space at a reasonable price. Besides, we hope that every space can be
+                    effectively used and shared. </p>
+            </div>
+            <div class="col-lg-6">
+                <img class="img-fluid rounded" src="/public/img/logo.jpeg" alt="" style="height: 200px; width: 100%;">
+            </div>
+        </div>
+    </div>
+    {{ include '../views/_partials/footer.html'}}
+    <!-- Optional JavaScript -->
+    <script src="../../node_modules/jquery/dist/jquery.slim.js"></script>
+    <script src="../../node_modules/popper.js/dist/popper.min.js"></script>
+    <script src="../../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    {{ block 'script'}}{{/block}}
+</body>
+
+</html>
