@@ -86,7 +86,7 @@ tags: []
 - cd /opt/lampp/etc/extra
 - sudo nano httpd-xampp.conf
 - replace "Require local" with "Require all granted"
-- service mysql stop
+- sudo service mysql stop
 - sudo /opt/lampp/lampp start
 - git clone https://github.com/se7ven012/Ushelf.git
 - cd Ushelf
