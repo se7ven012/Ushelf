@@ -1,159 +1,84 @@
-{{extend '../_layouts/home.html'}}
+{{extend '../_layouts/clienthome.html'}} {{block 'head'}}
+<link rel="stylesheet" href="/public/css/ushelf_index.css">
+<link rel="stylesheet" href="/public/css/ushelf.css">
+<link rel="stylesheet" href="/public/host/ushelf_aboutHost.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> {{/block}} {{block 'body'}}
+<div id="nav-placeholder"></div>
 
-<!--用户订房功能测试-->>
-{{ block 'head'}}
-<link rel="stylesheet" href="/node_modules/daterangepicker/daterangepicker.css" />
-{{/block}}
+<div class="container mt-4">
 
-{{block 'body'}}
-<form id="date_form">
-    <div class="container mt-5 mb-5" style="width: 400px">
-        <h3>用户订房功能测试</h3>
-        <input type="text" id="picker" class="form-control">
-        <button type="submit" class="btn btn-dark">Book</button>
-        <p><br /></p>
-        <p>Start Date: <b id="start"></b></p>
-        <p>End Date: <b id="end"></b></p>
+    <div class="row">
+        <!-- Left Column -->
+        <div class="col-lg-4">
+            <div class="card">
+                <!-- Pictures -->
+                <div class="card-body" style="text-align: center; padding: 10px;">
+                    <img class="rounded-circle" src="/public/img/avatar-max-img.png" alt="" style="width: 120px; height: 120px;">
+                    <hr />
+                    <p>Email: {{user.account}}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="col-lg-8">
+            <h1>Hi, I'm {{user.username}}</h1>
+            <button style="background-color: transparent; border-color: transparent; color: turquoise;" onclick="showEditProfile()">
+                    Edit Profile
+                </button>
+
+            <div class="card mt-4" id="editProfile" style="display: none">
+                <h4 class="card-header font-16">Edit Profile</h4>
+                <div class="card-body">
+
+                    <div class="mb-2" style="display: flex; flex-direction: row;">
+                        <p class="font-weight-bold font-16 mr-2" >Username: </p>
+                        <input id="inputUsername" type="text" style="height: 25px" value={{user.username}}>
+                    </div>
+                    <div class="mb-2" style="display: flex; flex-direction: row;">
+                        <button class="ushelfBtn-yellow mr-3" style="height: 40px; width: 20%;" onclick="changeUsername()">Confirm</button>
+                        <button class="ushelfBtn" style="height: 40px; width: 20%;" onclick="showEditProfile()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</form>
-{{/block}}
-
-{{ block 'script'}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/popper.js"></script>
-<script src="/node_modules/moment/moment.js"></script>
-<script src="/node_modules/daterangepicker/daterangepicker.js"></script>
-
-
-
-<!-- 获取不可访问日期, 日历显示 -->
+</div>
+{{/block}} {{ block 'script'}}
 <script>
-    var disabledArr = [];
+    function showEditProfile() {
+        var x = document.getElementById("editProfile");
+        if (x.style.display === "none") {
 
-    $.ajax({
-        url: '/detail.json',
-        type: 'get',
-        data: {},
-        dataType: 'json',
-        success: function (data) {
-            if (data.result.code == 200) {
-                var temp = "";
-                for (i = 0; i <= (data.unavailable).length; i++){
-                    //console.log(data.unavailable[i]);
-                    temp+=data.unavailable[i];
-                    if (i == (data.unavailable).length){
-                        temp = temp.substr(0, temp.length - 9);
-                        disabledArr.push(temp);
-                        //console.log(disabledArr);
-                        temp = '';
-                        break;
-                    }
-                    else if (data.unavailable[i]==','){
-                        temp = temp.substr(0, temp.length - 1);
-                        disabledArr.push(temp);
-                        //console.log(disabledArr);
-                        temp = '';
-                    }
-                }
-            } else {
-                alert('获取日期数据失败')
-            }
-        }
-    })
-
-    $('#picker').daterangepicker({
-        autoclose: true,
-        locale: {
-            format: 'YYYY/MM/DD'
-        },
-        opens: 'left',
-        todayHightlight: true,
-        startDate: new Date(),
-        endDate: new Date(new Date().setDate(new Date().getDate() + 366)),
-        minDate: new Date(new Date().setDate(new Date().getDate() + 1)),
-        maxDate: new Date(new Date().setDate(new Date().getDate() + 366)),
-        isInvalidDate: function (arg) {
-            //console.log(arg);
-            // Prepare the date comparision
-            var thisMonth = arg._d.getMonth() + 1; // Months are 0 based
-            if (thisMonth < 10) {
-                thisMonth = "0" + thisMonth; // Leading 0
-            }
-            var thisDate = arg._d.getDate();
-            if (thisDate < 10) {
-                thisDate = "0" + thisDate; // Leading 0
-            }
-            var thisYear = arg._d.getYear() + 1900; // Years are 1900 based
-            var thisCompare = thisYear + "-" + thisMonth + "-" + thisDate;
-            //console.log(thisCompare);
-            if ($.inArray(thisCompare, disabledArr) != -1) {
-                console.log("      ^--------- DATE FOUND HERE");
-                return true;
-            }
-        }
-    });
-    $("#picker").on("apply.daterangepicker", function (e, picker) {
-
-        // Get the selected bound dates.
-        var startDate = picker.startDate.format('MM/DD/YYYY')
-        var endDate = picker.endDate.format('MM/DD/YYYY')
-        //console.log(startDate + " to " + endDate);
-
-        // Compare the dates again.
-        var clearInput = false;
-        for (i = 0; i < disabledArr.length; i++) {
-            if (startDate < disabledArr[i] && endDate > disabledArr[i]) {
-                console.log("Found a disabled Date in selection!");
-                clearInput = true;
-            }
-        }
-
-        // If a disabled date is in between the bounds, clear the range.
-        if (clearInput) {
-            // To clear selected range (on the calendar).
-            var today = new Date();
-            $(this).data('daterangepicker').setStartDate(today);
-            $(this).data('daterangepicker').setEndDate(today);
-
-            // To clear input field and keep calendar opened.
-            $(this).val("").focus();
-            //console.log("Cleared the input field...");
-
-            // Alert user!
-            alert("Your range selection includes disabled dates!");
+            x.style.display = "block";
         } else {
-            // If everthing work fine
-            $('#start').text(picker.startDate.format('YYYY-MM-DD'))
-            $('#end').text(picker.endDate.format('YYYY-MM-DD'))
+            x.style.display = "none";
         }
-    });
-</script>
+    }
 
-<!-- 向后端发送数据 -->
-<script>
-    $('#date_form').on('submit', function (e) {
-        e.preventDefault()
-        var StartDate = $('#start').text()
-        var EndDate = $('#end').text()
+    function changeUsername() {
+        var name = document.getElementById("inputUsername").value
+        var account = document.getElementById("username").innerHTML
         $.ajax({
-            url: '/detail',
+            url: '/changeUsername',
             type: 'post',
             data: {
-                "StartDate": StartDate,
-                "EndDate": EndDate
+                username: name,
+                email: account
             },
             dataType: 'json',
-            success: function (data) {
-                console.log(data)
+            success: function(data) {
                 if (data.result.code == 200) {
-                    alert('接待时间设置成功');
-                    setTimeout(function () {
-                        location.href = 'http://' + window.location.host + '/detail';
+                    console.log('拿到数据');
+                    setTimeout(function() {
+                        location.href = 'http://' + window.location.host +
+                            '/profile'
                     }, 10)
                 } else {
-                    alert('服务器忙，请稍后再试')
+                    alert('服务器忙请稍后再试');
                 }
             }
         })
-    })
+    }
 </script>
 {{/block}}
