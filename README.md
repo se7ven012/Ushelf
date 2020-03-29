@@ -89,5 +89,5 @@ tags: []
 - sudo /opt/lampp/lampp start
 - git clone https://github.com/se7ven012/Ushelf.git
 - cd Ushelf
-- npm install node express mysql bootstrap jquery art-template express-art-template --save body-parser express-session blueimp-md5 moment daterangepicker bootstrap-datepicker
+- npm install node express mysql bootstrap jquery art-template express-art-template body-parser express-session blueimp-md5 moment daterangepicker bootstrap-datepicker moment nodemailer --save
 - node app.js
