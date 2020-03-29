@@ -78,6 +78,7 @@ tags: []
 |/setting|POST| | |YES|处理设定日期请求|
 
 ## TODO:
+- sudo apt-get update
 - sudo apt-get install nodejs npm git mysql-server wget
 - sudo wget https://sourceforge.net/projects/xampp/files/XAMPP%20Linux/7.4.1/xampp-linux-x64-7.4.1-0-installer.run
 - sudo chmod 755 xampp-linux-x64-7.4.1-0-installer.run
