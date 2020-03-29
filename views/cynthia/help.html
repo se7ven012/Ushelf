@@ -1,0 +1,103 @@
+{{extend '../_layouts/clienthome.html'}}
+
+{{block 'body'}}
+<!-- Navbar -->
+<div id="nav-placeholder"></div>
+
+<div class="container">
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">Help Centre</h1>
+
+    <!-- Content Row -->
+    <div class="row">
+        <!-- Sidebar Column -->
+        <div class="col-lg-3 mb-4">
+            <div class="list-group">
+                <button id="btnHelpStart" class="list-group-item text-left btn btnRules btnRules-active"
+                    onclick="temp(1)">Getting started</button>
+                <button id="btnHelpBooking" class="list-group-item text-left btn btnRules"
+                    onclick="temp(2)">Booking</button>
+                <button id="btnHelpStoring" class="list-group-item text-left btn btnRules"
+                    onclick="temp(3)">Storing</button>
+                <button id="btnHelpHosting" class="list-group-item text-left btn btnRules"
+                    onclick="temp(4)">Hosting</button>
+                <button id="btnHelpAccount" class="list-group-item text-left btn btnRules" onclick="temp(5)">Your
+                    account</button>
+                <button id="btnHelpTrust" class="list-group-item text-left btn btnRules" onclick="temp(6)">Trust and
+                    safety</button>
+            </div>
+        </div>
+        <!-- Content Column -->
+        <div class="col-lg-7 mb-4">
+            <h2 id="helpTitle">Getting Started</h2>
+            <p id="helpParagraph">Welcome to Ushelf Help Centre, feel free to contact us via email and WhatsApp if you have any doubts or questions. </p>
+        </div>
+        <!-- Contact us button -->
+        <div class="col-lg-2 mb-4">
+            <a href="contactus"
+                style="width: 100%; margin: 10px; padding: 10px; background-color: lightgrey; border-color: transparent; color: black;">Contact
+                us</a>
+        </div>
+    </div>
+</div>
+{{/block}}
+
+{{block 'script'}}
+<script>
+    function temp(code) {
+        if (code == 1) {
+            colorChanging("darkgrey", "white", "white", "black", "white", "black", "white", "black", "white",
+                "black", "white", "black");
+            document.getElementById("helpTitle").textContent = "Getting started";
+            document.getElementById("helpParagraph").textContent =
+                "Welcome to Ushelf Help Centre, feel free to contact us via email and WhatsApp if you have any doubts or questions.";
+        } else if (code == 2) {
+            colorChanging("white", "black", "darkgrey", "white", "white", "black", "white", "black", "white",
+                "black", "white", "black");
+            document.getElementById("helpTitle").textContent = "Booking";
+            document.getElementById("helpParagraph").textContent =
+                "This is the rules for booking. This is the rules for booking. This is the rules for booking. ";
+        } else if (code == 3) {
+            colorChanging("white", "black", "white", "black", "darkgrey", "white", "white", "black", "white",
+                "black", "white", "black");
+            document.getElementById("helpTitle").textContent = "Storing";
+            document.getElementById("helpParagraph").textContent =
+                "This is the rules for storing. This is the rules for storing. This is the rules for storing. ";
+        } else if (code == 4) {
+            colorChanging("white", "black", "white", "black", "white", "black", "darkgrey", "white", "white",
+                "black", "white", "black");
+            document.getElementById("helpTitle").textContent = "Hosting";
+            document.getElementById("helpParagraph").textContent =
+                "This is the rules for hosting. This is the rules for hosting. This is the rules for hosting. ";
+        } else if (code == 5) {
+            colorChanging("white", "black", "white", "black", "white", "black", "white", "black", "darkgrey",
+                "white", "white", "black");
+            document.getElementById("helpTitle").textContent = "Your account";
+            document.getElementById("helpParagraph").textContent =
+                "This is the rules for account. This is the rules for account. This is the rules for account. ";
+        } else {
+            colorChanging("white", "black", "white", "black", "white", "black", "white", "black", "white", "black",
+                "darkgrey", "white");
+            document.getElementById("helpTitle").textContent = "Trust and safety";
+            document.getElementById("helpParagraph").textContent =
+                "This is the rules for trust and safety. This is the rules for trust and safety. This is the rules for trust and safety. ";
+        }
+    }
+
+    function colorChanging(btn1bck, btn1txt, btn2bck, btn2txt, btn3bck, btn3txt, btn4bck, btn4txt, btn5bck, btn5txt,
+        btn6bck, btn6txt) {
+        document.getElementById("btnHelpStart").style.backgroundColor = btn1bck;
+        document.getElementById("btnHelpBooking").style.backgroundColor = btn2bck;
+        document.getElementById("btnHelpStoring").style.backgroundColor = btn3bck;
+        document.getElementById("btnHelpHosting").style.backgroundColor = btn4bck;
+        document.getElementById("btnHelpAccount").style.backgroundColor = btn5bck;
+        document.getElementById("btnHelpTrust").style.backgroundColor = btn6bck;
+        document.getElementById("btnHelpStart").style.color = btn1txt;
+        document.getElementById("btnHelpBooking").style.color = btn2txt;
+        document.getElementById("btnHelpStoring").style.color = btn3txt;
+        document.getElementById("btnHelpHosting").style.color = btn4txt;
+        document.getElementById("btnHelpAccount").style.color = btn5txt;
+        document.getElementById("btnHelpTrust").style.color = btn6txt;
+    }
+</script>
+{{/block}}

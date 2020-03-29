@@ -1,0 +1,98 @@
+{{extend '../_layouts/clienthome.html'}}
+
+{{ block 'body'}}
+<!-- Navbar -->
+<div id="nav-placeholder"></div>
+
+<div class="container">
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">Rules for Host</h1>
+
+    <!-- Content Row -->
+    <div class="row">
+        <!-- Sidebar Column -->
+        <div class="col-lg-3 mb-4">
+            <div class="list-group">
+                <button id="btnRuleStart" class="list-group-item text-left btn btnRules btnRules-active"
+                    onclick="temp(1)">Getting started</button>
+                <button id="btnRuleListShelf" class="list-group-item text-left btn btnRules" onclick="temp(2)">List your
+                    shelf</button>
+                <button id="btnRuleCalendar" class="list-group-item text-left btn btnRules" onclick="temp(3)">Your
+                    Calendar</button>
+                <button id="btnRuleListings" class="list-group-item text-left btn btnRules" onclick="temp(4)">Your
+                    Listings</button>
+                <button id="btnRulePayouts" class="list-group-item text-left btn btnRules" onclick="temp(5)">How payouts
+                    work</button>
+                <button id="btnRuleBookings" class="list-group-item text-left btn btnRules" onclick="temp(6)">How
+                    bookings work</button>
+            </div>
+        </div>
+        <!-- Content Column -->
+        <div class="col-lg-9 mb-4">
+            <h2 id="rulesHostTitle">Getting started</h2>
+            <p id="rulesHostParagraph">This is the rules for getting started. This is the rules for getting started.
+                This is the rules for getting started. </p>
+        </div>
+    </div>
+</div>
+{{/block}}
+
+{{ block 'script'}}
+<script>
+    function temp(code) {
+        if (code == 1) {
+            colorChanging("darkgrey", "white", "white", "black", "white", "black", "white", "black", "white",
+                "black", "white", "black");
+            document.getElementById("rulesHostTitle").textContent = "Getting started";
+            document.getElementById("rulesHostParagraph").textContent =
+                "This is the rules for getting started. This is the rules for getting started. This is the rules for getting started. ";
+        } else if (code == 2) {
+            colorChanging("white", "black", "darkgrey", "white", "white", "black", "white", "black", "white",
+                "black", "white", "black");
+            document.getElementById("rulesHostTitle").textContent = "List your shelf";
+            document.getElementById("rulesHostParagraph").textContent =
+                "This is the rules for List your shelf. This is the rules for List your shelf. This is the rules for List your shelf. ";
+        } else if (code == 3) {
+            colorChanging("white", "black", "white", "black", "darkgrey", "white", "white", "black", "white",
+                "black", "white", "black");
+            document.getElementById("rulesHostTitle").textContent = "Your Calendar";
+            document.getElementById("rulesHostParagraph").textContent =
+                "This is the rules for Your Calendar. This is the rules for Your Calendar. This is the rules for Your Calendar. ";
+        } else if (code == 4) {
+            colorChanging("white", "black", "white", "black", "white", "black", "darkgrey", "white", "white",
+                "black", "white", "black");
+            document.getElementById("rulesHostTitle").textContent = "Your Listings";
+            document.getElementById("rulesHostParagraph").textContent =
+                "This is the rules for Your Listings. This is the rules for Your Listings. This is the rules for Your Listings. ";
+        } else if (code == 5) {
+            colorChanging("white", "black", "white", "black", "white", "black", "white", "black", "darkgrey",
+                "white", "white", "black");
+            document.getElementById("rulesHostTitle").textContent = "How payouts works";
+            document.getElementById("rulesHostParagraph").textContent =
+                "This is the rules for How payouts works. This is the rules for How payouts works. This is the rules for How payouts works. ";
+        } else {
+            colorChanging("white", "black", "white", "black", "white", "black", "white", "black", "white", "black",
+                "darkgrey", "white");
+            document.getElementById("rulesHostTitle").textContent = "How bookings works";
+            document.getElementById("rulesHostParagraph").textContent =
+                "This is the rules for How bookings works. This is the rules for How bookings works. This is the rules for How bookings works. ";
+        }
+    }
+
+    function colorChanging(btn1bck, btn1txt, btn2bck, btn2txt, btn3bck, btn3txt, btn4bck, btn4txt, btn5bck, btn5txt,
+        btn6bck, btn6txt) {
+        document.getElementById("btnRuleStart").style.backgroundColor = btn1bck;
+        document.getElementById("btnRuleListShelf").style.backgroundColor = btn2bck;
+        document.getElementById("btnRuleCalendar").style.backgroundColor = btn3bck;
+        document.getElementById("btnRuleListings").style.backgroundColor = btn4bck;
+        document.getElementById("btnRulePayouts").style.backgroundColor = btn5bck;
+        document.getElementById("btnRuleBookings").style.backgroundColor = btn6bck;
+        document.getElementById("btnRuleStart").style.color = btn1txt;
+        document.getElementById("btnRuleListShelf").style.color = btn2txt;
+        document.getElementById("btnRuleCalendar").style.color = btn3txt;
+        document.getElementById("btnRuleListings").style.color = btn4txt;
+        document.getElementById("btnRulePayouts").style.color = btn5txt;
+        document.getElementById("btnRuleBookings").style.color = btn6txt;
+    }
+</script>
+{{/block}}

@@ -1,0 +1,215 @@
+{{extend '../_layouts/clienthome.html'}} {{block 'head'}}
+<link rel="stylesheet" href="../../public/css/ushelf_index.css">
+<link rel="stylesheet" href="../../public/css/ushelf.css">
+<link rel="stylesheet" href="../../public/css/ushelf_aboutHost.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> {{/block}} {{block 'body'}}
+<!-- Navbar -->
+<div id="nav-placeholder"></div>
+
+{{if orderinfo}}
+<form id="order_form">
+    <div class="container mt-4">
+        {{each orderinfo}}
+        <div class="row">
+            <!-- Left Column -->
+            <div class="col-lg-3">
+                <div class="card">
+                    <!-- Booking Details -->
+                    <h4 class="card-header font-14">Booking details</h4>
+                    <div class="card-body" style="padding: 10px">
+                        <p class="font-weight-bold font-16 mb-1">From:</p>
+                        <p id="s" class="font-16 mb-1">{{$value.startdate}}</p>
+                        <p class="font-weight-bold font-16 mb-1">To:</p>
+                        <p id="e" class="font-16 mb-1">{{$value.enddate}}</p>
+                        <p class="font-weight-bold font-16 mb-1">Total length of renting:</p>
+                        <p id="days" class="font-16 mb-1">{{$value.length}}</p>
+                    </div>
+                </div>
+
+                <div class="card mt-3">
+                    <!-- Price Details -->
+                    <h4 class="card-header font-14">Price details</h4>
+                    <div class="card-body" style="padding: 10px">
+                        <div class="mt-4" style="display: flex; flex-direction: row;">
+                            <p id="basePriceText" style="width: 80%">Base Price:</p>
+                            <p id="basePrice" style="width: 20%">{{$value.baseprice}}</p>
+                        </div>
+                        <div style="display: flex; flex-direction: row;">
+                            <p id="serviceFeeText" style="width: 80%">Service Fee: </p>
+                            <p id="serviceFee" style="width: 20%">{{$value.servicefee}}</p>
+                        </div>
+                        <div style="display: flex; flex-direction: row;">
+                            <p id="totalText" style="width: 80%; font-weight: bold;">Total Price: </p>
+                            <p id="totalCost" style="width: 20%; font-weight: bold;">{{$value.totalprice}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="col-lg-9">
+                <!-- Quick look -->
+                <div class="mb-3" style="display: flex; flex-direction: row;">
+                    <img class="img-fluid rounded" src="../../public/img/storageA.jfif" alt="" style="width: 200px; height: 200px">
+                    <div class="ml-2">
+                        <h1 class="mt-3">Storage A
+                            <small> by
+                                <a href="#">Host A</a>
+                            </small>
+                        </h1>
+                        <p>123 Woodlands, #01-01, 123456, Singapore</p>
+                        <p id="productid" style="display: none;">{{$value.storageid}}</p>
+                    </div>
+                </div>
+
+                <!-- Enter the Details -->
+                <div class="card mb-3">
+                    <h4 class="card-header font-14">Enter your details</h4>
+                    <div class="card-body" style="padding: 20px">
+
+                        <!-- Title -->
+                        <div class="mb-2" style="display: flex; flex-direction: row;">
+                            <p class="font-weight-bold font-16 mr-2">Title: </p>
+                            <select style="height: 25px; padding: 1px">
+                                <option id="personaltitle" name="personaltitle" value="Mr.">Mr.</option>
+                                <option id="personaltitle" name="personaltitle" value="Ms.">Ms.</option>
+                                <option id="personaltitle" name="personaltitle" value="Mrs.">Mrs.</option>
+                            </select>
+                        </div>
+
+                        <!-- First name -->
+                        <div class="mb-2" style="display: flex; flex-direction: row;">
+                            <p class="font-weight-bold font-16 mr-2">First name: </p>
+                            <input id="firstname" name="firstname" type="text" style="height: 25px">
+                            <p id="noticeFName" class="ml-2" style="color: red; display: none;">*Required</p>
+                        </div>
+
+                        <!-- Last name -->
+                        <div class="mb-2" style="display: flex; flex-direction: row;">
+                            <p class="font-weight-bold font-16 mr-2">Last name: </p>
+                            <input id="lastname" name="lastname" type="text" style="height: 25px">
+                            <p id="noticeLName" class="alertNotice ml-2" style="color: red; display: none;">*Required</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ask a question -->
+                <div class="card mb-3">
+                    <!-- Booking Details -->
+                    <h4 class="card-header font-14">Leave some notes</h4>
+                    <div class="card-body" style="padding: 20px">
+                        <!-- Title -->
+                        <div style="display: flex; flex-direction: row;">
+                            <p class="font-weight-bold font-16 mr-2">Describe your storing purpose:</p>
+                            <p id="noticeRequest" class="alertNotice ml-2" style="color: red; display: none;">*Required</p>
+                        </div>
+                        <textarea id="request" name="request" class="mb-3" style="width: 80%; height: 100px"></textarea>
+                    </div>
+                </div>
+                <button type="submit" style="height: 40px; width: 30%; border-color: transparent; background-color: lightgrey; float:right">Confirm
+                    booking</button>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</form>
+{{else}} {{/if}} {{/block}} {{ block 'script'}}
+<script>
+    var storageid = document.getElementById("productid").innerText
+    var customer = document.getElementById("username").innerText
+    var startdate = document.getElementById("s").innerText
+    var enddate = document.getElementById("e").innerText
+    var length = document.getElementById("days").innerText
+    var baseprice = document.getElementById("basePrice").innerText
+    var servicefee = document.getElementById("serviceFee").innerText
+    var totalprice = document.getElementById("totalCost").innerText
+    var title = document.getElementById("personaltitle").value
+    var firstname = document.getElementById("firstname").value
+    var lastname = document.getElementById("lastname").value
+    var request = document.getElementById("request").value
+
+    var noticeFName = document.getElementById("noticeFName")
+    var noticeLName = document.getElementById("noticeLName")
+    var noticeRequest = document.getElementById("noticeRequest")
+
+    var inputFirstName = document.getElementById("firstname")
+    var inputLastName = document.getElementById("lastname")
+    var inputRequest = document.getElementById("request")
+
+    $('#order_form').on('submit', function(e) {
+        e.preventDefault()
+
+        var validateFieldCode = [1, 1, 1];
+
+        // Check firstname
+        if (inputFirstName.value == "") {
+            noticeFName.style.display = "block";
+            validateFieldCode[0] = 0;
+        } else {
+            noticeFName.style.display = "none";
+            validateFieldCode[0] = 1;
+        }
+
+        // Check lastname
+        if (inputLastName.value == "") {
+            noticeLName.style.display = "block";
+            validateFieldCode[1] = 0;
+        } else {
+            noticeLName.style.display = "none";
+            validateFieldCode[1] = 1;
+        }
+
+        // Check request
+        if (inputRequest.value == "") {
+            noticeRequest.style.display = "block";
+            validateFieldCode[2] = 0;
+        } else {
+            noticeRequest.style.display = "none";
+            validateFieldCode[2] = 1;
+        }
+
+        // Check required is entered
+        for (i = 0; i < 3; i++) {
+            if (validateFieldCode[i] == 0) {
+                window.scrollTo(0, 0);
+                return;
+            }
+        }
+
+        var answer = window.confirm("Submit the booking?")
+        if (!answer) {
+            return;
+        }
+
+        $.ajax({
+            url: '/bookDetails',
+            type: 'post',
+            data: {
+                storageid: storageid,
+                customer: customer,
+                startdate: startdate,
+                enddate: enddate,
+                length: length,
+                baseprice: baseprice,
+                servicefee: servicefee,
+                totalprice: totalprice,
+                title: title,
+                firstname: inputFirstName.value,
+                lastname: inputLastName.value,
+                request: inputRequest.value
+            },
+            dataType: 'json',
+            success: function(data) {
+                if (data.result.code == 200) {
+                    alert("Booking successful, please wait for host's confirmation");
+                    setTimeout(function() {
+                        location.href = 'http://' + window.location.host + '/mystorage';
+                    }, 10)
+                } else {
+                    alert('服务器忙请稍后再试');
+                }
+            }
+        })
+    })
+</script>
+{{/block}}

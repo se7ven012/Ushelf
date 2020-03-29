@@ -1,0 +1,167 @@
+{{extend '../_layouts/clienthome.html'}} 
+
+{{ block 'head'}}
+<!-- CSS -->
+<link rel="stylesheet" href="../../public/css/ushelf_index.css">
+<link rel="stylesheet" href="../../public/css/ushelf_aboutHost.css">
+<link rel="stylesheet" href="../../public/css/ushelf.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> {{/block}} {{block 'body'}}
+<!-- Show Result -->
+<div class="container mt-4">
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">MyShelf</h1>
+
+    <!-- Content Row -->
+    <div class="row">
+        <!-- Sidebar Column -->
+        <div class="col-lg-3 mb-4">
+            <div class="list-group">
+                <form id="mystorage">
+                    <button type="submit" class="list-group-item text-left btn btnRules btnRules-active" style="width: 100%">Getting started</button>
+                </form>
+                <form id="mystorage-wfc">
+                    <button type="submit" class="list-group-item text-left btn btnRules" style="width: 100%">Wait for confirm</button>
+                </form>
+                <form id="mystorage-wfp">
+                    <button type="submit" class="list-group-item text-left btn btnRules" style="width: 100%">Wait for payment</button>
+                </form>
+                <form id="mystorage-og">
+                    <button type="submit" class="list-group-item text-left btn btnRules" style="width: 100%">On going order</button>
+                </form>
+                <form id="mystorage-past">
+                    <button type="submit" class="list-group-item text-left btn btnRules" style="width: 100%">Past
+                        History</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Content Column -->
+        <div class="col-lg-9 mb-4">
+            <h2 id="rulesTitle">Getting started</h2>
+            <p>In MyShelf page, you can view and manage your order. Here is the different status of your order: </p>
+            <ul>
+                <li class="font-weight-bold">Wait for Confirmation:
+                    <span class="font-weight-normal">
+                        Please be patient while waiting for the host's confirmation. If the host doesn't make any response in 24 hours, the booking will auto-rejected. 
+                </span>
+                </li>
+                <li class="font-weight-bold">Wait for Payment:
+                    <span class="font-weight-normal">
+                        Please make the payment after the host confirms your booking. 
+                    </span>
+                </li>
+                <li class="font-weight-bold">On going order:
+                    <span class="font-weight-normal">
+                        The order is now completed, please use the storage space in the period. 
+                    </span>
+                </li>
+                <li class="font-weight-bold">Past History
+                    <span class="font-weight-normal">
+                        View the past order. 
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+{{/block}}
+
+{{ block 'script'}}
+<script>
+    $('#mystorage').on('submit', function(e) {
+        setTimeout(function() {
+            location.href = 'http://' + window.location.host +
+                '/mystorage';
+        }, 10)
+    })
+    $('#mystorage-wfc').on('submit', function(e) {
+        e.preventDefault()
+        var customer = document.getElementById("username").innerText
+        $.ajax({
+            url: '/mystorage-wfc.load',
+            type: 'post',
+            data: {
+                customer: customer
+            },
+            dataType: 'json',
+            success: function(data) {
+                if (data.result.code == 200 || data.result.code == 1) {
+                    setTimeout(function() {
+                        location.href = 'http://' + window.location.host +
+                            '/mystorage-wfc';
+                    }, 10)
+                } else {
+                    alert('服务器忙请稍后再试');
+                }
+            }
+        })
+    })
+    $('#mystorage-wfp').on('submit', function(e) {
+        e.preventDefault()
+        var customer = document.getElementById("username").innerText
+        $.ajax({
+            url: 'mystorage-wfp.load',
+            type: 'post',
+            data: {
+                customer: customer
+            },
+            dataType: 'json',
+            success: function(data) {
+                if (data.result.code == 200 || data.result.code == 1) {
+                    setTimeout(function() {
+                        location.href = 'http://' + window.location.host +
+                            '/mystorage-wfp';
+                    }, 10)
+                } else {
+                    alert('服务器忙请稍后再试');
+                }
+            }
+        })
+    })
+    $('#mystorage-og').on('submit', function(e) {
+        e.preventDefault()
+        var customer = document.getElementById("username").innerText
+        $.ajax({
+            url: 'mystorage-og.load',
+            type: 'post',
+            data: {
+                customer: customer
+            },
+            dataType: 'json',
+            success: function(data) {
+                if (data.result.code == 200 || data.result.code == 1) {
+                    setTimeout(function() {
+                        location.href = 'http://' + window.location.host +
+                            '/mystorage-og';
+                    }, 10)
+                } else {
+                    alert('服务器忙请稍后再试');
+                }
+            }
+        })
+    })
+    $('#mystorage-past').on('submit', function(e) {
+        e.preventDefault()
+        var customer = document.getElementById("username").innerText
+        $.ajax({
+            url: 'mystorage-past.load',
+            type: 'post',
+            data: {
+                customer: customer
+            },
+            dataType: 'json',
+            success: function(data) {
+                if (data.result.code == 200 || data.result.code == 1) {
+                    setTimeout(function() {
+                        location.href = 'http://' + window.location.host +
+                            '/mystorage-past';
+                    }, 10)
+                } else {
+                    alert('服务器忙请稍后再试');
+                }
+            }
+        })
+    })
+</script>
+{{/block}}

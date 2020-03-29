@@ -1,0 +1,79 @@
+{{extend '../_layouts/clienthome.html'}}
+
+{{ block 'head'}}
+<link rel="stylesheet" href="../../public/css/ushelf_index.css">
+{{/block}}
+
+{{block 'body'}}
+<!-- Navbar -->
+<div id="nav-placeholder"></div>
+
+<!-- Banner -->
+<img src="../../public/img/banner.jpg " class="banner ">
+
+<!-- Search Form -->
+<div class="searchForm ">
+    <div class="searchForm-title ">Become an Ushelf host</div>
+    <select class="searchForm-input">
+        <option data-display="Where ">Where</option>
+        <option value="1 ">Ang Mo Kio</option>
+        <option value="2 ">Bishan</option>
+        <option value="3 ">Toa Payoh</option>
+        <option value="4 ">Woodlands</option>
+    </select>
+    <select class="searchForm-input">
+        <option data-display="Where ">Size</option>
+        <option value="1 ">Small</option>
+        <option value="2 ">Medium</option>
+        <option value="3 ">Large</option>
+        <option value="4 ">Extra Large</option>
+    </select>
+    <div class="searchForm-search">
+        <button class="searchForm-searchbtn" onclick="window.location.href='newListing'">Get started</button>
+    </div>
+</div>
+
+<!-- Short introduction for ushelf host -->
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-lg-4 my-2">
+            <h4>Why host on Ushelf?</h4>
+            <p>This is a paragraph. This is a paragraph. This is a paragraph. This is a paragraph. </p>
+        </div>
+        <div class="col-lg-4 my-2">
+            <h4>Ushelf protects hosts</h4>
+            <p>This is a paragraph. This is a paragraph. This is a paragraph. This is a paragraph. This is a
+                paragraph.This is a paragraph.This is a paragraph.</p>
+        </div>
+        <div class="col-lg-4 my-2">
+            <h4>Renter are verified</h4>
+            <p>This is a paragraph. This is a paragraph. This is a paragraph. This is a paragraph. This is a
+                paragraph.This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Steps for ushelf hosting -->
+<div class="container mt-4">
+    <hr />
+    <h1 class="text-center">Hosting in 3 steps</h1>
+    <hr />
+
+    <div class="row">
+        <div class="col-lg-4 my-2">
+            <h4>1. List your shelf</h4>
+            <p>This is a paragraph. This is a paragraph. This is a paragraph. This is a paragraph. </p>
+        </div>
+        <div class="col-lg-4 my-2">
+            <h4>2. Decide how you want to host</h4>
+            <p>This is a paragraph. This is a paragraph. This is a paragraph. This is a paragraph. This is a
+                paragraph.This is a paragraph.This is a paragraph.</p>
+        </div>
+        <div class="col-lg-4 my-2">
+            <h4>3. Welcome your renter</h4>
+            <p>This is a paragraph. This is a paragraph. This is a paragraph. This is a paragraph. This is a
+                paragraph.This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.</p>
+        </div>
+    </div>
+</div>
+{{/block}}

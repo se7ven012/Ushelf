@@ -1,0 +1,57 @@
+{{extend '../_layouts/clienthome.html'}} {{block 'header'}}
+<link rel="stylesheet" href="/public/css/ushelf.css"> {{/block}} {{ block 'body'}}
+<!-- Navbar -->
+<div id="nav-placeholder"></div>
+
+<div class="container">
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">Rules</h1>
+
+    <!-- Content Row -->
+    <div class="row">
+        <!-- Content Column -->
+        <div id="generalRule" class="col-lg-9 mb-4">
+            <p class="mb-1">Ushelf rules aim to protect our host and member, while also building a friendly storage environment for both users. </p>
+            <p class="mb-1">If you are the host, please <a href="/rules_host">click here</a> for more information. </p>
+            <p class="mb-1">Please feel free to check in the <a href="/help">help</a> or <a href="/contactus">contact us</a> if you have any question. </p>
+        </div>
+
+        <div id="storingRule" class="col-lg-9 mb-4">
+            <h2>Storing Rule</h2>
+            <p>Most household items, business items and commercial items can be stored in the storage space. Examples of things are furniture, documents, books, commercial stock, wine, sports equipment etc. But please take note that different host has different
+                storage rule, please read the section "Things to keep in mind" in the storage detail you make your choice. </p>
+            <p>Few items are prohibited in all storage space, which includes: </p>
+            <ul>
+                <li>Live animals/plants</li>
+                <li>Perishables items (such as foodstuffs)</li>
+                <li>Explosive items</li>
+                <li>Flammable gases/liquids</li>
+                <li>Fuel/diesel</li>
+                <li>Toxic/corrosive/oxidizing materials</li>
+                <li>Any items prohibited or controlled by law (such as weapons, drugs)</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{{/block}} {{ block 'script'}}
+<script>
+    function temp(code) {
+        if (code == 1) {
+            colorChanging("darkgrey", "white", "white", "black");
+            document.getElementById("generalRule").style.display = "block";
+            document.getElementById("storingRule").style.display = "none"
+        } else {
+            colorChanging("white", "black", "darkgrey", "white");
+            document.getElementById("generalRule").style.display = "none";
+            document.getElementById("storingRule").style.display = "block"
+        }
+    }
+
+    function colorChanging(btn1bck, btn1txt, btn2bck, btn2txt) {
+        document.getElementById("btnRuleGeneral").style.backgroundColor = btn1bck;
+        document.getElementById("btnRuleStoring").style.backgroundColor = btn2bck;
+        document.getElementById("btnRuleGeneral").style.color = btn1txt;
+        document.getElementById("btnRuleStoring").style.color = btn2txt;
+    }
+</script>
+{{/block}}

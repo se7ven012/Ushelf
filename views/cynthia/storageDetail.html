@@ -1,0 +1,292 @@
+{{extend '../_layouts/clienthome.html'}} {{ block 'head'}}
+<!-- CSS -->
+<link rel="stylesheet" href="../../public/css/ushelf_index.css">
+<link rel="stylesheet" href="../../public/css/ushelf.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/node_modules/daterangepicker/daterangepicker.css" />
+
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+{{ /block}} {{ block 'body'}}
+<!-- Navbar -->
+<div id="nav-placeholder"></div>
+
+<div class="container mt-4">
+    {{if detailinfo}}
+    <div class="row">
+        {{each detailinfo}}
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
+            <!-- Preview Image -->
+            <img class="img-fluid rounded" src="../../public/img/storageA.jfif" alt="" style="height: 60vh; width: 100%; object-fit: cover;">
+
+            <h1 class="mt-3">{{$value.title}}
+                <small> by {{$value.owner}}
+                </small>
+            </h1>
+            <p>{{$value.address0}}, {{$value.address1}}, {{$value.city}}, {{$value.province}}, {{$value.zipcode}}, {{$value.country}}</p>
+            <p id="productid" style="display: none">{{$value.id}}</p>
+            <br>
+
+            <dl>
+                {{if $value.feature.includes("0")}}
+                <dt style="font-weight: bold;"><i class="fa fa-clock-o mr-2"></i>24 hours available</dt>
+                <dd class="ml-4">Store and pick in anytime.</dd>
+                {{/if}} {{if $value.feature.includes("1")}}
+                <dt style="font-weight: bold;"><i class="fa fa-key mr-2"></i>Lock and key</dt>
+                <dd class="ml-4">Keep your things in secure.</dd>
+                {{/if}} {{if $value.feature.includes("2")}}
+                <dt style="font-weight: bold;"><i class="fas fa-video mr-2"></i>CCTV</dt>
+                <dd class="ml-4">Keep on eye of your things anytime.</dd>
+                {{/if}} {{if $value.feature.includes("3")}}
+                <dt style="font-weight: bold;"><i class="fa fa-briefcase mr-2"></i>Safe Deposit Box</dt>
+                <dd class="ml-4">Store and pick in anytime.</dd>
+                {{/if}} {{if $value.feature.includes("4")}}
+                <dt style="font-weight: bold;"><i class="fa fa-truck mr-2"></i>Delivery service</dt>
+                <dd class="ml-4">Easier picking and storing.</dd>
+                {{/if}}
+            </dl>
+
+            <hr />
+
+            <h4>Introduction</h4>
+            <p>{{$value.paragraph}}</p>
+            <p class="mb-2 font-weight-bold">Storage Type:<span class="font-weight-normal">&nbsp{{$value.type}}</span>
+            </p>
+            <p class="mb-2 font-weight-bold">Storage Size:<span class="font-weight-normal">&nbsp{{$value.size}}</span>
+            </p>
+            <div style="display: flex; flex-direction: row;">
+                <p class="mb-2 font-weight-bold">Dedicated storage space
+                    <div class="dropdown-msgIcon">
+                        <span class="fa fa-question-circle ml-1"></span>
+                        <div class="dropdown-msg">
+                            <p>Dedicated storage space means the place is primarily set up for storing and is not a part of common living area. </p>
+                        </div>
+                    </div>:
+                    <span class="font-weight-normal">&nbsp{{$value.dedicated}}</span></p>
+            </div>
+
+            <hr />
+
+            <h4 class="mb-3">Reviews</h4>
+            <!-- Single Comment -->
+            <!-- 这里先放着到时候做review table -->
+            <div class="media mb-4">
+                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                <div class="media-body">
+                    <h5 class="mt-0">User A</h5>
+                    I had rent for a week and everything keep remains as I store in. The host is also nice!
+                </div>
+            </div>
+            <div class="media mb-4">
+                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                <div class="media-body">
+                    <h5 class="mt-0">User G</h5>
+                    Only a few minutes walk from MRT, good location, easy to store and pick.
+                </div>
+            </div>
+
+            <hr />
+
+            <h4>Things to keep in mind</h4>
+            <p>{{$value.mention}}</p>
+
+            <hr />
+
+            <h4>Storage rules</h4>
+            <dl>
+                {{if $value.prohibited.includes("0")}}
+                <dt class="mb-2" style="font-weight: normal;"><i class="fa fa-ban mr-2"></i>No furnishings</dt> {{/if}} {{if $value.prohibited.includes("1")}}
+                <dt class="mb-2" style="font-weight: normal;"><i class="fa fa-ban mr-2"></i>No books</dt> {{/if}} {{if $value.prohibited.includes("2")}}
+                <dt class="mb-2" style="font-weight: normal;"><i class="fas fa-ban mr-2"></i>No dolls & plushies</dt> {{/if}} {{if $value.prohibited.includes("3")}}
+                <dt class="mb-2" style="font-weight: normal;"><i class="fa fa-ban mr-2"></i>No liquid items</dt> {{/if}} {{if $value.prohibited.includes("4")}}
+                <dt class="mb-2" style="font-weight: normal;"><i class="fa fa-ban mr-2"></i>No fragile items</dt> {{/if}}
+            </dl>
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-lg-4">
+            <!-- Book Widget -->
+            <form id="book_form">
+                <div class="searchWidgets">
+                    <p>$<span class="font-weight-bold" style="font-size: 20px;">{{$value.price}}</span> /per day</p>
+                    <div class="searchWidgets-hr"></div>
+                    <p class="mb-1">Dates:</p>
+
+                    <!-- 要调整一下datepicker的位置，现在的位置不太好看 -->
+                    <div class="container mt-2" style="width: 100%;">
+                        <input type="text" id="picker" class="form-control">
+                        <span id="s" style="display: none;"></span>
+                        <span id="e" style="display: none;"></span>
+                        <p><br /></p>
+                    </div>
+
+                    <!-- 这里要调整字符的位置，以及计算费用，{{$value.price}}是一个var（例如4.8）-->
+                    <div class="mt-4" style="display: flex; flex-direction: row;">
+                        <p id="basePriceText" style="width: 80%">Base fee: $<span id="basePrice">{{$value.price}}</span> *
+                            <span id="days">0</span> days</p>
+                        <p id="showBase" style="width: 20%">-</p>
+                    </div>
+                    <div style="display: flex; flex-direction: row;">
+                        <p id="serviceFeeText" style="width: 80%">Service Fee: </p>
+                        <p id="showService" style="width: 20%">-</p>
+                    </div>
+                    <div style="display: flex; flex-direction: row;">
+                        <p id="totalText" style="width: 80%; font-weight: bold;">Total Price: </p>
+                        <p id="showTotal" style="width: 20%; font-weight: bold;">-</p>
+                    </div>
+                    <button type="submit" class="searchForm-searchbtn ushelfBtn mt-3">Book</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {{/each}}
+</div>
+{{else}} {{/if}}
+</div>
+{{ /block}} {{ block 'script'}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/popper.js"></script>
+<script src="/node_modules/moment/moment.js"></script>
+<script src="/node_modules/daterangepicker/daterangepicker.js"></script>
+
+<script>
+    // 这里开始不能改动，否则datepicker会出问题！
+    var disabledArr = [];
+
+    var calbasePrice = "";
+    var calserviceFee = "";
+    var calTotalPrice = "";
+    $('#picker').daterangepicker({
+        autoclose: true,
+        locale: {
+            format: 'YYYY/MM/DD'
+        },
+        opens: 'left',
+        todayHightlight: true,
+        startDate: new Date(),
+        endDate: new Date(new Date().setDate(new Date().getDate() + 366)),
+        minDate: new Date(new Date().setDate(new Date().getDate() + 1)),
+        maxDate: new Date(new Date().setDate(new Date().getDate() + 366)),
+        isInvalidDate: function(arg) {
+            //console.log(arg);
+            // Prepare the date comparision
+            var thisMonth = arg._d.getMonth() + 1; // Months are 0 based
+            if (thisMonth < 10) {
+                thisMonth = "0" + thisMonth; // Leading 0
+            }
+            var thisDate = arg._d.getDate();
+            if (thisDate < 10) {
+                thisDate = "0" + thisDate; // Leading 0
+            }
+            var thisYear = arg._d.getYear() + 1900; // Years are 1900 based
+            var thisCompare = thisYear + "-" + thisMonth + "-" + thisDate;
+            //console.log(thisCompare);
+            if ($.inArray(thisCompare, disabledArr) != -1) {
+                console.log("      ^--------- DATE FOUND HERE");
+                return true;
+            }
+        }
+    });
+    $("#picker").on("apply.daterangepicker", function(e, picker) {
+        // Get the selected bound dates.
+        var startDate = picker.startDate.format('MM/DD/YYYY')
+        var endDate = picker.endDate.format('MM/DD/YYYY')
+            //console.log(startDate + " to " + endDate);
+
+        // Compare the dates again.
+        var clearInput = false;
+        for (i = 0; i < disabledArr.length; i++) {
+            if (startDate < disabledArr[i] && endDate > disabledArr[i]) {
+                console.log("Found a disabled Date in selection!");
+                clearInput = true;
+            }
+        }
+
+        // If a disabled date is in between the bounds, clear the range.
+        if (clearInput) {
+            // To clear selected range (on the calendar).
+            var today = new Date();
+            $(this).data('daterangepicker').setStartDate(today);
+            $(this).data('daterangepicker').setEndDate(today);
+
+            // To clear input field and keep calendar opened.
+            $(this).val("").focus();
+            //console.log("Cleared the input field...");
+
+            // Alert user!
+            alert("Your range selection includes disabled dates!");
+        } else {
+            // If everthing work fine
+            // 这里可以写
+            var s = picker.startDate.format('YYYY-MM-DD')
+            var e = picker.endDate.format('YYYY-MM-DD')
+            var a = moment(s, 'YYYY-MM-DD');
+            var b = moment(e, 'YYYY-MM-DD');
+            var days = b.diff(a, 'days');
+            $('#days').text(days);
+            $('#s').text(s);
+            $('#e').text(e);
+
+            var basePrice = document.getElementById("basePrice").textContent; // basePrice
+            calbasePrice = (basePrice * days).toFixed(2); // calculateBasePrice
+            calserviceFee = (calbasePrice * 0.05).toFixed(2); // calculateServiceFee (5%)
+            calTotalPrice = (parseFloat(calbasePrice.toString()) + parseFloat(calserviceFee.toString()))
+                .toFixed(2); // calcualteTotalPrice
+
+            // Edit the view
+            var showBase = document.getElementById("showBase");
+            var showService = document.getElementById("showService");
+            var showTotal = document.getElementById("showTotal");
+
+            showBase.textContent = "$" + calbasePrice;
+            showService.textContent = "$" + calserviceFee;
+            showTotal.textContent = "$" + calTotalPrice;
+        }
+    });
+    // 这里结束不能改动，否则datepicker会出问题！
+
+    $('#book_form').on('submit', function(e) {
+        e.preventDefault()
+        if (document.getElementById("username") == null) {
+            alert("Please log in to proceed the booking.");
+            setTimeout(function() {
+                location.href = 'http://' + window.location.host + '/signin';
+            }, 10)
+        } else {
+            if (document.getElementById("showTotal").innerText == "-") {
+                alert("Please select the date");
+            } else {
+                var customer = document.getElementById("username").innerText
+                var storageid = document.getElementById("productid").innerText
+                var startdate = document.getElementById("s").innerText
+                var enddate = document.getElementById("e").innerText
+                var length = document.getElementById("days").innerText
+                $.ajax({
+                    url: '/storageDetail',
+                    type: 'post',
+                    data: {
+                        storageid: storageid,
+                        startdate: startdate,
+                        enddate: enddate,
+                        customer: customer,
+                        length: length,
+                        baseprice: calbasePrice,
+                        servicefee: calserviceFee,
+                        totalprice: calTotalPrice
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.result.code == 200) {
+                            setTimeout(function() {
+                                location.href = 'http://' + window.location.host + '/bookDetails';
+                            }, 10)
+                        } else {
+                            alert("服务器忙请稍后再试");
+                        }
+                    }
+                })
+            }
+        }
+    });
+</script>
+
+{{ /block}}

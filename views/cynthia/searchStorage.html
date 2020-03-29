@@ -1,0 +1,103 @@
+{{extend '../_layouts/clienthome.html'}} {{ block 'head'}}
+<!-- CSS -->
+<link rel="stylesheet" href="../../public/css/ushelf_index.css">
+<link rel="stylesheet" href="../../public/css/ushelf.css"> {{/block}} {{block 'body'}}
+<!-- Navbar -->
+<div id="nav-placeholder"></div>
+
+<!-- Filter -->
+<div class="container mt-4 pt-2 pb-2" style="background-color: grey; margin-top: 30px">
+    <div style="display: flex; flex-direction: row;"></div>
+    <form id="search_form">
+        <select id="type" name="type" class="storage-filter mr-2">
+            <option value="Normal storage">Normal storage</option>
+            <option value="Frozen storage">Frozen storage</option>
+            <option value="Wine storage">Wine storage</option>
+        </select>
+        <select id="size" name="size" class="storage-filter mr-2">
+            <option value="Small">Small (16sqft - 25sqft)</option>
+            <option value="Medium">Medium (26sqft - 50sqft)</option>
+            <option value="Large">Large (51sqft - 75sqft)</option>
+            <option value="Extra Large">Extra Large (above 76sqft)</option>
+        </select>
+        <button type="submit" class="storage-search">Search</button>
+    </form>
+</div>
+</div>
+
+{{if searchresult == 0}}
+<div class="container mt-4">
+    <p>No result</p>
+</div>
+{{else if searchresult}}
+<div class="container mt-4">
+    <div class="row">
+        {{each searchresult}}
+        <div class="col-lg-4 portfolio-item my-3">
+            <div class="card h-100">
+                <a onclick="jump('{{$value.id}}')"><img class="card-img-top storagePic" src="../../public/img/storageA.jfif" alt="{{$value.image}}"></a>
+                <div class="card-body">
+                    <h4 class="card-title">{{$value.title}}</h4>
+                    <p class="card-text">{{$value.paragraph}}</p>
+                    <button class="ushelfBtn" style="width: 100%;" onclick="jump('{{$value.id}}')">Details</button>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
+{{else}}
+<!-- 显示推荐 -->
+<div class="container mt-4">
+    <p>Please select the filter to search</p>
+</div>
+{{/if}} {{/block}} {{ block 'script'}}
+<script src="/node_modules/jquery/dist/jquery.js"></script>
+<!-- 获取后端的搜索结果 -->
+<script>
+    $('#search_form').on('submit', function(e) {
+        e.preventDefault()
+        var formData = $(this).serialize();
+        $.ajax({
+            url: '/searchStorage.json',
+            type: 'post',
+            data: formData,
+            dataType: 'json',
+            success: function(data) {
+                if (data.result.code == 200) {
+                    console.log('拿到数据')
+                    setTimeout(function() {
+                        location.href = 'http://' + window.location.host +
+                            '/searchStorage.result'
+                    }, 10)
+                } else {
+                    alert('用户名或密码错误');
+                }
+            }
+        })
+    })
+
+    function jump(idnumber) {
+        var productid = idnumber;
+        $.ajax({
+            url: '/clickproduct.json',
+            type: 'post',
+            data: {
+                id: productid
+            },
+            dataType: 'json',
+            success: function(data) {
+                if (data.result.code == 200) {
+                    console.log('拿到数据');
+                    setTimeout(function() {
+                        location.href = 'http://' + window.location.host +
+                            '/storageDetail'
+                    }, 10)
+                } else {
+                    alert('服务器忙请稍后再试');
+                }
+            }
+        })
+    }
+</script>
+{{/block}}

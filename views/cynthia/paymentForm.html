@@ -1,0 +1,200 @@
+{{extend '../_layouts/clienthome.html'}} {{block 'head'}}
+<link rel="stylesheet" href="../../public/css/ushelf_index.css">
+<link rel="stylesheet" href="../../public/css/ushelf.css">
+<link rel="stylesheet" href="../../public/css/ushelf_aboutHost.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> {{/block}} {{block 'body'}}
+<!-- Navbar -->
+<div id="nav-placeholder"></div>
+
+<!-- Page Content -->
+<div class="container upload mt-4">
+    <div class="card h-100" style="width: 75%; margin: auto">
+        <!-- Card Title -->
+        <form id="payment_form">
+            <h4 class="card-header font-18">Payment</h4>
+            <div class="card-body" style="padding: 20px">
+                <!-- Price Details -->
+                {{if orderDetail}} {{each orderDetail}}
+                <div class="card-body" style="padding: 10px">
+                    <p class="font-weight-bold font-16 mb-1">Order number:</p>
+                    <p id="orderid" class="font-16 mb-1">{{$value.orderid}}</p>
+                    <p class="font-weight-bold font-16 mb-1">From:</p>
+                    <p id="startdate" class="font-16 mb-1">{{$value.startdate}}</p>
+                    <p class="font-weight-bold font-16 mb-1">To:</p>
+                    <p id="enddate" class="font-16 mb-1">{{$value.enddate}}</p>
+                    <p class="font-weight-bold font-16 mb-1">Total length of renting:</p>
+                    <p id="days" class="font-16 mb-1">{{$value.length}}</p>
+                    <p class="font-weight-bold font-16 mb-1">Total Price: </p>
+                    <p id="totalCost" class="font-16 mb-1">${{$value.totalprice}}</p>
+                </div>
+                {{/each}} {{/if}}
+
+                <hr />
+
+                <!-- Credit card Information -->
+                <h4 class="font-20 mb-3">Credit Card (VISA / MasterCard)</h4>
+
+                <!-- Credit Card Numner -->
+                <div class="mb-1" style="display: flex; flex-direction: row;">
+                    <p class="font-16 mr-1">Credit Card Number: </p>
+                    <input id="cardnum" name="cardnum" type="text" style="height: 25px; width: 30%">
+                    <p id="alertCardnum" class="ml-2" style="color: red; display: none;">*Required</p>
+                </div>
+
+                <!-- Name -->
+                <div class="mb-1" style="display: flex; flex-direction: row;">
+                    <p class="font-16 mr-1">Name on card: </p>
+                    <input id="name" name="name" type="text" style="height: 25px; width: 30%">
+                    <p id="alertname" class="ml-2" style="color: red; display: none;">*Required</p>
+                </div>
+
+                <!-- Security Code -->
+                <div class="mb-1" style="display: flex; flex-direction: row;">
+                    <p class="font-16 mr-1">CCV: </p>
+                    <input id="ccv" name="ccv" type="text" style="height: 25px; width: 10%">
+                    <p id="alertCVV" class="ml-2" style="color: red; display: none;">*Required</p>
+                </div>
+
+                <!-- Valid Thru  -->
+                <div class="mb-1" style="display: flex; flex-direction: row;">
+                    <p class="font-16 mr-1">Valid Thru: </p>
+                    <div class="mb-1" style="display: flex; flex-direction: row;">
+                        <select id="expMonth" style="height: 25px; padding: 1px">
+                        </select>
+                        <p class="ml-2 mr-2">/</p>
+                        <select id="expYear" style="height: 25px; padding: 1px">
+                            <option value="2020">2020</option>
+                            <option value="1">2021</option>
+                            <option value="2">2022</option>
+                            <option value="3">2023</option>
+                            <option value="4">2024</option>
+                            <option value="5">2025</option>
+                            <option value="6">2026</option>
+                            <option value="7">2027</option>
+                            <option value="8">2028</option>
+                            <option value="9">2029</option>
+                            <option value="10">2030</option>
+                        </select>
+                        <p id="alertValid" class="ml-2" style="color: red; display: none;">*The card is expired</p>
+                    </div>
+                </div>
+                <button type="submit" class="mb-4" style="height: 40px; width: 30%; border-color: transparent; background-color: lightgrey; float:right;">Confirm booking</button>
+            </div>
+        </form>
+    </div>
+</div>
+{{/block}} {{ block 'script'}}
+<script>
+    var inputcardnum = document.getElementById("cardnum");
+    var inputname = document.getElementById("name");
+    var inputCVV = document.getElementById("ccv");
+    var expMonth = document.getElementById("expMonth");
+    var expYear = document.getElementById("expYear");
+
+    var visa = /^4[0-9]{12}(?:[0-9]{3})?$/
+    var mastercard = /^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$/
+    var cvv = /^\d{3}$/
+
+    var alertCardnum = document.getElementById("alertCardnum");
+    var alertname = document.getElementById("alertname");
+    var alertCVV = document.getElementById("alertCVV");
+    var alertValid = document.getElementById("alertValid");
+
+    var d = new Date();
+
+    // Add month
+    for (var i = 1; i < 13; i++) {
+        var opt = document.createElement('option')
+        opt.value = i;
+        opt.innerHTML = i;
+        expMonth.appendChild(opt)
+    }
+    $('#payment_form').on('submit', function(e) {
+        e.preventDefault();
+        var validationCode = [1, 1, 1, 1];
+
+        if (inputcardnum.value == "") {
+            alertCardnum.textContent = "*Required"
+            alertCardnum.style.display = "block"
+            validationCode[0] = 0;
+        } else if (inputcardnum.value.match(visa) || inputcardnum.value.match(mastercard)) {
+            alertCardnum.style.display = "none"
+            validationCode[0] = 1;
+        } else {
+            alertCardnum.textContent = "*Please provide a valid card number (16 digits)"
+            alertCardnum.style.display = "block"
+            validationCode[0] = 0;
+        }
+
+        if (inputname.value == "") {
+            alert(inputname.textContent)
+            alertname.style.display = "block"
+            validationCode[1] = 0;
+        } else {
+            alertname.style.display = "none"
+            validationCode[1] = 1;
+        }
+
+        if (inputCVV.value == "") {
+            alertCVV.textContent = "*Required"
+            alertCVV.style.display = "block"
+            validationCode[2] = 0;
+        } else if (inputCVV.value.match(cvv)) {
+            alertCVV.style.display = "none"
+            validationCode[2] = 1;
+        } else {
+            alertCVV.textContent = "*Please provide a valid CVV (3 digits)"
+            alertCVV.style.display = "block"
+            validationCode[2] = 0;
+        }
+
+        if (expYear.value == d.getFullYear()) {
+            if (expMonth.value <= d.getMonth() + 1) {
+                alertValid.style.display = "block"
+                validationCode[3] = 0;
+            } else {
+                alertValid.style.display = "none"
+                validationCode[3] = 1;
+            }
+        } else {
+            alertValid.style.display = "none"
+            validationCode[3] = 1;
+        }
+
+        for (i = 0; i < 4; i++) {
+            if (validationCode[i] == 0) {
+                window.scrollTo(0, 0);
+                return;
+            }
+        }
+
+        var answer = window.confirm("Finish the payment?")
+        if (!answer) {
+            return;
+        }
+
+        var orderid = document.getElementById("orderid").innerText
+        var price = document.getElementById("totalCost").innerText
+
+        $.ajax({
+            url: '/paymentForm',
+            type: 'post',
+            data: {
+                orderid: orderid,
+                price: price
+            },
+            dataType: 'json',
+            success: function(data) {
+                if (data.result.code == 200) {
+                    alert('Payment successful')
+                    setTimeout(function() {
+                        location.href = 'http://' + window.location.host + '/mystorage';
+                    }, 10)
+                } else {
+                    alert('服务器忙其稍后再试');
+                }
+            }
+        })
+    })
+</script>
+{{/block}}
