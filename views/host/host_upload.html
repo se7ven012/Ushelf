@@ -1,0 +1,420 @@
+{{extend '../_layouts/hosthome.html'}} {{ block 'head'}}
+<!-- CSS -->
+<link rel="stylesheet" href="../../public/css/ushelf_index.css">
+<link rel="stylesheet" href="../../public/css/ushelf_aboutHost.css">
+<link rel="stylesheet" href="../../public/css/ushelf.css">
+<link rel="stylesheet" href="../../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> {{/block}} {{ block 'body'}}
+<!-- Page Content -->
+
+<div class="container upload mt-4">
+    <div class="card h-100" style="width: 75%; margin: auto">
+        <!-- Card Title -->
+        <h4 class="card-header font-18">Tell us more about your storage</h4>
+        <div class="card-body" style="padding: 20px">
+            <form id="storage_form">
+                <!-- Storage title -->
+                <div class="mb-3" style="display: flex; flex-direction: row;">
+                    <p class="font-weight-bold font-16 mr-2">Storage title: </p>
+                    <input id="title" name="title" type="text" style="height: 25px">
+                    <div class="dropdown-msgIcon">
+                        <span class="fa fa-question-circle ml-1"></span>
+                        <div class="dropdown-msg">
+                            <p>Give a <span style="color: #00cccc;">name</span> for your storage. <br/>For example: Storage A</p>
+                        </div>
+                    </div>
+                    <p id="titleAlert" class="ml-2 alertNotice">*Required</p>
+                </div>
+
+                <!-- Storage type -->
+                <div class="mb-3" style="display: flex; flex-direction: row;">
+                    <p class="font-weight-bold font-16 mr-2">Storage type: </p>
+                    <select id="type" name="type" style="height: 25px; padding: 1px">
+                        <option value="Normal Storage">Normal Storage</option>
+                        <option value="Frozen Storage">Frozen Storage</option>
+                        <option value="Wine Storage">Wine Storage</option>
+                    </select>
+                    <div class="dropdown-msgIcon">
+                        <span class="fa fa-question-circle ml-1"></span>
+                        <div class="dropdown-msg">
+                            <p><span style="color: #00cccc;">Normal storage</span>: Normal space. <br/>
+                                <span style="color: #00cccc;">Frozen storage</span>: The space with temperature below -4. <br/>
+                                <span style="color: #00cccc;">Wine storage</span>: The space with temperature and humidity control that ideal for storing wine.</p>
+                        </div>
+                    </div>
+                    <p id="typeAlert" class="ml-2 alertNotice">*Required</p>
+                </div>
+
+                <!-- Storage size -->
+                <div class="mb-3" style="display: flex; flex-direction: row;">
+                    <p class="font-weight-bold font-16 mr-2">Storage size: </p>
+                    <select id="size" name="size" style="height: 25px; padding: 1px">
+                        <option value="Small">Small (16sqft - 25sqft)</option>
+                        <option value="Medium">Medium (26sqft - 50sqft)</option>
+                        <option value="Large">Large (51sqft - 75sqft)</option>
+                        <option value="Extra Large">Extra Large (Above 76sqft)</option>
+                    </select>
+                    <div class="dropdown-msgIcon">
+                        <span class="fa fa-question-circle ml-1"></span>
+                        <div class="dropdown-msg">
+                            <p><span style="color: #00cccc;">Small</span>: Locker, shelf <br/>
+                                <span style="color: #00cccc;">Medium</span>: Room <br/>
+                                <span style="color: #00cccc;">Large</span>: Room <br/>
+                                <span style="color: #00cccc;">Extra Large</span>: Warehouse <br/>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Storage location -->
+                <div style="display: flex; flex-direction: row;">
+                    <p class="font-weight-bold font-16 mr-2 mb-1">Location: </p>
+                    <div class="dropdown-msgIcon">
+                        <span class="fa fa-question-circle ml-1"></span>
+                        <div class="dropdown-msg">
+                            <p>The <span style="color: #00cccc;">location</span> of your storage space.</p>
+                        </div>
+                    </div>
+                    <p id="locationAlert" class="ml-2 alertNotice">*Required</p>
+                </div>
+                <div style="display: flex; flex-direction: row;">
+                    <input id="address0" name="address0" type="text" class="mb-2" style="height: 25px; width: 40%" placeholder="Street Address">
+                </div>
+                <div style="display: flex; flex-direction: row;">
+                    <input id="address1" name="address1" type="text" class="mb-2" style="height: 25px; width: 40%" placeholder="Street Address Line 2">
+                </div>
+                <div style="display: flex; flex-direction: row;">
+                    <input id="city" name="city" type="text" class="mb-2 mr-2" style="height: 25px" placeholder="City">
+                    <input id="province" name="province" type="text" class="mb-2" style="height: 25px" placeholder="State / Province">
+                </div>
+                <div class="mb-3" style="display: flex; flex-direction: row;">
+                    <input id="zipcode" name="zipcode" type="text" class="mb-2 mr-2" style="height: 25px" placeholder="Postal / Zip Code">
+                    <select id="country" name="country" style="height: 25px; padding: 1px">
+                        <option value="Singapore">Singapore</option>
+                    </select>
+                </div>
+
+                <!-- Price -->
+                <div class="mb-3" style="display: flex; flex-direction: row;">
+                    <p class="font-weight-bold font-16 mr-2">Storage price: </p>
+                    <input id="price" name="price" type="text" style="height: 25px">&nbsp/per day
+                    <div class="dropdown-msgIcon">
+                        <span class="fa fa-question-circle ml-1"></span>
+                        <div class="dropdown-msg">
+                            <p>The price <span style="color: #00cccc;">per day</span> for your storage.</p>
+                        </div>
+                    </div>
+                    <p id="priceAlert" class="ml-2 alertNotice">*Required</p>
+                </div>
+
+                <!-- Dedicated? -->
+                <div style="display: flex; flex-direction: row;">
+                    <p class="font-weight-bold font-16 mr-2">Is this set up as a dedicated storage space? (Pick only one): </p>
+                    <div class="dropdown-msgIcon">
+                        <span class="fa fa-question-circle ml-1"></span>
+                        <div class="dropdown-msg">
+                            <p><span style="color: #00cccc;">Dedicated storage space</span> means the place is primarily set up for storing. <br/> It is not a part of your living space and you doesn't keep any personal belongings there. </p>
+                        </div>
+                    </div>
+                    <p id="dedicatedAlert" class="ml-2 alertNotice">*Required</p>
+                </div>
+                <div class="mb-3" style="display: flex; flex-direction: row;">
+                    <label class="container-rbtn mr-2">Yes, it's primarily set up for storing
+                        <input type="radio" id="dedicated" name="dedicated" value="yes">
+                        <span class="checkmark-rbtn"></span>
+                    </label>
+                    <label class="container-rbtn">No, I keep my personal belongings here
+                        <input type="radio" id="dedicated" name="dedicated" value="no">
+                        <span class="checkmark-rbtn"></span>
+                    </label>
+                </div>
+
+                <!-- Storage Condition -->
+                <div style="display: flex; flex-direction: row;">
+                    <p class="font-weight-bold font-16 mr-2">Storage Condition (Multi-selection, choose at least one): </p>
+                    <div class="dropdown-msgIcon">
+                        <span class="fa fa-question-circle ml-1"></span>
+                        <div class="dropdown-msg">
+                            <p><span style="color: #00cccc;">Storage condition</span> means how is your storage space? Is it a warehouse, a room, and whether any shelves or locker in the storage space </p>
+                        </div>
+                    </div>
+                    <p id="conditionAlert" class="ml-2 alertNotice">*Required</p>
+                </div>
+                <div style="display: flex; flex-direction: row;">
+                    <label class="container-chkbx mr-2">Open shelves
+                        <input value="0" id="condition" name="conditionMax6" type="checkbox">
+                        <span class="checkmark-chkbx"></span>
+                    </label>
+                    <label class="container-chkbx mr-2">Closed shelves (closet)
+                        <input value="1" id="condition" name="conditionMax6" type="checkbox">
+                        <span class="checkmark-chkbx"></span>
+                    </label>
+                    <label class="container-chkbx mr-2">Locker
+                        <input value="2" id="condition" name="conditionMax6" type="checkbox">
+                        <span class="checkmark-chkbx"></span>
+                    </label>
+                </div>
+                <div class="mb-3" style="display: flex; flex-direction: row;">
+                    <label class="container-chkbx mr-2">Room (items put on floor)
+                        <input value="3" id="condition" name="conditionMax6" type="checkbox">
+                        <span class="checkmark-chkbx"></span>
+                    </label>
+                    <label class="container-chkbx mr-2">Warehouse
+                        <input value="4" id="condition" name="conditionMax6" type="checkbox">
+                        <span class="checkmark-chkbx"></span>
+                    </label>
+                    <label class="container-chkbx mr-2">Wine rack
+                        <input value="5" id="condition" name="conditionMax6" type="checkbox">
+                        <span class="checkmark-chkbx"></span>
+                    </label>
+                </div>
+
+                <!-- Description -->
+                <div style="display: flex; flex-direction: row;">
+                    <p class="font-weight-bold font-16 mr-2 mb-1">Write a small paragraph to describe your storage: </p>
+                    <div class="dropdown-msgIcon">
+                        <span class="fa fa-question-circle ml-1"></span>
+                        <div class="dropdown-msg">
+                            <p>Write some <span style="color: #00cccc;">introduction</span> of your storage space to attract your customer</p>
+                        </div>
+                    </div>
+                    <p id="paragraphAlert" class="ml-2 alertNotice">*Required</p>
+                </div>
+                <textarea id="paragraph" name="paragraph" class="mb-3" style="width: 80%; height: 100px"></textarea>
+
+                <!-- Special features -->
+                <div style="display: flex; flex-direction: row;">
+                    <p class="font-weight-bold font-16 mr-2">What special features that you will provide (Multi-selection, not required): </p>
+                    <div class="dropdown-msgIcon">
+                        <span class="fa fa-question-circle ml-1"></span>
+                        <div class="dropdown-msg">
+                            <p> Which feature is provided by you? <br/>
+                                <span style="color: #00cccc;">24 hours available</span>: Able to provide storing and picking at anytime.<br/>
+                                <span style="color: #00cccc;">Lock and key</span>: A set of lock and key or digital doorlock is provided <br/>
+                                <span style="color: #00cccc;">Delivery</span>: Provide delivery service when storing and picking <br/>
+                        </div>
+                    </div>
+                </div>
+                <div style="display: flex; flex-direction: row;">
+                    <label class="container-chkbx mr-2">24 hours available
+                        <input value="0" id="feature" name="featureMax5" type="checkbox">
+                        <span class="checkmark-chkbx"></span>
+                    </label>
+                    <label class="container-chkbx mr-2">Lock and key
+                        <input value="1"id="feature" name="featureMax5"type="checkbox">
+                        <span class="checkmark-chkbx"></span>
+                    </label>
+                    <label class="container-chkbx mr-2">CCTV
+                        <input value="2"id="feature" name="featureMax5"type="checkbox">
+                        <span class="checkmark-chkbx"></span>
+                    </label>
+                </div>
+                <div class="mb-3" style="display: flex; flex-direction: row;">
+                    <label class="container-chkbx mr-2">Safe deposit box
+                        <input value="3"id="feature" name="featureMax5"type="checkbox">
+                        <span class="checkmark-chkbx"></span>
+                    </label>
+                    <label class="container-chkbx mr-2">Delivery
+                        <input value="4"id="feature" name="featureMax5"type="checkbox">
+                        <span class="checkmark-chkbx"></span>
+                    </label>
+                </div>
+
+                <!-- Images -->
+                <p class="font-weight-bold font-16 mr-2 mb-1">Please upload at least one images for your storage: </p>
+                <input id="image" name="image" class="mb-3" type="file">
+
+                <!-- Prohibited items -->
+                <div style="display: flex; flex-direction: row;">
+                    <p class="font-weight-bold font-16 mr-2">What items you don't allowed to store (Multi-selection, not required): </p>
+                    <div class="dropdown-msgIcon">
+                        <span class="fa fa-question-circle ml-1"></span>
+                        <div class="dropdown-msg">
+                            <p>Please tick the items that you <span style="color: #00cccc;">don't allowed</span> to store in this storage space. If the item that you wish to prohibit is not in this list, please specifiy at the next box</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="display: flex; flex-direction: row;">
+                    <label class="container-chkbx mr-2">Furnishings
+                        <input value="0" id="prohibited" name="prohibitedMax5" type="checkbox">
+                        <span class="checkmark-chkbx"></span>
+                    </label>
+                    <label class="container-chkbx mr-2">Books
+                        <input value="1" id="prohibited" name="prohibitedMax5" type="checkbox">
+                        <span class="checkmark-chkbx"></span>
+                    </label>
+                    <label class="container-chkbx mr-2">Dolls & Plushies
+                        <input value="2" id="prohibited" name="prohibitedMax5" type="checkbox">
+                        <span class="checkmark-chkbx"></span>
+                    </label>
+                </div>
+                <div class="mb-3" style="display: flex; flex-direction: row;">
+                    <label class="container-chkbx mr-2">Liquid Items
+                        <input value="3" id="prohibited" name="prohibitedMax5" type="checkbox">
+                        <span class="checkmark-chkbx"></span>
+                    </label>
+                    <label class="container-chkbx mr-2">Fragile Items
+                        <input value="4" id="prohibited" name="prohibitedMax5" type="checkbox">
+                        <span class="checkmark-chkbx"></span>
+                    </label>
+                </div>
+
+                <!-- Things to keep in mind -->
+                <div style="display: flex; flex-direction: row;">
+                    <p class="font-weight-bold font-16 mr-2 mb-1">Please write any things to keep in mind for renter: </p>
+                    <div class="dropdown-msgIcon">
+                        <span class="fa fa-question-circle ml-1"></span>
+                        <div class="dropdown-msg">
+                            <p>Please specficy any additional <span style="color: #00cccc;">storage rule</span> here.</p>
+                        </div>
+                    </div>
+                </div>
+                <textarea id="mention" name="mention" class="mb-3" style="width: 80%; height: 100px"></textarea>
+
+                <button type="submit" style="height: 40px; width: 40%; border-color: transparent; background-color: lightgrey; float:right">Finish upload</button>
+            </form>
+        </div>
+    </div>
+</div>
+{{/block}} {{ block 'script'}}
+<script type="text/javascript" src="/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+<!-- 日历显示 -->
+<script type="text/javascript">
+    $('#datepicker').datepicker({
+        autoclose: false,
+        format: 'yyyy-mm-dd',
+        multidate: true,
+        opens: 'left',
+        todayHightlight: true,
+        startDate: new Date(),
+        endDate: new Date(new Date().setDate(new Date().getDate() + 366)),
+        minDate: new Date(),
+        maxDate: new Date(new Date().setDate(new Date().getDate() + 366)),
+    });
+    $('#datepicker').on('change', function() {
+        $('#dates').text($('#datepicker').val())
+    });
+</script>
+
+<!-- 向后端发送数据 -->
+<script>
+    var title = document.getElementById("title");
+    var address0 = document.getElementById("address0");
+    var address1 = document.getElementById("address1");
+    var city = document.getElementById("city");
+    var province = document.getElementById("province");
+    var zipcode = document.getElementById("zipcode");
+    var zipcodeFormat = /\d{5}-\d{4}|\d{5}/;
+    var price = document.getElementById("price");
+    var priceFormat = /^\d+(,\d{3})*(\.\d{1,2})?$/;
+    var paragraph = document.getElementById("paragraph");
+    var condition = document.getElementById("condition");
+
+    var titleAlert = document.getElementById("titleAlert");
+    var locationAlert = document.getElementById("locationAlert");
+    var priceAlert = document.getElementById("priceAlert");
+    var dedicatedAlert = document.getElementById("dedicatedAlert");
+    var paragraphAlert = document.getElementById("paragraphAlert");
+    var conditionAlert = document.getElementById("conditionAlert");
+
+
+    $('#storage_form').on('submit', function(e) {
+        e.preventDefault()
+
+        // Validation
+        var validateFieldCode = [1, 1, 1, 1, 1, 1];
+
+        // Title
+        if (title.value == "") {
+            titleAlert.style.display = "block";
+            validateFieldCode[0] = 0;
+        } else {
+            titleAlert.style.display = "none";
+            validateFieldCode[0] = 1;
+        }
+
+        // Location
+        if (address0.value == "" || address1.value == "" || city.value == "" || province.value == "" || zipcode.value == "") {
+            locationAlert.style.display = "block";
+            locationAlert.textContent = "*Required"
+            validateFieldCode[1] = 0;
+        } else if (zipcode.value.match(zipcodeFormat)) {
+            locationAlert.style.display = "none";
+            validateFieldCode[1] = 1;
+        } else {
+            locationAlert.style.display = "block";
+            locationAlert.textContent = "*Invalid zip/postal code"
+            validateFieldCode[1] = 0;
+        }
+
+        // Price
+        if (price.value == "") {
+            priceAlert.style.display = "block";
+            priceAlert.textContent = "*Required"
+            validateFieldCode[2] = 0;
+        } else if (price.value.match(priceFormat)) {
+            priceAlert.style.display = "none";
+            validateFieldCode[2] = 1;
+        } else {
+            priceAlert.style.display = "block";
+            priceAlert.textContent = "*Please enter a valid price (00.00)"
+            validateFieldCode[2] = 0;
+        }
+
+        // Dedicated
+        if ($('[name = "dedicated"]').is(":checked")) {
+            dedicatedAlert.style.display = "none";
+            validateFieldCode[3] = 1;
+        } else {
+            dedicatedAlert.style.display = "block";
+            validateFieldCode[3] = 0;
+        }
+
+        // Paragraph
+        if (paragraph.value == "") {
+            paragraphAlert.style.display = "block";
+            validateFieldCode[4] = 0;
+        } else {
+            paragraphAlert.style.display = "none";
+            validateFieldCode[4] = 1;
+        }
+
+        // Condition
+        if ($('[id = "condition"]').is(":checked")) {
+            conditionAlert.style.display = "none";
+            validateFieldCode[5] = 1;
+        } else {
+            conditionAlert.style.display = "block";
+            validateFieldCode[5] = 0;
+        }
+
+
+        // Final checking
+        for (i = 0; i < 5; i++) {
+            if (validateFieldCode[i] == 0) {
+                window.scrollTo(0, 0);
+                return;
+            }
+        }
+
+        var formData = $(this).serialize();
+        $.ajax({
+            url: '/host_upload',
+            type: 'post',
+            data: formData,
+            dataType: 'json',
+            success: function(data) {
+                console.log(data)
+                if (data.result.code == 200) {
+                    alert('Successfully upload!');
+                    setTimeout(function() {
+                        location.href = 'http://' + window.location.host +
+                            '/host_index'
+                    }, 10)
+                } else {
+                    alert('服务器忙，请稍后再试')
+                }
+            }
+        })
+    })
+</script>
+{{/block}}

@@ -1,0 +1,123 @@
+{{extend '../_layouts/hosthome.html'}} {{ block 'head'}}
+<!-- CSS -->
+<link rel="stylesheet" href="../../public/css/ushelf_index.css">
+<link rel="stylesheet" href="../../public/css/ushelf.css">
+<link rel="stylesheet" href="../../public/css/ushelf_aboutHost.css"> {{/block}} {{block 'body'}}
+<!-- Show Result -->
+<div class="container mt-4">
+    <h1 class="mt-4 mb-3">My Listings</h1>
+    <div class="row">
+        {{if hostlistings}} {{each hostlistings}}
+
+        <div class="col-lg-4 portfolio-item my-3">
+            <div class="card h-100">
+                <img class="card-img-top" src="../../public/img/storageA.jfif" alt="" style="height: 200px">
+                <div class="card-body">
+                    <h4 class="card-title">{{$value.title}}</h4>
+                    <p class="card-text mb-1">Location: {{$value.address0}}, {{$value.address1}}, {{$value.city}}, {{$value.province}}, {{$value.zipcode}}</p>
+                    <p class="card-text mb-1">Base price: ${{$value.price}}</p>
+                    <button class="ushelfBtn mt-3" style="width: 100%; height: 40px;" onclick="viewDetails('{{$value.id}}')">View Details</button>
+                </div>
+            </div>
+        </div>
+        {{/each}} {{else}}
+        <p>You don't have the listings yet</p>
+        {{/if}}
+    </div>
+
+    {{if hostlistings}}{{each hostlistings}}
+    <div id="openModal{{$value.id}}" class="modal">
+        <div class="modal-content">
+            <div class="mb-2">
+                <span class="close" onclick="closeDetails('{{$value.id}}')">&times;</span>
+                <h4>{{$value.title}}</h4>
+                <p class="mb-1 font-weight-bold">Location: <span class="font-weight-normal">{{$value.address0}}, {{$value.address1}}, {{$value.city}}, {{$value.province}}, {{$value.zipcode}}</span></p>
+                <p class="mb-1 font-weight-bold">Base Price: <span class="font-weight-normal">${{$value.price}}</span></p>
+                <p class="mb-1 font-weight-bold">Storage size: <span class="font-weight-normal">{{$value.size}} size</span></p>
+                <p class="mb-1 font-weight-bold">Storage type: <span class="font-weight-normal">{{$value.type}}</span></p>
+                <p class="mb-1 font-weight-bold">Special Feature:</p>
+                {{if $value.feature.includes("0")}}24 hours available. {{/if}} {{if $value.feature.includes("1")}} Lock and key. {{/if}} {{if $value.feature.includes("2")}} CCTV. {{/if}} {{if $value.feature.includes("3")}} Safe Deposit Box. {{/if}} {{if $value.feature.includes("4")}}
+                Delivery services. {{/if}}
+                <p class="mb-1 font-weight-bold">Prohibited items:</p>
+                {{if $value.prohibited.includes("0")}} No furnishings. {{/if}} {{if $value.prohibited.includes("1")}} No books. {{/if}} {{if $value.prohibited.includes("2")}} No dolls & plushies. {{/if}} {{if $value.prohibited.includes("3")}} No liquid items. {{/if}}
+                {{if $value.prohibited.includes("4")}} No fragile items. {{/if}}
+                <div style="display: flex; flex-direction: row;">
+                    <button class="ushelfBtn-yellow mr-3 mt-3" style="width: 32%; height: 40px" onclick="editListings('{{$value.id}}')">Edit</button>
+                    <button class="ushelfBtn-red mr-3 mt-3" style="width: 32%; height: 40px" onclick="removeListings('{{$value.id}}', '{{$value.title}}')">Remove</button>
+                    <button class="ushelfBtn mt-3" style="width: 32%; height: 40px" onclick="closeDetails('{{$value.id}}')">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/each}} {{/if}}
+</div>
+{{/block}} {{ block 'script'}}
+<script>
+    function viewDetails(storageid) {
+        var modalname = 'openModal' + storageid
+        var x = document.getElementById(modalname)
+        x.style.display = "block"
+    }
+
+    function closeDetails(storageid) {
+        var modalname = 'openModal' + storageid
+        var x = document.getElementById(modalname)
+        x.style.display = "none"
+    }
+
+    function editListings(storageid) {
+        sid = storageid
+        $.ajax({
+            url: '/editlistings',
+            type: 'post',
+            data: {
+                id: sid
+            },
+            dataType: 'json',
+            success: function(data) {
+                if (data.result.code == 200) {
+                    console.log('拿到数据');
+                    setTimeout(function() {
+                        location.href = 'http://' + window.location.host +
+                            '/editlistings'
+                    }, 10)
+                } else {
+                    alert('服务器忙请稍后再试');
+                }
+            }
+        })
+    }
+
+    function removeListings(storageid, storagename) {
+        var answer = window.confirm("Are you sure you want to remove " + storagename + "? This action cannot be undo.")
+        if (!answer) {
+            return;
+        }else {
+            var answer = window.confirm(storagename + " will be removed. Click 'OK' to confirm your action.")
+            if (!answer) {
+                return;
+            }else {
+                sid = storageid
+                alert(sid)
+                $.ajax({
+                    url: '/removeStorage',
+                    type: 'post',
+                    data: {
+                        id: storage
+                    },  
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.result.code == 200) {
+                            console.log('拿到数据');
+                            setTimeout(function() {
+                                location.href = 'http://' + window.location.host + '/editlistings'}, 10)
+                        } else {
+                            alert('Some booking and rental related to this storage haven\'t ended yet. The storage is not allowed to remove now');
+                        }
+                    }
+                })
+            }
+        }
+    }
+</script>
+{{/block}}
