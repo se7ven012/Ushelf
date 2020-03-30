@@ -5,9 +5,9 @@ tags: []
 ---
 
 # Ushelf
-- Front End：HTML + Bootstrap
+- Front End：Bootstrap + AJAX
 - Back End：NodeJS + Express
-- Web Server：Apache
+- Web Server：Apache XAMPP
 - Database：MySQL
 
 ## Directory structure
