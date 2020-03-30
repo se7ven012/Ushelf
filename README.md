@@ -12,10 +12,8 @@ tags: []
 
 ## Directory structure
 ```
-|-- WEB
+|-- undefined
     |-- app.js
-    |-- ERD.vsdx
-    |-- function.js
     |-- package-lock.json
     |-- README.md
     |-- router.js
@@ -31,34 +29,101 @@ tags: []
     |   |-- Usersql.js
     |-- public
     |   |-- css
+    |   |   |-- chat.css
     |   |   |-- login.css
     |   |   |-- main.css
     |   |   |-- setting.css
+    |   |   |-- ushelf.css
+    |   |   |-- ushelf_aboutHost.css
+    |   |   |-- ushelf_index.css
     |   |-- img
+    |   |   |-- aboutus.jfif
     |   |   |-- avatar-max-img.png
+    |   |   |-- banner(original).jpg
+    |   |   |-- banner.jpg
+    |   |   |-- banner2(original).jpg
+    |   |   |-- banner2.jpg
+    |   |   |-- banner_signup.jpg
+    |   |   |-- banner_signup.jpg~
+    |   |   |-- box.jpg
+    |   |   |-- brandable-box-8mCsyImZRGY-unsplash.jpg
+    |   |   |-- helpdesk(ori).jpg
+    |   |   |-- helpdesk.jpg
+    |   |   |-- image2.jpg
+    |   |   |-- logo.jpeg
+    |   |   |-- news_openning.jpg
+    |   |   |-- news_referral reward.jpg
+    |   |   |-- news_rule.jpg
+    |   |   |-- storageA.jfif
+    |   |   |-- storageB.jpg
     |   |-- js
-    |-- router
-    |   |-- property.js
-    |   |-- session.js
+    |       |-- chat.js
+    |       |-- jquery-3.4.1.min.js
+    |       |-- loadFooter.js
+    |       |-- loadHostNavbar.js
+    |       |-- loadNavbar.js
     |-- views
         |-- 404.html
+        |-- forgetPassword.html
         |-- index.html
         |-- login.html
         |-- register.html
+        |-- admin
+        |   |-- admin-order.html
+        |   |-- admin-storage.html
+        |   |-- admin-user.html
+        |   |-- admin_index.html
+        |-- cynthia
+        |   |-- abouthost.html
+        |   |-- aboutus.html
+        |   |-- bookDetails.html
+        |   |-- contactus.html
+        |   |-- help.html
+        |   |-- instruction.html
+        |   |-- mystorage-og.html
+        |   |-- mystorage-past.html
+        |   |-- mystorage-wfc.html
+        |   |-- mystorage-wfp.html
+        |   |-- mystorage.html
+        |   |-- news.html
+        |   |-- paymentForm.html
+        |   |-- rules.html
+        |   |-- rules_host.html
+        |   |-- searchStorage.html
+        |   |-- storageDetail.html
+        |   |-- t&c.html
+        |-- host
+        |   |-- host-order-ir.html
+        |   |-- host-order-past.html
+        |   |-- host-order-wfc.html
+        |   |-- host-order-wfp.html
+        |   |-- host-order.html
+        |   |-- host_editListings.html
+        |   |-- host_index.html
+        |   |-- host_listings.html
+        |   |-- host_upload.html
+        |   |-- searchStorage.html
         |-- property
+        |   |-- chat.html
         |   |-- detail.html
         |   |-- edit.html
         |   |-- new.html
+        |   |-- obtainchat.html
         |   |-- search.html
+        |   |-- temp
         |-- settings
         |   |-- admin.html
         |   |-- profile.html
+        |   |-- settime.html
         |   |-- setting.html
         |-- _layouts
+        |   |-- clienthome.html
         |   |-- home.html
+        |   |-- hosthome.html
         |-- _partials
+            |-- clientheader.html
             |-- footer.html
-            |-- header.html
+            |-- hostheader.html
             |-- settings-nav.html
 ```
 
@@ -80,5 +145,6 @@ tags: []
 - sudo /opt/lampp/xampp start
 - git clone https://github.com/se7ven012/Ushelf.git
 - cd Ushelf
-- npm install node popper express jquery mysql bootstrap art-template express-art-template body-parser express-session blueimp-md5 moment daterangepicker bootstrap-datepicker nodemailer --save pm2 -g
-- node app.js
+- npm install node popper express jquery mysql bootstrap art-template express-art-template body-parser express-session blueimp-md5 moment daterangepicker bootstrap-datepicker nodemailer mddir pm2 -g
+- pm2 start app.js
+- pm2 logs
