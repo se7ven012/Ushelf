@@ -8,7 +8,6 @@
 ```
 |-- Ushelf
     |-- app.js
-    |-- package-lock.json
     |-- README.md
     |-- router.js
     |-- test.sql
