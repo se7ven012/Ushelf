@@ -7,7 +7,7 @@ var UserSQL = {
     queryAll: 'SELECT * FROM user', // 查找表中所有数据
     getUserById: 'SELECT * FROM user WHERE email =?', // 查找符合条件的数据
     insertmsg: 'INSERT INTO chats(fromsb,saytosb,publishTime,content) VALUES(?,?,?,?)', // 刷入聊天记录
-    getmsg: 'SELECT * FROM chats WHERE fromsb = ? AND saytosb = ? ORDER BY publishTime',
+    getmsg: '(SELECT * FROM chats WHERE fromsb=? AND saytosb=?) UNION (SELECT * FROM chats WHERE fromsb=? AND saytosb=?) ORDER BY publishTime',
     resetpassword: 'UPDATE user SET password = ? WHERE email = ?',
     insertStorage: 'INSERT INTO storage (id, owner, price, title, type, size, address0, address1, city, province, zipcode, country, dedicated, conditions, paragraph, feature, image, mention, prohibited) VALUES (? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,?)',
     updateStorage: 'UPDATE storage SET price=?, title=?, type=?, size=?, address0=?, address1=?, city=?, province=?, zipcode=?, country=?, dedicated=?, conditions=?, paragraph=?, feature=?, image=?, mention=?, prohibited=? WHERE id=?',
@@ -30,13 +30,14 @@ var UserSQL = {
     insertReview: 'INSERT INTO review (reviewid, orderid, writer, content) VALUES (?, ?, ?, ?)',
     reviewOrder: 'UPDATE orders SET reviewed = "yes" WHERE orderid = ?',
     selectReview: 'SELECT * FROM review WHERE writer = ?',
-    selectReviewbyid: 'SELECT s.id, r.writer, r.content FROM storage AS s, review AS r, orders AS o WHERE o.orderid = r.orderid AND o.storageid = s.id WHERE s.id = ?',
-    getOrder: 'SELECT * FROM orders WHERE orderid = ?',
+    selectReviewbyid: 'SELECT s.id, r.writer, r.content FROM storage AS s, review AS r, orders AS o WHERE o.orderid = r.orderid AND o.storageid = s.id AND s.id = ?',
+    getOrderbyOrderid: 'SELECT * FROM orders WHERE orderid = ?',
     searchStoragebyOwner: 'SELECT * FROM storage WHERE owner = ?',
     removeStorage: 'DELETE FROM storage WHERE id=?',
     changeUsername: 'UPDATE user SET username=? WHERE email=?',
-};
+    getUser: 'SELECT * FROM user',
+    getOrder: 'SELECT * FROM orders',
+    getStorage: 'SELECT * FROM storage',
 
+}
 module.exports = UserSQL;
-
-//orderid, writer, content
