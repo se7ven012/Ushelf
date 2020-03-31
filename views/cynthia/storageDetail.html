@@ -46,8 +46,6 @@
                 {{/if}}
             </dl>
 
-            <hr />
-
             <h4>Introduction</h4>
             <p>{{$value.paragraph}}</p>
             <p class="mb-2 font-weight-bold">Storage Type:<span class="font-weight-normal">&nbsp{{$value.type}}</span>
@@ -70,20 +68,17 @@
             <h4 class="mb-3">Reviews</h4>
             <!-- Single Comment -->
             <!-- 这里先放着到时候做review table -->
+            {{if reviewList}} {{each reviewList}}
             <div class="media mb-4">
-                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                <img class="d-flex mr-3 rounded-circle" src="/public/img/avatar-max-img.png" alt="" width="50px" height="50px">
                 <div class="media-body">
-                    <h5 class="mt-0">User A</h5>
-                    I had rent for a week and everything keep remains as I store in. The host is also nice!
+                    <h5 class="mt-0">{{$value.writer}}</h5>
+                    {{$value.content}}
                 </div>
             </div>
-            <div class="media mb-4">
-                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                <div class="media-body">
-                    <h5 class="mt-0">User G</h5>
-                    Only a few minutes walk from MRT, good location, easy to store and pick.
-                </div>
-            </div>
+            {{/each}} {{else}}
+            <p>No review yet</p>
+            {{/if}}
 
             <hr />
 

@@ -2,10 +2,7 @@
 <!-- CSS -->
 <link rel="stylesheet" href="../../public/css/ushelf_index.css">
 <link rel="stylesheet" href="../../public/css/ushelf_aboutHost.css">
-<link rel="stylesheet" href="../../public/css/ushelf.css">
-{{/block}}
-
-{{ block 'body'}}
+<link rel="stylesheet" href="../../public/css/ushelf.css"> {{/block}} {{ block 'body'}}
 <!-- Navbar -->
 <div id="nav-placeholder"></div>
 
@@ -28,8 +25,7 @@
                 </form>
 
                 <form id="mystorage-wfp">
-                    <button type="submit" class="list-group-item text-left btn btnRules btnRules-active"
-                        style="width: 100%">Wait for payment</button>
+                    <button type="submit" class="list-group-item text-left btn btnRules btnRules-active" style="width: 100%">Wait for payment</button>
                 </form>
 
                 <form id="mystorage-og">
@@ -50,20 +46,16 @@
             {{if wfp}} {{each wfp}}
             <div class="row mb-4">
                 <div class="col-md-4">
-                    <img class="img-fluid rounded mb-3 mb-md-0" src="../public/img/storageB.jpg" alt=""
-                        style="height: 200px; width: 100%; object-fit: cover;">
+                    <img class="img-fluid rounded mb-3 mb-md-0" src="../public/img/storageB.jpg" alt="" style="height: 200px; width: 100%; object-fit: cover;">
                 </div>
                 <div class="col-md-8">
                     <h3 class="mb-1">{{$value.title}}</h3>
                     <p class="mb-1">Hosted by: {{$value.owner}}</p>
-                    <p class="mb-1">Location: {{$value.address0}}, {{$value.address1}}, {{$value.city}},
-                        {{$value.province}}, {{$value.zipcode}}</p>
+                    <p class="mb-1">Location: {{$value.address0}}, {{$value.address1}}, {{$value.city}}, {{$value.province}}, {{$value.zipcode}}</p>
                     <p class="mb-1">Period: {{$value.startdate}} - {{$value.enddate}}</p>
                     <p class="mb-1">Total Price: ${{$value.price}}</p>
-                    <button class="ushelfBtn mr-3" style="width: 30%; height: 40px; float: left;"
-                        onclick="viewDetail('{{$value.orderid}}')">View</button>
-                    <button class="ushelfBtn-yellow" style="width: 30%; height: 40px; float: left;"
-                        onclick="makePayment('{{$value.orderid}}')">Make payment</button>
+                    <button class="ushelfBtn mr-3" style="width: 30%; height: 40px; float: left;" onclick="viewDetail('{{$value.orderid}}')">View</button>
+                    <button class="ushelfBtn-yellow" style="width: 30%; height: 40px; float: left;" onclick="makePayment('{{$value.orderid}}')">Make payment</button>
                 </div>
             </div>
             {{/each}}
@@ -78,8 +70,7 @@
     <div id="openModal{{$value.orderid}}" class="modal">
         <div class="modal-content">
             <div class="mb-2">
-                <span id="closeModal{{$value.orderid}}" class="close"
-                    onclick="closeDetail('{{$value.orderid}}')">&times;</span>
+                <span id="closeModal{{$value.orderid}}" class="close" onclick="closeDetail('{{$value.orderid}}')">&times;</span>
                 <h4>{{$value.title}}</h4>
                 <p class="mb-1 font-weight-bold">Hosted by: {{$value.owner}}</p>
                 <p class="mb-1 font-weight-bold">Location: <span class="font-weight-normal">{{$value.address0}},
@@ -93,38 +84,19 @@
                 <p class="mb-1 font-weight-bold">Storage type: <span class="font-weight-normal">{{$value.type}}</span>
                 </p>
                 <p class="mb-1 font-weight-bold">Special Feature:</p>
-                {{if $value.feature.includes("0")}}
-                <p class="mb-1">- 24 hours available</p>
-                {{/if}} {{if $value.feature.includes("1")}}
-                <p class="mb-1">- Lock and key</p>
-                {{/if}} {{if $value.feature.includes("2")}}
-                <p class="mb-1">- CCTV</p>
-                {{/if}} {{if $value.feature.includes("3")}}
-                <p class="mb-1">- Safe Deposit Box</p>
-                {{/if}} {{if $value.feature.includes("4")}}
-                <p class="mb-1">- Delivery services</p>
-                {{/if}}
+                <p class="mb-1"> {{if $value.feature.includes("0")}}24 hours available.{{/if}} {{if $value.feature.includes("1")}}&nbspLock and key.{{/if}} {{if $value.feature.includes("2")}} &nbspCCTV.{{/if}} {{if $value.feature.includes("3")}}&nbspSafe Deposit Box.
+                    {{/if}} {{if $value.feature.includes("4")}}&nbspDelivery. services{{/if}}
+                </p>
                 <p class="mb-1 font-weight-bold">Prohibited items:</p>
-                {{if $value.prohibited.includes("0")}}
-                <p class="mb-1">- No furnishings</p>
-                {{/if}} {{if $value.prohibited.includes("1")}}
-                <p class="mb-1">- No books</p>
-                {{/if}} {{if $value.prohibited.includes("2")}}
-                <p class="mb-1">- No dolls & plushies</p>
-                {{/if}} {{if $value.prohibited.includes("3")}}
-                <p class="mb-1">- No liquid items</p>
-                {{/if}} {{if $value.prohibited.includes("4")}}
-                <p class="mb-1">- No fragile items</p>
-                {{/if}}
+                <p class="mb-1">{{if $value.prohibited.includes("0")}}No furnishings.{{/if}} {{if $value.prohibited.includes("1")}}&nbspNo books.</p>{{/if}} {{if $value.prohibited.includes("2")}} &nbspNo dolls & plushies.{{/if}} {{if $value.prohibited.includes("3")}}&nbspNo
+                liquid items.{{/if}} {{if $value.prohibited.includes("4")}}&nbspNo fragile items.{{/if}}
 
             </div>
         </div>
     </div>
     {{/each}} {{/if}}
 </div>
-{{/block}}
-
-{{ block 'script'}}
+{{/block}} {{ block 'script'}}
 <script>
     function viewDetail(orderID) {
         var modalName = 'openModal' + orderID
@@ -139,11 +111,11 @@
     }
 </script>
 <script>
-    $('#mystorage').on('submit', function (e) {
+    $('#mystorage').on('submit', function(e) {
         e.preventDefault()
         window.location.href = "/mystorage"
     })
-    $('#mystorage-wfc').on('submit', function (e) {
+    $('#mystorage-wfc').on('submit', function(e) {
         e.preventDefault()
         var customer = document.getElementById("username").innerText
         $.ajax({
@@ -153,9 +125,9 @@
                 customer: customer
             },
             dataType: 'json',
-            success: function (data) {
+            success: function(data) {
                 if (data.result.code == 200 || data.result.code == 1) {
-                    setTimeout(function () {
+                    setTimeout(function() {
                         location.href = 'http://' + window.location.host +
                             '/mystorage-wfc';
                     }, 10)
@@ -166,7 +138,7 @@
         })
     })
 
-    $('#mystorage-wfp').on('submit', function (e) {
+    $('#mystorage-wfp').on('submit', function(e) {
         e.preventDefault()
         var customer = document.getElementById("username").innerText
         $.ajax({
@@ -176,9 +148,9 @@
                 customer: customer
             },
             dataType: 'json',
-            success: function (data) {
+            success: function(data) {
                 if (data.result.code == 200 || data.result.code == 1) {
-                    setTimeout(function () {
+                    setTimeout(function() {
                         location.href = 'http://' + window.location.host +
                             '/mystorage-wfp';
                     }, 10)
@@ -189,7 +161,7 @@
         })
     })
 
-    $('#mystorage-og').on('submit', function (e) {
+    $('#mystorage-og').on('submit', function(e) {
         e.preventDefault()
         var customer = document.getElementById("username").innerText
         $.ajax({
@@ -199,9 +171,9 @@
                 customer: customer
             },
             dataType: 'json',
-            success: function (data) {
+            success: function(data) {
                 if (data.result.code == 200 || data.result.code == 1) {
-                    setTimeout(function () {
+                    setTimeout(function() {
                         location.href = 'http://' + window.location.host +
                             '/mystorage-og';
                     }, 10)
@@ -212,7 +184,7 @@
         })
     })
 
-    $('#mystorage-past').on('submit', function (e) {
+    $('#mystorage-past').on('submit', function(e) {
         e.preventDefault()
         var customer = document.getElementById("username").innerText
         $.ajax({
@@ -222,9 +194,9 @@
                 customer: customer
             },
             dataType: 'json',
-            success: function (data) {
+            success: function(data) {
                 if (data.result.code == 200 || data.result.code == 1) {
-                    setTimeout(function () {
+                    setTimeout(function() {
                         location.href = 'http://' + window.location.host +
                             '/mystorage-past';
                     }, 10)
@@ -245,10 +217,10 @@
                 id: id
             },
             dataType: 'json',
-            success: function (data) {
+            success: function(data) {
                 if (data.result.code == 200) {
                     console.log('拿到数据');
-                    setTimeout(function () {
+                    setTimeout(function() {
                         location.href = 'http://' + window.location.host +
                             '/paymentForm'
                     }, 10)

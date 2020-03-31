@@ -20,7 +20,8 @@
             <option value="Large">Large (51sqft - 75sqft)</option>
             <option value="Extra Large">Extra Large (above 76sqft)</option>
         </select>
-        <button type="submit" class="storage-search">Search</button>
+        <button type="submit" class="storage-search mr-2">Search by filter</button>
+        <button type="button" class="storage-search ushelfBtn-yellow" onclick="searchAll()">Search All</button>
     </form>
 </div>
 </div>
@@ -37,7 +38,10 @@
             <div class="card h-100">
                 <a onclick="jump('{{$value.id}}')"><img class="card-img-top storagePic" src="../../public/img/storageA.jfif" alt="{{$value.image}}"></a>
                 <div class="card-body">
-                    <h4 class="card-title">{{$value.title}}</h4>
+                    <h4 class="card-title">{{$value.title}}
+                        <p class="card-text" style="float: right">${{$value.price}}</p>
+                    </h4>
+
                     <p class="card-text">{{$value.paragraph}}</p>
                     <button class="ushelfBtn" style="width: 100%;" onclick="jump('{{$value.id}}')">Details</button>
                 </div>
@@ -55,6 +59,25 @@
 <script src="/node_modules/jquery/dist/jquery.js"></script>
 <!-- 获取后端的搜索结果 -->
 <script>
+    function searchAll() {
+        $.ajax({
+            url: '/searchStorage.search',
+            type: 'post',
+            data: {},
+            dataType: 'json',
+            success: function(data) {
+                if (data.result.code == 200) {
+                    console.log('拿到数据');
+                    setTimeout(function() {
+                        location.href = 'http://' + window.location.host + '/searchStorage.result'
+                    }, 10)
+                } else {
+                    alert('服务器忙请稍后再试');
+                }
+            }
+        })
+    }
+
     $('#search_form').on('submit', function(e) {
         e.preventDefault()
         var formData = $(this).serialize();
@@ -78,6 +101,26 @@
     })
 
     function jump(idnumber) {
+        var productid = idnumber;
+        $.ajax({
+            url: '/loadReview',
+            type: 'post',
+            data: {
+                id: productid
+            },
+            dataType: 'json',
+            success: function(data) {
+                if (data.result.code == 200) {
+                    console.log('拿到数据');
+                    getReview(productid)
+                } else {
+                    alert('服务器忙请稍后再试');
+                }
+            }
+        })
+    }
+
+    function getReview(idnumber) {
         var productid = idnumber;
         $.ajax({
             url: '/clickproduct.json',

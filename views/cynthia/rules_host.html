@@ -1,6 +1,5 @@
-{{extend '../_layouts/clienthome.html'}}
-
-{{ block 'body'}}
+{{extend '../_layouts/clienthome.html'}} {{block 'head'}}
+<link rel="stylesheet" href="../../public/css/ushelf.css"> {{/block}} {{block 'body'}}
 <!-- Navbar -->
 <div id="nav-placeholder"></div>
 
@@ -13,86 +12,111 @@
         <!-- Sidebar Column -->
         <div class="col-lg-3 mb-4">
             <div class="list-group">
-                <button id="btnRuleStart" class="list-group-item text-left btn btnRules btnRules-active"
-                    onclick="temp(1)">Getting started</button>
-                <button id="btnRuleListShelf" class="list-group-item text-left btn btnRules" onclick="temp(2)">List your
-                    shelf</button>
-                <button id="btnRuleCalendar" class="list-group-item text-left btn btnRules" onclick="temp(3)">Your
-                    Calendar</button>
-                <button id="btnRuleListings" class="list-group-item text-left btn btnRules" onclick="temp(4)">Your
-                    Listings</button>
-                <button id="btnRulePayouts" class="list-group-item text-left btn btnRules" onclick="temp(5)">How payouts
-                    work</button>
-                <button id="btnRuleBookings" class="list-group-item text-left btn btnRules" onclick="temp(6)">How
-                    bookings work</button>
+                <button id="btnHelpStart" class="list-group-item text-left btn btnRules btnRules-active" onclick="temp(1)">Getting started</button>
+                <button id="btnHelpBooking" class="list-group-item text-left btn btnRules" onclick="temp(2)">Rules</button>
+                <button id="btnHelpStoring" class="list-group-item text-left btn btnRules" onclick="temp(3)">Your Listings</button>
+                <button id="btnHelpTrust" class="list-group-item text-left btn btnRules" onclick="temp(6)">Your Order</button>
             </div>
         </div>
-        <!-- Content Column -->
-        <div class="col-lg-9 mb-4">
-            <h2 id="rulesHostTitle">Getting started</h2>
-            <p id="rulesHostParagraph">This is the rules for getting started. This is the rules for getting started.
-                This is the rules for getting started. </p>
+        <!-- FAQ Column -->
+        <div id="general" class="col-lg-7 mb-4">
+            <h2>General</h2>
+            <p class="font-weight-bold mb-1">Q: Can I become a host?</p>
+            <p>A: If you have idle storage space is 16sqft or above, and willing to rent out, Yes!</p>
+            <p class="font-weight-bold mb-1">Q: How to become a host?</p>
+            <p>A: Switch to Renting and click the "Getting started" to upload your first listings. After complete the listings, you will become a Ushelf host.</p>
+            <p class="font-weight-bold mb-1">Q: Anything I need to do as a host?</p>
+            <p>A: Keep your storage ready and always welcome your renter. Click the "Rules" on the left bar to read more.</p>
+        </div>
+
+        <!-- Booking Column -->
+        <div id="booking" class="col-lg-7 mb-4" style="display: none;">
+            <h2>Rules</h2>
+            <p>As a Ushelf host, few rules you need to be take note of</p>
+            <ul>
+                <li>Be responsive. Respond the booking in 24 hours, either accept or reject. If you don't make any response, you will get a warning from Ushelf and get blacklisted if this happened three times.</li>
+                <li>Be honest to your renter and us, your account will get banned if any fraud happens.</li>
+                <li>Be resposibility, keep the storage items in safe. You will get fined or sue for item lost or damaged.</li>
+                <li>Avoid rejection, we take rejection seriously and will get warning if you reject too many bookings.</li>
+            </ul>
+        </div>
+
+        <!-- Storing Column -->
+        <div id="storing" class="col-lg-7 mb-4" style="display: none;">
+            <h2>Your listings</h2>
+            <p class="font-weight-bold mb-1">Q: I can't provide any special features listed in the storage form, can I still upload it?</p>
+            <p>A: Yes, the special features is additional features that the host can provided. It doesn't affect your upload process.</p>
+            <p class="font-weight-bold mb-1">Q: Where can I manage my listings?</p>
+            <p>A: You will see the "MyListings" after switching to host. You can manage all your listings there.</p>
+            <p class="font-weight-bold mb-1">Q: Can I remove the listings?</p>
+            <p>A: Yes, you can remove the listings in the "MyListings". Click for more details and there is a button "remove". But be caution that the remove action can not be undo, please think twice before you remove it.</p>
+            <p class="font-weight-bold mb-1">Q: I just remove some listings, how can I recover it back?</p>
+            <p>A: Basicallly, the removed listings cannot be recover, but please contact Ushelf customer service for further assistance.</p>
+        </div>
+
+        <!-- Trust Column -->
+        <div id="trust" class="col-lg-7 mb-4" style="display: none;">
+            <h2>Your order</h2>
+            <p class="font-weight-bold mb-1">Q: Can I accept the booking?</p>
+            <p>A: Yes, you can accept the booking.</p>
+            <p class="font-weight-bold mb-1">Q: Can I reject the booking?</p>
+            <p>A: Yes, you can reject the booking. However, if you reject too many bookings, the Ushelf will give you the warnings. </p>
+            <p class="font-weight-bold mb-1">Q: What happen if I do not respond the booking?</p>
+            <p>A: The booking will automatically reject after 24 hours and you will get a warning from Ushelf. If this happened three times, you will get blacklisted.</p>
+            <p class="font-weight-bold mb-1">Q: What can I do when the booking is wait for payment?</p>
+            <p>A: Nothing you can do much, but you can prepare your storage space be ready for the prospective renter.</p>
+        </div>
+
+        <!-- Contact us button -->
+        <div class="col-lg-2 mb-4">
+            <a href="contactus" style="width: 100%; margin: 10px; padding: 10px; background-color: lightgrey; border-color: transparent; color: black;">Contact us</a>
         </div>
     </div>
 </div>
-{{/block}}
-
-{{ block 'script'}}
+{{/block}} {{block 'script'}}
 <script>
     function temp(code) {
+        var general = document.getElementById("general")
+        var booking = document.getElementById("booking")
+        var storing = document.getElementById("storing")
+        var trust = document.getElementById("trust")
+
         if (code == 1) {
-            colorChanging("darkgrey", "white", "white", "black", "white", "black", "white", "black", "white",
-                "black", "white", "black");
-            document.getElementById("rulesHostTitle").textContent = "Getting started";
-            document.getElementById("rulesHostParagraph").textContent =
-                "This is the rules for getting started. This is the rules for getting started. This is the rules for getting started. ";
+            colorChanging("darkgrey", "white", "white", "black", "white", "black", "white", "black");
+            general.style.display = "block"
+            booking.style.display = "none"
+            storing.style.display = "none"
+            trust.style.display = "none"
         } else if (code == 2) {
-            colorChanging("white", "black", "darkgrey", "white", "white", "black", "white", "black", "white",
-                "black", "white", "black");
-            document.getElementById("rulesHostTitle").textContent = "List your shelf";
-            document.getElementById("rulesHostParagraph").textContent =
-                "This is the rules for List your shelf. This is the rules for List your shelf. This is the rules for List your shelf. ";
+            colorChanging("white", "black", "darkgrey", "white", "white", "black", "white", "black");
+            general.style.display = "none"
+            booking.style.display = "block"
+            storing.style.display = "none"
+            trust.style.display = "none"
         } else if (code == 3) {
-            colorChanging("white", "black", "white", "black", "darkgrey", "white", "white", "black", "white",
-                "black", "white", "black");
-            document.getElementById("rulesHostTitle").textContent = "Your Calendar";
-            document.getElementById("rulesHostParagraph").textContent =
-                "This is the rules for Your Calendar. This is the rules for Your Calendar. This is the rules for Your Calendar. ";
-        } else if (code == 4) {
-            colorChanging("white", "black", "white", "black", "white", "black", "darkgrey", "white", "white",
-                "black", "white", "black");
-            document.getElementById("rulesHostTitle").textContent = "Your Listings";
-            document.getElementById("rulesHostParagraph").textContent =
-                "This is the rules for Your Listings. This is the rules for Your Listings. This is the rules for Your Listings. ";
-        } else if (code == 5) {
-            colorChanging("white", "black", "white", "black", "white", "black", "white", "black", "darkgrey",
-                "white", "white", "black");
-            document.getElementById("rulesHostTitle").textContent = "How payouts works";
-            document.getElementById("rulesHostParagraph").textContent =
-                "This is the rules for How payouts works. This is the rules for How payouts works. This is the rules for How payouts works. ";
+            colorChanging("white", "black", "white", "black", "darkgrey", "white", "white", "black");
+            general.style.display = "none"
+            booking.style.display = "none"
+            storing.style.display = "block"
+            trust.style.display = "none"
         } else {
-            colorChanging("white", "black", "white", "black", "white", "black", "white", "black", "white", "black",
-                "darkgrey", "white");
-            document.getElementById("rulesHostTitle").textContent = "How bookings works";
-            document.getElementById("rulesHostParagraph").textContent =
-                "This is the rules for How bookings works. This is the rules for How bookings works. This is the rules for How bookings works. ";
+            colorChanging("white", "black", "white", "black", "white", "black", "darkgrey", "white");
+            general.style.display = "none"
+            booking.style.display = "none"
+            storing.style.display = "none"
+            trust.style.display = "block"
         }
     }
 
-    function colorChanging(btn1bck, btn1txt, btn2bck, btn2txt, btn3bck, btn3txt, btn4bck, btn4txt, btn5bck, btn5txt,
-        btn6bck, btn6txt) {
-        document.getElementById("btnRuleStart").style.backgroundColor = btn1bck;
-        document.getElementById("btnRuleListShelf").style.backgroundColor = btn2bck;
-        document.getElementById("btnRuleCalendar").style.backgroundColor = btn3bck;
-        document.getElementById("btnRuleListings").style.backgroundColor = btn4bck;
-        document.getElementById("btnRulePayouts").style.backgroundColor = btn5bck;
-        document.getElementById("btnRuleBookings").style.backgroundColor = btn6bck;
-        document.getElementById("btnRuleStart").style.color = btn1txt;
-        document.getElementById("btnRuleListShelf").style.color = btn2txt;
-        document.getElementById("btnRuleCalendar").style.color = btn3txt;
-        document.getElementById("btnRuleListings").style.color = btn4txt;
-        document.getElementById("btnRulePayouts").style.color = btn5txt;
-        document.getElementById("btnRuleBookings").style.color = btn6txt;
+    function colorChanging(btn1bck, btn1txt, btn2bck, btn2txt, btn3bck, btn3txt, btn6bck, btn6txt) {
+        document.getElementById("btnHelpStart").style.backgroundColor = btn1bck;
+        document.getElementById("btnHelpBooking").style.backgroundColor = btn2bck;
+        document.getElementById("btnHelpStoring").style.backgroundColor = btn3bck;
+        document.getElementById("btnHelpTrust").style.backgroundColor = btn6bck;
+        document.getElementById("btnHelpStart").style.color = btn1txt;
+        document.getElementById("btnHelpBooking").style.color = btn2txt;
+        document.getElementById("btnHelpStoring").style.color = btn3txt;
+        document.getElementById("btnHelpTrust").style.color = btn6txt;
     }
 </script>
 {{/block}}

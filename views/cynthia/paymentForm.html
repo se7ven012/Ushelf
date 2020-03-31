@@ -14,7 +14,7 @@
             <h4 class="card-header font-18">Payment</h4>
             <div class="card-body" style="padding: 20px">
                 <!-- Price Details -->
-                {{if orderDetail}} {{each orderDetail}}
+                {{if userorderdetail}} {{each userorderdetail}}
                 <div class="card-body" style="padding: 10px">
                     <p class="font-weight-bold font-16 mb-1">Order number:</p>
                     <p id="orderid" class="font-16 mb-1">{{$value.orderid}}</p>
@@ -127,7 +127,6 @@
         }
 
         if (inputname.value == "") {
-            alert(inputname.textContent)
             alertname.style.display = "block"
             validationCode[1] = 0;
         } else {

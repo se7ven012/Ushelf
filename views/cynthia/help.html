@@ -1,6 +1,5 @@
-{{extend '../_layouts/clienthome.html'}}
-
-{{block 'body'}}
+{{extend '../_layouts/clienthome.html'}} {{block 'head'}}
+<link rel="stylesheet" href="../../public/css/ushelf.css"> {{/block}} {{block 'body'}}
 <!-- Navbar -->
 <div id="nav-placeholder"></div>
 
@@ -13,91 +12,96 @@
         <!-- Sidebar Column -->
         <div class="col-lg-3 mb-4">
             <div class="list-group">
-                <button id="btnHelpStart" class="list-group-item text-left btn btnRules btnRules-active"
-                    onclick="temp(1)">Getting started</button>
-                <button id="btnHelpBooking" class="list-group-item text-left btn btnRules"
-                    onclick="temp(2)">Booking</button>
-                <button id="btnHelpStoring" class="list-group-item text-left btn btnRules"
-                    onclick="temp(3)">Storing</button>
-                <button id="btnHelpHosting" class="list-group-item text-left btn btnRules"
-                    onclick="temp(4)">Hosting</button>
-                <button id="btnHelpAccount" class="list-group-item text-left btn btnRules" onclick="temp(5)">Your
-                    account</button>
-                <button id="btnHelpTrust" class="list-group-item text-left btn btnRules" onclick="temp(6)">Trust and
-                    safety</button>
+                <button id="btnHelpStart" class="list-group-item text-left btn btnRules btnRules-active" onclick="temp(1)">General</button>
+                <button id="btnHelpBooking" class="list-group-item text-left btn btnRules" onclick="temp(2)">Booking & Payment</button>
+                <button id="btnHelpStoring" class="list-group-item text-left btn btnRules" onclick="temp(3)">Storing and Picking</button>
             </div>
         </div>
-        <!-- Content Column -->
-        <div class="col-lg-7 mb-4">
-            <h2 id="helpTitle">Getting Started</h2>
-            <p id="helpParagraph">Welcome to Ushelf Help Centre, feel free to contact us via email and WhatsApp if you have any doubts or questions. </p>
+        <!-- FAQ Column -->
+        <div id="general" class="col-lg-7 mb-4">
+            <h2>General</h2>
+            <p style="font-size: 20px;">Welcome to Ushelf Help Centre, feel free to contact us via email and WhatsApp if you have any doubts or questions.</p>
+            <p class="font-weight-bold mb-1">Q: What is Ushelf?</p>
+            <p>A: Ushelf is the C2C and B2C platform for storage renting. You can rent our your idle storage space or rent from other.</p>
+            <p class="font-weight-bold mb-1">Q: What type of storage do you have?</p>
+            <p>A: We have normal storage, frozen storage and wine storage.</p>
+            <p class="font-weight-bold mb-1">Q: What size of storage do you have?</p>
+            <p>A: Every host has different unit sizes, but to brings convenience to you for searching, we had categorised the size into small (16sqft - 25sqft), medium (26sqft - 50sqft), large (51sqft - 75sqft), extra large(above 76sqft).</p>
+            <p class="font-weight-bold mb-1">Q: Is moving and packing services provided?</p>
+            <p>A: While we do not actually provide moving and packaging services, we may be able to refer you to some movers. Moreover, some host are providing such services as special features that you may prefer to have it.</p>
         </div>
+
+        <!-- Booking Column -->
+        <div id="booking" class="col-lg-7 mb-4" style="display: none;">
+            <h2>Booking & Payment</h2>
+            <p class="font-weight-bold mb-1">Q: Can I make a booking?</p>
+            <p>A: Yes! But first, please sign up or log in to your Ushelf account to proceed the booking.</p>
+            <p class="font-weight-bold mb-1">Q: How do I make a booking?</p>
+            <p>A: Search the favourite storage on Ushelf platform, and when you are ready, check the storage details, select the start time and end time on the calendar. Finally, click the "Book" button to place the booking. The host will respond to your
+                booking in 24 hours or it will be expired.</p>
+            <p class="font-weight-bold mb-1">Q: I had place the booking but it say it is wait for confirm? What does that means?</p>
+            <p>A: Every booking require host's confirmation for accept or reject, your understanding and patience is greatly appreciated.</p>
+            <p class="font-weight-bold mb-1">Q: What should I do if my booking is accepted?</p>
+            <p>A: After the booking is accepted, please proceed to your "MyShelf" and make the payment under the "Wait for payment" category. If the payment is successful, the whole order is completed.</p>
+            <p class="font-weight-bold mb-1">Q: What should I do if my booking is rejected?</p>
+            <p>A: The host may reject your booking in some reasons, hence, we will suggest you to search other storage space on Ushelf. </p>
+            <p class="font-weight-bold mb-1">Q: What are the modes of payment?</p>
+            <p>A: Ushelf accept online payment via VISA and MasterCard. </p>
+        </div>
+
+        <!-- Storing Column -->
+        <div id="storing" class="col-lg-7 mb-4" style="display: none;">
+            <h2>Storing and Picking</h2>
+            <p class="font-weight-bold mb-1">Q: When can I access my storage space?</p>
+            <p>A: Please contact your host for further information in accessing. You can message your host in the "In Rental" in "MyShelf"</p>
+            <p class="font-weight-bold mb-1">Q: What are the prohibited for storage?</p>
+            <p>A: Live animals or plants, perishables items, explosive items, toxic items, fuel, and any items prohibited or controlled by law. For more information, please <a href="/rules">Click here</a>. Moreover, there are other different items that may
+                be prohibited by the host, such as furniture, dolls and more.</p>
+            <p class="font-weight-bold mb-1">Q: The host always reject to let me access to storage space, what should I do?</p>
+            <p>A: Please contact Ushelf customer service for further assiatance.</p>
+        </div>
+
         <!-- Contact us button -->
         <div class="col-lg-2 mb-4">
-            <a href="contactus"
-                style="width: 100%; margin: 10px; padding: 10px; background-color: lightgrey; border-color: transparent; color: black;">Contact
-                us</a>
+            <a href="contactus" style="width: 100%; margin: 10px; padding: 10px; background-color: lightgrey; border-color: transparent; color: black;">Contact us</a>
         </div>
     </div>
 </div>
-{{/block}}
-
-{{block 'script'}}
+{{/block}} {{block 'script'}}
 <script>
     function temp(code) {
+        var general = document.getElementById("general")
+        var booking = document.getElementById("booking")
+        var storing = document.getElementById("storing")
+
         if (code == 1) {
-            colorChanging("darkgrey", "white", "white", "black", "white", "black", "white", "black", "white",
-                "black", "white", "black");
-            document.getElementById("helpTitle").textContent = "Getting started";
-            document.getElementById("helpParagraph").textContent =
-                "Welcome to Ushelf Help Centre, feel free to contact us via email and WhatsApp if you have any doubts or questions.";
+            colorChanging("darkgrey", "white", "white", "black", "white", "black");
+            general.style.display = "block"
+            booking.style.display = "none"
+            storing.style.display = "none"
+            trust.style.display = "none"
         } else if (code == 2) {
-            colorChanging("white", "black", "darkgrey", "white", "white", "black", "white", "black", "white",
-                "black", "white", "black");
-            document.getElementById("helpTitle").textContent = "Booking";
-            document.getElementById("helpParagraph").textContent =
-                "This is the rules for booking. This is the rules for booking. This is the rules for booking. ";
+            colorChanging("white", "black", "darkgrey", "white", "white", "black");
+            general.style.display = "none"
+            booking.style.display = "block"
+            storing.style.display = "none"
+            trust.style.display = "none"
         } else if (code == 3) {
-            colorChanging("white", "black", "white", "black", "darkgrey", "white", "white", "black", "white",
-                "black", "white", "black");
-            document.getElementById("helpTitle").textContent = "Storing";
-            document.getElementById("helpParagraph").textContent =
-                "This is the rules for storing. This is the rules for storing. This is the rules for storing. ";
-        } else if (code == 4) {
-            colorChanging("white", "black", "white", "black", "white", "black", "darkgrey", "white", "white",
-                "black", "white", "black");
-            document.getElementById("helpTitle").textContent = "Hosting";
-            document.getElementById("helpParagraph").textContent =
-                "This is the rules for hosting. This is the rules for hosting. This is the rules for hosting. ";
-        } else if (code == 5) {
-            colorChanging("white", "black", "white", "black", "white", "black", "white", "black", "darkgrey",
-                "white", "white", "black");
-            document.getElementById("helpTitle").textContent = "Your account";
-            document.getElementById("helpParagraph").textContent =
-                "This is the rules for account. This is the rules for account. This is the rules for account. ";
-        } else {
-            colorChanging("white", "black", "white", "black", "white", "black", "white", "black", "white", "black",
-                "darkgrey", "white");
-            document.getElementById("helpTitle").textContent = "Trust and safety";
-            document.getElementById("helpParagraph").textContent =
-                "This is the rules for trust and safety. This is the rules for trust and safety. This is the rules for trust and safety. ";
+            colorChanging("white", "black", "white", "black", "darkgrey", "white");
+            general.style.display = "none"
+            booking.style.display = "none"
+            storing.style.display = "block"
+            trust.style.display = "none"
         }
     }
 
-    function colorChanging(btn1bck, btn1txt, btn2bck, btn2txt, btn3bck, btn3txt, btn4bck, btn4txt, btn5bck, btn5txt,
-        btn6bck, btn6txt) {
+    function colorChanging(btn1bck, btn1txt, btn2bck, btn2txt, btn3bck, btn3txt) {
         document.getElementById("btnHelpStart").style.backgroundColor = btn1bck;
         document.getElementById("btnHelpBooking").style.backgroundColor = btn2bck;
         document.getElementById("btnHelpStoring").style.backgroundColor = btn3bck;
-        document.getElementById("btnHelpHosting").style.backgroundColor = btn4bck;
-        document.getElementById("btnHelpAccount").style.backgroundColor = btn5bck;
-        document.getElementById("btnHelpTrust").style.backgroundColor = btn6bck;
         document.getElementById("btnHelpStart").style.color = btn1txt;
         document.getElementById("btnHelpBooking").style.color = btn2txt;
         document.getElementById("btnHelpStoring").style.color = btn3txt;
-        document.getElementById("btnHelpHosting").style.color = btn4txt;
-        document.getElementById("btnHelpAccount").style.color = btn5txt;
-        document.getElementById("btnHelpTrust").style.color = btn6txt;
     }
 </script>
 {{/block}}
