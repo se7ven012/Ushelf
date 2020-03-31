@@ -1,16 +1,11 @@
-{{extend '../_layouts/clienthome.html'}}
-
-{{block 'head'}}
+{{extend '../_layouts/clienthome.html'}} {{block 'head'}}
 <link rel="stylesheet" href="css/ushelf_index.css">
-<link rel="stylesheet" href="css/ushelf.css">
+<link rel="stylesheet" href="/public/css/ushelf.css">
 <link rel="stylesheet" href="host/ushelf_aboutHost.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-{{/block}}
-
-{{block 'body'}}
-{{if saytosb}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> {{/block}} {{block 'body'}} {{if saytosb}}
 <div class="container">
     <h1 class="mt-4 mb-3">Chat</h1>
+    <button class="ushelfBtn-blue mb-4" style="font-size: 18px; padding: 5px; border-radius: 10px;" onclick="location.replace('/mystorage-og')"><i class="fa fa-chevron-left mr-2"></i>Return to previous page</button>
     <div class="card">
         <h4 id="saytosb" class="card-header">{{saytosb}}</h4>
         {{if content}}
@@ -25,93 +20,86 @@
             <p id="message" class="mb-1" style="padding-right: 30px; font-size: 20px; text-align: right;">
                 <span style="background-color: #cecece; padding: 5px 10px; border-radius: 10px;">{{$value.msg}}</span>
             </p>
-            <p style="padding-right: 30px; font-size: 12px; text-align: right;">{{$value.time}}<p>
+            <p style="padding-right: 30px; font-size: 12px; text-align: right;">{{$value.time}}
+                <p>
 
-            <!-- 如果是他发的 -->
-            {{else}}
-            <p id="message" class="mb-1" style="padding-right: 30px; font-size: 20px; text-align: left;">
-                <span style="background-color: #cecece; padding: 5px 10px; border-radius: 10px;">{{$value.msg}}</span>
-            </p>
-            <p style="padding-right: 30px; font-size: 12px; text-align: left;">{{$value.time}}<p>
-            {{/if}}
-            {{/each}}
+                    <!-- 如果是他发的 -->
+                    {{else}}
+                    <p id="message" class="mb-1" style="padding-right: 30px; font-size: 20px; text-align: left;">
+                        <span style="background-color: #9c9c9c; padding: 5px 10px; border-radius: 10px;">{{$value.msg}}</span>
+                    </p>
+                    <p style="padding-right: 30px; font-size: 12px; text-align: left;">{{$value.time}}
+                        <p>
+                            {{/if}} {{/each}} {{else}}
+                            <p style="padding: 5px;">No chat history found</p>
+                            {{/if}}
 
-            {{else}}
-            <p style="padding: 5px;">No chat history found</p>
-            {{/if}}
-
-            <div class="panel-footer mt-4 mb-4">
-                <form id="chat_form" class="container">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="inputtext" name="inputtext"
-                            placeholder="Write your message here..." required>
-                        <button type="submit" class="btn btn-dark">Send</button>
-                    </div>
-                </form>
-            </div>
+                            <div class="panel-footer mt-4 mb-4">
+                                <form id="chat_form" class="container">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="inputtext" name="inputtext" placeholder="Write your message here..." required>
+                                        <button type="submit" class="btn btn-dark">Send</button>
+                                    </div>
+                                </form>
+                            </div>
 
         </div>
     </div>
 </div>
 </div>
 </div>
-{{else}}
-{{/if}}
-{{/block}}
-
-{{ block 'script'}}
+{{else}} {{/if}} {{/block}} {{ block 'script'}}
 <script src="../../public/js/chat.js"></script>
 
 <!-- 获取后端的聊天记录 -->
 <script>
-
 </script>
 
 <!-- 发送聊天记录给后端 -->
 <script>
-    $('#chat_form').on('submit', function (e) {
-        e.preventDefault();
-        var saytosb = document.getElementById("saytosb").innerText;
-        var content = $('#inputtext').val();
-        $.ajax({
-            url: '/postmsg',
-            type: 'post',
-            data: {
-                "saytosb": saytosb,
-                "content": content
-            },
-            dataType: 'json',
-            success: function (data) {
-                //console.log(data)
-                if (data.result.code == 200) {
-                    posted = "yes";
-                } else {
-                    alert("服务器忙，请稍后再试");
+    $('#chat_form').on('submit', function(e) {
+            e.preventDefault();
+            var saytosb = document.getElementById("saytosb").innerText;
+            var content = $('#inputtext').val();
+            $.ajax({
+                url: '/postmsg',
+                type: 'post',
+                data: {
+                    "saytosb": saytosb,
+                    "content": content
+                },
+                dataType: 'json',
+                success: function(data) {
+                    //console.log(data)
+                    if (data.result.code == 200) {
+                        posted = "yes";
+                    } else {
+                        alert("服务器忙，请稍后再试");
+                    }
                 }
-            }
-        })
-        var account = document.getElementById("saytosb").innerText
-        $.ajax({
-            url: '/getchatmsg.json',
-            type: 'post',
-            data: {
-                saytosb: account
-            },
-            dataType: 'json',
-            success: function (data) {
-                if (data.result.code == 200) {
-                    console.log('拿到数据')
-                    setTimeout(function () {
-                        location.href = 'http://' + window.location.host +
-                            '/message';
-                    }, 10)
-                } else {
-                    alert('获取日期数据失败')
+            })
+            var account = document.getElementById("saytosb").innerText
+            $.ajax({
+                url: '/getchatmsg.json',
+                type: 'post',
+                data: {
+                    saytosb: account
+                },
+                dataType: 'json',
+                success: function(data) {
+                    if (data.result.code == 200) {
+                        console.log('拿到数据')
+                        setTimeout(function() {
+                            location.href = 'http://' + window.location.host +
+                                '/message';
+                        }, 10)
+                    } else {
+                        alert('获取日期数据失败')
+                    }
                 }
-            }
+            })
         })
-    })
-    // 如果没拿到content，就要加载content
+        // 如果没拿到content，就要加载content
     if (document.getElementById("message") == null) {
         var account = document.getElementById("saytosb").innerText
         $.ajax({
@@ -121,10 +109,10 @@
                 saytosb: account
             },
             dataType: 'json',
-            success: function (data) {
+            success: function(data) {
                 if (data.result.code == 200) {
                     console.log('拿到数据')
-                    setTimeout(function () {
+                    setTimeout(function() {
                         location.href = 'http://' + window.location.host +
                             '/message';
                     }, 10)
