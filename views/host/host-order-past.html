@@ -1,14 +1,9 @@
-{{extend '../_layouts/hosthome.html'}} 
-
-{{ block 'head'}}
+{{extend '../_layouts/hosthome.html'}} {{ block 'head'}}
 <!-- CSS -->
 <link rel="stylesheet" href="../../public/css/ushelf_index.css">
 <link rel="stylesheet" href="../../public/css/ushelf_aboutHost.css">
 <link rel="stylesheet" href="../../public/css/ushelf.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
-{{/block}} 
-
-{{block 'body'}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> {{/block}} {{block 'body'}}
 <!-- Show Result -->
 <div class="container mt-4">
     <!-- Page Heading/Breadcrumbs -->
@@ -46,7 +41,7 @@
                 </div>
                 <div class="col-md-8">
                     <h3 class="mb-1">{{$value.title}}</h3>
-                    <p class="mb-1">Rent by: <a href="/profile">{{$value.customer}}</a></p>
+                    <p class="mb-1">Rent by: {{$value.customer}}</p>
                     <p class="mb-1">Location: {{$value.address0}}, {{$value.address1}}, {{$value.city}}, {{$value.province}}, {{$value.zipcode}}</p>
                     <p class="mb-1">Period: {{$value.startdate}} - {{$value.enddate}}</p>
                     <p class="mb-1">Total Price: ${{$value.price}}</p>
@@ -66,25 +61,27 @@
             <div class="mb-2">
                 <span id="closeModal{{$value.orderid}}" class="close" onclick="closeDetail('{{$value.orderid}}')">&times;</span>
                 <h4>{{$value.title}}</h4>
+                <p class="mb-1 font-weight-bold">Rent by: <span class="font-weight-normal">{{$value.customer}}</span></p>
                 <p class="mb-1 font-weight-bold">Hosted by: <a href="/profile" class="font-weight-normal">{{$value.owner}}</a></p>
                 <p class="mb-1 font-weight-bold">Location: <span class="font-weight-normal">{{$value.address0}}, {{$value.address1}}, {{$value.city}}, {{$value.province}}, {{$value.zipcode}}</span></p>
                 <p class="mb-1 font-weight-bold">Period: <span class="font-weight-normal">{{$value.startdate}} - {{$value.enddate}}</span></p>
                 <p class="mb-1 font-weight-bold">Total Price: <span class="font-weight-normal">${{$value.price}}</span></p>
                 <p class="mb-1 font-weight-bold">Storage size: <span class="font-weight-normal">{{$value.size}} size</span></p>
                 <p class="mb-1 font-weight-bold">Storage type: <span class="font-weight-normal">{{$value.type}}</span></p>
-                <p class="mb-1 font-weight-bold">Special Feature: <span class="font-weight-normal">{{if $value.feature.includes("0")}}24 hours available. {{/if}} {{if $value.feature.includes("1")}}Lock and key. {{/if}}{{if $value.feature.includes("2")}}CCTV. {{/if}} {{if $value.feature.includes("3")}}Safe Deposit Box.
-                    {{/if}}{{if $value.feature.includes("4")}}Delivery service. {{/if}}</span></p>
-                <p class="mb-1 font-weight-bold">Prohibited items: <span class="font-weight-normal">{{if $value.prohibited.includes("0")}}No furnishings. {{/if}} {{if $value.prohibited.includes("1")}}No books. {{/if}}{{if $value.prohibited.includes("2")}}No dolls & plushies. {{/if}} {{if $value.prohibited.includes("3")}}No liquid items.
-                    {{/if}}{{if $value.prohibited.includes("4")}}No fragile items. {{/if}}</span></p>
-
+                <p class="mb-1 font-weight-bold">Special Feature:</p>
+                <p class="mb-1"> {{if $value.feature.includes("0")}}24 hours available.{{/if}} {{if $value.feature.includes("1")}}&nbspLock and key.{{/if}} {{if $value.feature.includes("2")}} &nbspCCTV.{{/if}} {{if $value.feature.includes("3")}}&nbspSafe Deposit Box.
+                    {{/if}} {{if $value.feature.includes("4")}}&nbspDelivery. services{{/if}}
+                </p>
+                <p class="mb-1 font-weight-bold">Prohibited items:</p>
+                <p class="mb-1">{{if $value.prohibited.includes("0")}}No furnishings.{{/if}} {{if $value.prohibited.includes("1")}}&nbspNo books.</p>{{/if}} {{if $value.prohibited.includes("2")}} &nbspNo dolls & plushies.{{/if}} {{if $value.prohibited.includes("3")}}&nbspNo
+                liquid items.{{/if}} {{if $value.prohibited.includes("4")}}&nbspNo fragile items.{{/if}}
+                <p class="mb-1 font-weight-bold">Storage purpose: <span class="font-weight-normal">{{$value.request}}</span></p>
             </div>
         </div>
     </div>
     {{/each}} {{/if}}
 </div>
-{{/block}}
-
-{{ block 'script'}}
+{{/block}} {{ block 'script'}}
 <script>
     function closeDetail(id) {
         var name = "orderModal" + id

@@ -140,31 +140,31 @@
                     <p id="conditionAlert" class="ml-2 alertNotice">*Required</p>
                 </div>
                 <div style="display: flex; flex-direction: row;">
-                    <label class="container-chkbx mr-2">Open shelves
-                        <input value="0" id="condition" name="conditionMax6" type="checkbox">
-                        <span class="checkmark-chkbx"></span>
+                    <label class="container-rbtn mr-2">Open shelves 
+                        <input value="0" id="condition" name="conditionMax6" type="radio">
+                        <span class="checkmark-rbtn"></span>
                     </label>
-                    <label class="container-chkbx mr-2">Closed shelves (closet)
-                        <input value="1" id="condition" name="conditionMax6" type="checkbox">
-                        <span class="checkmark-chkbx"></span>
+                    <label class="container-rbtn mr-2">Closed shelves (closet)
+                        <input value="1" id="condition" name="conditionMax6" type="radio">
+                        <span class="checkmark-rbtn"></span>
                     </label>
-                    <label class="container-chkbx mr-2">Locker
-                        <input value="2" id="condition" name="conditionMax6" type="checkbox">
-                        <span class="checkmark-chkbx"></span>
+                    <label class="container-rbtn mr-2">Locker
+                        <input value="2" id="condition" name="conditionMax6" type="radio">
+                        <span class="checkmark-rbtn"></span>
                     </label>
                 </div>
                 <div class="mb-3" style="display: flex; flex-direction: row;">
-                    <label class="container-chkbx mr-2">Room (items put on floor)
-                        <input value="3" id="condition" name="conditionMax6" type="checkbox">
-                        <span class="checkmark-chkbx"></span>
+                    <label class="container-rbtn mr-2">Room (items put on floor)
+                        <input value="3" id="condition" name="conditionMax6" type="radio">
+                        <span class="checkmark-rbtn"></span>
                     </label>
-                    <label class="container-chkbx mr-2">Warehouse
-                        <input value="4" id="condition" name="conditionMax6" type="checkbox">
-                        <span class="checkmark-chkbx"></span>
+                    <label class="container-rbtn mr-2">Warehouse
+                        <input value="4" id="condition" name="conditionMax6" type="radio">
+                        <span class="checkmark-rbtn"></span>
                     </label>
-                    <label class="container-chkbx mr-2">Wine rack
-                        <input value="5" id="condition" name="conditionMax6" type="checkbox">
-                        <span class="checkmark-chkbx"></span>
+                    <label class="container-rbtn mr-2">Wine rack
+                        <input value="5" id="condition" name="conditionMax6" type="radio">
+                        <span class="checkmark-rbtn"></span>
                     </label>
                 </div>
 
@@ -406,15 +406,31 @@
                 console.log(data)
                 if (data.result.code == 200) {
                     alert('Successfully upload!');
-                    setTimeout(function() {
-                        location.href = 'http://' + window.location.host +
-                            '/host_index'
-                    }, 10)
+                    mylistings();
                 } else {
                     alert('服务器忙，请稍后再试')
                 }
             }
         })
     })
+
+    function mylistings() {
+        var customer = document.getElementById("username").innerText
+        $.ajax({
+            url: '/host_listings',
+            type: 'post',
+            data: {
+                customer: customer
+            },
+            dataType: 'json',
+            success: function(data) {
+                if (data.result.code == 200 || data.result.code == 1) {
+                    location.href = "/host_listings"
+                } else {
+                    alert('服务器忙请稍后再试');
+                }
+            }
+        })
+    }
 </script>
 {{/block}}

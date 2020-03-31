@@ -41,12 +41,12 @@
                 </div>
                 <div class="col-md-8">
                     <h3 class="mb-1">{{$value.title}}</h3>
-                    <p class="mb-1">Rent by: <a href="/profile">{{$value.customer}}</a></p>
+                    <p class="mb-1">Rent by: {{$value.customer}}</p>
                     <p class="mb-1">Location: {{$value.address0}}, {{$value.address1}}, {{$value.city}}, {{$value.province}}, {{$value.zipcode}}</p>
                     <p class="mb-1">Period: {{$value.startdate}} - {{$value.enddate}}</p>
                     <p class="mb-1">Total Price: ${{$value.price}}</p>
                     <button class="ushelfBtn mr-3" style="width: 30%; height: 40px; float: left;" onclick="openDetail('{{$value.orderid}}')">View Details</button>
-                    <button class="ushelfBtn-blue mr-3" style="width: 30%; height: 40px; float: left;" onclick="message('{{$value.orderid}}')">Message Customer</button>
+                    <button class="ushelfBtn-blue mr-3" style="width: 30%; height: 40px; float: left;" onclick="message('{{$value.talker}}')">Message Customer</button>
                 </div>
             </div>
             {{/each}} {{else}}
@@ -62,22 +62,26 @@
             <div class="mb-2">
                 <span id="closeModal{{$value.orderid}}" class="close" onclick="closeDetail('{{$value.orderid}}')">&times;</span>
                 <h4>{{$value.title}}</h4>
-                <p class="mb-1 font-weight-bold">Hosted by: <a href="/profile" class="font-weight-normal">{{$value.owner}}</a></p>
+                <p class="mb-1 font-weight-bold">Rent by: <span class="font-weight-normal">{{$value.customer}}</span></p>
                 <p class="mb-1 font-weight-bold">Location: <span class="font-weight-normal">{{$value.address0}}, {{$value.address1}}, {{$value.city}}, {{$value.province}}, {{$value.zipcode}}</span></p>
                 <p class="mb-1 font-weight-bold">Period: <span class="font-weight-normal">{{$value.startdate}} - {{$value.enddate}}</span></p>
                 <p class="mb-1 font-weight-bold">Total Price: <span class="font-weight-normal">${{$value.price}}</span></p>
                 <p class="mb-1 font-weight-bold">Storage size: <span class="font-weight-normal">{{$value.size}} size</span></p>
                 <p class="mb-1 font-weight-bold">Storage type: <span class="font-weight-normal">{{$value.type}}</span></p>
                 <p class="mb-1 font-weight-bold">Special Feature:</p>
-
+                <p class="mb-1"> {{if $value.feature.includes("0")}}24 hours available.{{/if}} {{if $value.feature.includes("1")}}&nbspLock and key.{{/if}} {{if $value.feature.includes("2")}} &nbspCCTV.{{/if}} {{if $value.feature.includes("3")}}&nbspSafe Deposit Box.
+                    {{/if}} {{if $value.feature.includes("4")}}&nbspDelivery. services{{/if}}
+                </p>
+                <p class="mb-1 font-weight-bold">Prohibited items:</p>
+                <p class="mb-1">{{if $value.prohibited.includes("0")}}No furnishings.{{/if}} {{if $value.prohibited.includes("1")}}&nbspNo books.</p>{{/if}} {{if $value.prohibited.includes("2")}} &nbspNo dolls & plushies.{{/if}} {{if $value.prohibited.includes("3")}}&nbspNo
+                liquid items.{{/if}} {{if $value.prohibited.includes("4")}}&nbspNo fragile items.{{/if}}
+                <p class="mb-1 font-weight-bold">Storage purpose: <span class="font-weight-normal">{{$value.request}}</span></p>
             </div>
         </div>
     </div>
     {{/each}} {{/if}}
 </div>
-{{/block}}
-
-{{ block 'script'}}
+{{/block}} {{ block 'script'}}
 <script>
     function closeDetail(id) {
         var name = "orderModal" + id
@@ -91,8 +95,25 @@
         x.style.display = "block"
     }
 
-    function message(orderID) {
-        window.location.href = "/message"
+    function message(chater) {
+        $.ajax({
+            url: '/getchatmsg.session',
+            type: 'post',
+            data: {
+                chater: chater
+            },
+            dataType: 'json',
+            success: function(data) {
+                if (data.result.code == 200 || data.result.code == 1) {
+                    setTimeout(function() {
+                        location.href = 'http://' + window.location.host +
+                            '/obtainchatmsg';
+                    }, 10)
+                } else {
+                    alert('服务器忙请稍后再试');
+                }
+            }
+        })
     }
 
     $('#order').on('submit', function(e) {
