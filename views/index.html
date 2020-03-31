@@ -29,7 +29,7 @@
     <div class="searchForm ">
         <div class="searchForm-title ">Rent your storage today</div>
         <p>Find your storage now!</p>
-        <button id="button-search" type="submit" class="ushelfBtn" style="width: 80%; height: 40px; margin-top: 20px;" onclick="window.location.href='searchStorage.search'">Search Now
+        <button id="button-search" type="submit" class="ushelfBtn" style="width: 80%; height: 40px; margin-top: 20px;" onclick="searchGeneral()">Search Now
     </button>
     </div>
 
@@ -53,9 +53,9 @@
                     <img class="card-img-top news" src="../public/img/news_referral reward.jpg" alt="">
                     <div class="card-body">
                         <h4 class="card-title">
-                            <span style="color: black;">Referral Reward</span>
+                            <span style="color: black;">Share with friends</span>
                         </h4>
-                        <p>Share Ushelf with your friends</p>
+                        <p>Good things is to share, share Ushelf with your friends now!</p>
                     </div>
                 </div>
             </div>
@@ -66,7 +66,7 @@
                         <h4 class="card-title">
                             <span style="color: black;">Storage Rule</span>
                         </h4>
-                        <p>Do you know what you can store and what cannot store? Take a look now!</p>
+                        <p>Do you know what you can store and what cannot store? We had just update the storage rules, take a look!</p>
                     </div>
                 </div>
             </div>
@@ -92,7 +92,28 @@
     <script src="../../node_modules/popper.js/dist/popper.min.js"></script>
     <script src="../../node_modules/jquery/dist/jquery.js"></script>
     <script src="../../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-    {{ block 'script'}}{{/block}}
+    {{ block 'script'}}
+    <script>
+        function searchGeneral() {
+            $.ajax({
+                url: '/searchStorage.search',
+                type: 'post',
+                data: {},
+                dataType: 'json',
+                success: function(data) {
+                    if (data.result.code == 200) {
+                        console.log('拿到数据');
+                        setTimeout(function() {
+                            location.href = 'http://' + window.location.host + '/searchStorage.result'
+                        }, 10)
+                    } else {
+                        alert('服务器忙请稍后再试');
+                    }
+                }
+            })
+        }
+    </script>
+    {{/block}}
 </body>
 
 </html>

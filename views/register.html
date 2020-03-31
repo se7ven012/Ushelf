@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <button class="btn-back fixed-top" style="background-color: white; font-size: 20px;" onclick="location.replace(document.referrer)"><i class="fa fa-chevron-left mr-2"></i>Back</button>
+    <button class="btn-back fixed-top" style="background-color: white; font-size: 20px;" onclick="window.history.back()"><i class="fa fa-chevron-left mr-2"></i>Back</button>
 
     <!-- signup -->
     <div class="sidenav">
@@ -81,6 +81,10 @@
                         success: function(data) {
                             if (data.result.code == 200) {
                                 // 如果后端返回成功，显示验证码界面
+                                account.disabled = "true"
+                                username.disabled = "true"
+                                password.disabled = "true"
+                                password2.disabled = "true"
                                 y.textContent =
                                     "The verification code had sent to your email. Please use it to activate your account."
                                 y.style.color = "#00cccc";
@@ -98,7 +102,7 @@
                                             success: function(data) {
                                                 //console.log(data)
                                                 if (data.result.code == 200) {
-                                                    alert("注册成功，点击跳转登录")
+                                                    alert("Sign up successful, proceed to sign in now")
                                                     setTimeout(function() {
                                                         location.href = 'http://' + window
                                                             .location.host + '/signin';
@@ -109,7 +113,8 @@
                                             }
                                         })
                                     } else {
-                                        alert("vcode错了")
+                                        y.textContent = "The validation is incorrect";
+                                        y.color = "red"
                                     }
                                 })
                             } else if (data.result.code == 1) {

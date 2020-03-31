@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <button class="btn-back fixed-top" style="font-size: 20px;" onclick="location.replace(document.referrer)"><i class="fa fa-chevron-left mr-2"></i>Back</button>
+    <button class="btn-back fixed-top" style="font-size: 20px;" onclick="window.history.back()"><i class="fa fa-chevron-left mr-2"></i>Back</button>
 
     <!-- Login -->
     <div class="sidenav">
@@ -26,7 +26,7 @@
             <div class="login-form">
                 <form id="login_form">
                     <div class="form-group">
-                        <label>User Name</label>
+                        <label>Email</label>
                         <!--注意input里的name是一定要写的，否则后端取不到值-->
                         <input type="text" class="form-control" id="account" name="account" placeholder="User Name" required>
                     </div>
