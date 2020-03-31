@@ -12,18 +12,18 @@ tags: []
 
 ## Directory structure
 ```
+---
+noteId: "97573a7072fd11eaadd5ffe7d887cc33"
+tags: []
+
+---
+
 |-- undefined
     |-- app.js
     |-- package-lock.json
     |-- README.md
     |-- router.js
-    |-- .notebook
-    |   |-- assets
-    |   |   |-- images
-    |   |-- tmp
-    |       |-- .gitignore
-    |       |-- drawIOAppForChrome.html
-    |       |-- chrome
+    |-- test.sql
     |-- db
     |   |-- DBConfig.js
     |   |-- Usersql.js
