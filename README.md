@@ -1,9 +1,3 @@
----
-noteId: "51d4cfd04d8211ea8b14337a5ae4ac51"
-tags: []
-
----
-
 # Ushelf
 - Front End：Bootstrap + AJAX
 - Back End：NodeJS + Express
@@ -12,12 +6,6 @@ tags: []
 
 ## Directory structure
 ```
----
-noteId: "97573a7072fd11eaadd5ffe7d887cc33"
-tags: []
-
----
-
 |-- undefined
     |-- app.js
     |-- package-lock.json
