@@ -1,0 +1,143 @@
+{{extend '../_layouts/clienthome.html'}}{{block 'head'}}
+<link rel="stylesheet" href="../../public/css/ushelf.css"> {{/block}} {{block 'body'}}
+<div id="nav-placeholder"></div>
+
+
+<div class="container">
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">Admin</h1>
+
+    <!-- Content Row -->
+    <div class="row">
+        <!-- Sidebar Column -->
+        <div class="col-lg-3 mb-4">
+            <div class="list-group">
+                <form id="admin-main">
+                    <button type="submit" class="list-group-item text-left btn btnRules" style="width: 100%">Main</button>
+                </form>
+                <form id="admin-user">
+                    <button type="submit" class="list-group-item text-left btn btnRules" style="width: 100%">User</button>
+                </form>
+                <form id="admin-storage">
+                    <button type="submit" class="list-group-item text-left btn btnRules" style="width: 100%">Storage</button>
+                </form>
+                <form id="admin-order">
+                    <button type="submit" class="list-group-item text-left btn btnRules btnRules-active" style="width: 100%">Order</button>
+                </form>
+            </div>
+        </div>
+        <!-- Content Column -->
+        <div class="col-lg-8 mb-4">
+            <h2 id="helpTitle">Order</h2>
+                    <table rules="cols" cellpadding="10" style="overflow: scroll; white-space: nowrap; width: 100%">
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Storage ID</th>
+                                <th>Customer</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Day length</th>
+                                <th>Total Base Price</th>
+                                <th>Service Fee</th>
+                                <th>Total Price</th>
+                                <th>Booking Person</th>
+                                <th>Request</th>
+                                <th>Confirmed</th>
+                                <th>Paid</th>
+                                <th>Ended</th>
+                                <th>Review</th>
+                            </tr>
+                        {{if orderList}}
+                        {{each orderList}}
+                            <tr>
+                                <td>{{$value.orderid}}</td>
+                                <td>{{$value.storageid}}</td>
+                                <td>{{$value.customer}}</td>
+                                <td>{{$value.startdate}}</td>
+                                <td>{{$value.enddate}}</td>
+                                <td>{{$value.length}}</td>
+                                <td>{{$value.baseprice}}</td>
+                                <td>{{$value.servicefee}}</td>
+                                <td>{{$value.totalprice}}</td>
+                                <td>{{$value.personaltitle}} {{$value.firstname}} {{$value.lastname}}</td>
+                                <td>{{$value.request}}</td>
+                                <td>{{$value.confirm}}</td>
+                                <td>{{$value.paid}}</td>
+                                <td>{{$value.ended}}</td>
+                                <td>{{$value.reviewed}}</td>
+                            </tr>
+                        {{/each}}
+                        {{else}}
+                        <p>No</p>
+                        {{/if}}
+            </table>
+        </div>
+    </div>
+</div>
+{{/block}}
+
+{{ block 'script'}}
+<script>
+    $('#admin-main').on('submit', function (e) {
+        e.preventDefault()
+        window.location.href = "/admin"
+    })
+    $('#admin-user').on('submit', function(e) {
+        e.preventDefault()
+        $.ajax({
+            url: '/admin-user',
+            type: 'post',
+            data: {},
+            dataType: 'json',
+            success: function(data) {
+                if (data.result.code == 200 || data.result.code == 1) {
+                    setTimeout(function() {
+                        location.href = 'http://' + window.location.host +
+                            '/admin-user';
+                    }, 10)
+                } else {
+                    alert('服务器忙请稍后再试');
+                }
+            }
+        })
+    })
+    $('#admin-order').on('submit', function(e) {
+        e.preventDefault()
+        $.ajax({
+            url: '/admin-order',
+            type: 'post',
+            data: {},
+            dataType: 'json',
+            success: function(data) {
+                if (data.result.code == 200 || data.result.code == 1) {
+                    setTimeout(function() {
+                        location.href = 'http://' + window.location.host +
+                            '/admin-order';
+                    }, 10)
+                } else {
+                    alert('服务器忙请稍后再试');
+                }
+            }
+        })
+    })
+    $('#admin-storage').on('submit', function(e) {
+        e.preventDefault()
+        $.ajax({
+            url: '/admin-storage',
+            type: 'post',
+            data: {},
+            dataType: 'json',
+            success: function(data) {
+                if (data.result.code == 200 || data.result.code == 1) {
+                    setTimeout(function() {
+                        location.href = 'http://' + window.location.host +
+                            '/admin-storage';
+                    }, 10)
+                } else {
+                    alert('服务器忙请稍后再试');
+                }
+            }
+        })
+    })
+</script>
+{{/block}}

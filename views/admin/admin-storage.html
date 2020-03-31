@@ -1,0 +1,144 @@
+{{extend '../_layouts/clienthome.html'}}{{block 'head'}}
+<link rel="stylesheet" href="../../public/css/ushelf.css"> {{/block}} {{block 'body'}}
+<div id="nav-placeholder"></div>
+
+
+<div class="container">
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">Admin</h1>
+
+    <!-- Content Row -->
+    <div class="row">
+        <!-- Sidebar Column -->
+        <div class="col-lg-3 mb-4">
+            <div class="list-group">
+                <form id="admin-main">
+                    <button type="submit" class="list-group-item text-left btn btnRules" style="width: 100%">Main</button>
+                </form>
+                <form id="admin-user">
+                    <button type="submit" class="list-group-item text-left btn btnRules" style="width: 100%">User</button>
+                </form>
+                <form id="admin-storage">
+                    <button type="submit" class="list-group-item text-left btn btnRules btnRules-active" style="width: 100%">Storage</button>
+                </form>
+                <form id="admin-order">
+                    <button type="submit" class="list-group-item text-left btn btnRules" style="width: 100%">Order</button>
+                </form>
+            </div>
+        </div>
+        <!-- Content Column -->
+        <div class="col-lg-8 mb-4">
+            <h2 id="helpTitle">Storage</h2>
+            <p class="mb-1">Conditions: 0-Open shelves; 1-Closed shelves; 2-Locker; 3-Room; 4-Warehouse; 5-Wine rack</p>
+            <p class="mb-1">Feature: 0-24 hours available; 1-Lock & key; 2-CCTV; 3-Safe deposit box; 4-Delivery service </p>
+            <p class="mb-1">Prohibited: 0-Furnishings; 1-Books; 2-Dolls & Plushies; 3-Liquid items; 4-Fragile items</p>
+                    <table rules="cols" cellpadding="10" style="overflow: scroll; white-space: nowrap; width: 100%">
+                            <tr>
+                                <th>Storage ID</th>
+                                <th>Owner</th>
+                                <th>Accessibility</th>
+                                <th>Title</th>
+                                <th>Type</th>
+                                <th>Size</th>
+                                <th>Price</th>
+                                <th>Address</th>
+                                <th>Dedicated</th>
+                                <th>Conditions</th>
+                                <th>Paragraph</th>
+                                <th>Feature</th>
+                                <th>Mention</th>
+                                <th>Prohibited</th>
+                            </tr>
+                        {{if storageList}}
+                        {{each storageList}}
+                            <tr>
+                                <td>{{$value.id}}</td>
+                                <td>{{$value.owner}}</td>
+                                <td>{{$value.accessibility}}</td>
+                                <td>{{$value.title}}</td>
+                                <td>{{$value.type}}</td>
+                                <td>{{$value.size}}</td>
+                                <td>{{$value.price}}</td>
+                                <td>{{$value.address0}}, {{$value.address1}}, {{$value.city}}, {{$value.province}}, {{$value.zipcode}}, {{$value.country}}</td>
+                                <td>{{$value.dedicated}}</td>
+                                <td>{{$value.conditions}}</td>
+                                <td>{{$value.paragraph}}</td>
+                                <td>{{$value.feature}}</td>
+                                <td>{{$value.mention}}</td>
+                                <td>{{$value.prohibited}}</td>
+                            </tr>
+                        {{/each}}
+                        {{else}}
+                        <p>No</p>
+                        {{/if}}
+            </table>
+        </div>
+    </div>
+</div>
+{{/block}}
+
+{{ block 'script'}}
+<script>
+    $('#admin-main').on('submit', function (e) {
+        e.preventDefault()
+        window.location.href = "/admin"
+    })
+    $('#admin-user').on('submit', function(e) {
+        e.preventDefault()
+        $.ajax({
+            url: '/admin-user',
+            type: 'post',
+            data: {},
+            dataType: 'json',
+            success: function(data) {
+                if (data.result.code == 200 || data.result.code == 1) {
+                    setTimeout(function() {
+                        location.href = 'http://' + window.location.host +
+                            '/admin-user';
+                    }, 10)
+                } else {
+                    alert('服务器忙请稍后再试');
+                }
+            }
+        })
+    })
+    $('#admin-order').on('submit', function(e) {
+        e.preventDefault()
+        $.ajax({
+            url: '/admin-order',
+            type: 'post',
+            data: {},
+            dataType: 'json',
+            success: function(data) {
+                if (data.result.code == 200 || data.result.code == 1) {
+                    setTimeout(function() {
+                        location.href = 'http://' + window.location.host +
+                            '/admin-order';
+                    }, 10)
+                } else {
+                    alert('服务器忙请稍后再试');
+                }
+            }
+        })
+    })
+    $('#admin-storage').on('submit', function(e) {
+        e.preventDefault()
+        $.ajax({
+            url: '/admin-storage',
+            type: 'post',
+            data: {},
+            dataType: 'json',
+            success: function(data) {
+                if (data.result.code == 200 || data.result.code == 1) {
+                    setTimeout(function() {
+                        location.href = 'http://' + window.location.host +
+                            '/admin-storage';
+                    }, 10)
+                } else {
+                    alert('服务器忙请稍后再试');
+                }
+            }
+        })
+    })
+</script>
+{{/block}}

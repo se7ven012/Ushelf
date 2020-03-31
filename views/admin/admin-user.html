@@ -1,0 +1,115 @@
+{{extend '../_layouts/clienthome.html'}}{{block 'head'}}
+<link rel="stylesheet" href="../../public/css/ushelf.css"> {{/block}} {{block 'body'}}
+<div id="nav-placeholder"></div>
+
+
+<div class="container">
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">Admin</h1>
+
+    <!-- Content Row -->
+    <div class="row">
+        <!-- Sidebar Column -->
+        <div class="col-lg-3 mb-4">
+            <div class="list-group">
+                <form id="admin-main">
+                    <button type="submit" class="list-group-item text-left btn btnRules" style="width: 100%">Main</button>
+                </form>
+                <form id="admin-user">
+                    <button type="submit" class="list-group-item text-left btn btnRules btnRules-active" style="width: 100%">User</button>
+                </form>
+                <form id="admin-storage">
+                    <button type="submit" class="list-group-item text-left btn btnRules" style="width: 100%">Storage</button>
+                </form>
+                <form id="admin-order">
+                    <button type="submit" class="list-group-item text-left btn btnRules" style="width: 100%">Order</button>
+                </form>
+            </div>
+        </div>
+        <!-- Content Column -->
+        <div class="col-lg-8 mb-4">
+            <h2 id="helpTitle">User</h2>
+                    <table rules="cols" cellpadding="10">
+                        <tr>
+                            <th>Email</th>
+                            <th>Username</th>
+                        </tr>
+                        {{if userList}}
+                        {{each userList}}
+                        <tr>
+                            <td>{{$value.email}}</td>
+                            <td>{{$value.username}}<td>
+                        </tr>
+                        {{/each}}
+                        {{/if}}
+                    </table>
+        </div>
+    </div>
+</div>
+{{/block}}
+
+{{ block 'script'}}
+<script>
+    $('#admin-main').on('submit', function (e) {
+        e.preventDefault()
+        window.location.href = "/admin"
+    })
+    $('#admin-user').on('submit', function(e) {
+        e.preventDefault()
+        $.ajax({
+            url: '/admin-user',
+            type: 'post',
+            data: {},
+            dataType: 'json',
+            success: function(data) {
+                if (data.result.code == 200 || data.result.code == 1) {
+                    setTimeout(function() {
+                        location.href = 'http://' + window.location.host +
+                            '/admin-user';
+                    }, 10)
+                } else {
+                    alert('服务器忙请稍后再试');
+                }
+            }
+        })
+    })
+    $('#admin-order').on('submit', function(e) {
+        e.preventDefault()
+        $.ajax({
+            url: '/admin-order',
+            type: 'post',
+            data: {},
+            dataType: 'json',
+            success: function(data) {
+                if (data.result.code == 200 || data.result.code == 1) {
+                    setTimeout(function() {
+                        location.href = 'http://' + window.location.host +
+                            '/admin-order';
+                    }, 10)
+                } else {
+                    alert('服务器忙请稍后再试');
+                }
+            }
+        })
+    })
+    $('#admin-storage').on('submit', function(e) {
+        e.preventDefault()
+        $.ajax({
+            url: '/admin-storage',
+            type: 'post',
+            data: {},
+            dataType: 'json',
+            success: function(data) {
+                if (data.result.code == 200 || data.result.code == 1) {
+                    setTimeout(function() {
+                        location.href = 'http://' + window.location.host +
+                            '/admin-storage';
+                    }, 10)
+                } else {
+                    alert('服务器忙请稍后再试');
+                }
+            }
+        })
+    })
+</script>
+{{/block}}
