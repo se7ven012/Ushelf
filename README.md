@@ -6,7 +6,7 @@
 
 ## Directory structure
 ```
-|-- undefined
+|-- Ushelf
     |-- app.js
     |-- package-lock.json
     |-- README.md
