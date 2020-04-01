@@ -119,7 +119,7 @@
 | :----: | :----: | :----: | :----: | :----: | :---- |
 |/|GET| |  |NO|渲染首页*太多了可以直接打开项目看|
 
-## TODO:
+## TODO(Ubuntu 18.04 LTS):
 - sudo apt-get update
 - sudo apt-get install nodejs npm git mysql-server wget
 - sudo wget https://sourceforge.net/projects/xampp/files/XAMPP%20Linux/7.4.1/xampp-linux-x64-7.4.1-0-installer.run
