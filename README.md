@@ -132,6 +132,6 @@
 - sudo /opt/lampp/xampp start
 - git clone https://github.com/se7ven012/Ushelf.git
 - cd Ushelf
-- npm install node popper express jquery mysql bootstrap art-template express-art-template body-parser express-session blueimp-md5 moment daterangepicker bootstrap-datepicker nodemailer mddir pm2 -g
+- sudo npm install npm n node popper express jquery mysql bootstrap art-template express-art-template body-parser express-session blueimp-md5 moment daterangepicker bootstrap-datepicker nodemailer mddir pm2
 - pm2 start app.js
 - pm2 logs
